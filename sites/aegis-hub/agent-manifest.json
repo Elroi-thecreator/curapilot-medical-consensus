@@ -26,10 +26,13 @@
     "byok_router": "https://api.otari.ai/api/v1"
   },
   "allowed_peers": [
+    "https://pnrs.is-a.dev",
     "http://localhost:8081",
     "http://localhost:8082",
     "http://127.0.0.1:8081",
-    "http://127.0.0.1:8082"
+    "http://127.0.0.1:8082",
+    "http://127.0.0.1:8881",
+    "http://127.0.0.1:8882"
   ],
   "peer_policy": {
     "mode": "closed",

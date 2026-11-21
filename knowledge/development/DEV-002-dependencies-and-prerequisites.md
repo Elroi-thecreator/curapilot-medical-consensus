@@ -1,7 +1,7 @@
-# DEV-001: Hackathon Dependencies, Prerequisites & Submission Lifecycle
+# DEV-002: Hackathon Dependencies, Prerequisites & Submission Lifecycle
 
 ---
-id: "DEV-001"
+id: "DEV-002"
 type: "development"
 title: "Hackathon Dependencies, Prerequisites & Submission Lifecycle"
 domain: "development"

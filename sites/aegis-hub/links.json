@@ -2,8 +2,8 @@
   "version": 1,
   "networks": {
     "aegis_coordinator": {
-      "genomics": "http://localhost:8081/genomics_node",
-      "pharmasafe": "http://localhost:8082/pharmasafe_node"
+      "genomics": "https://pnrs.is-a.dev/genomics/genomics_node",
+      "pharmasafe": "https://pnrs.is-a.dev/pharmasafe/pharmasafe_node"
     }
   }
 }

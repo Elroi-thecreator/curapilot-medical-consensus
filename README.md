@@ -140,11 +140,18 @@ Open your browser to:
 
 ```
 .
-├── knowledge/                     # Mandatory Knowledge Base Protocol
-│   ├── index.yaml
+├── AGENTS.md                      # Universal AI Agent instructions & Knowledge Protocol
+├── CLAUDE.md                      # Claude Code agent configuration
+├── GEMINI.md                      # Gemini CLI & Antigravity agent configuration
+├── .cursorrules                   # Cursor IDE AI rules
+├── .github/
+│   └── copilot-instructions.md    # GitHub Copilot workspace instructions
+├── knowledge/                     # Mandatory Knowledge Base Protocol (Single Source of Truth)
+│   ├── index.yaml                 # Master index of all registered knowledge units
+│   ├── README.md                  # Knowledge base guide & schema definition
 │   ├── product/PROD-001-...       # Hackathon Spec & Submission Protocol
 │   ├── architecture/ARCH-001-...  # Aegis Consensus Multi-Site Architecture
-│   └── development/DEV-001-...   # Runtime, Site Actions & Otari BYOK Standards
+│   └── development/               # Runtime, Action Tools, Prerequisites & Agent Protocol
 ├── assets/                        # Design Assets & Thumbnails
 │   ├── thumbnail.jpg              # Official 3:2 Devpost thumbnail
 │   ├── thumbnail.svg              # Scalable vector graphic
@@ -162,6 +169,21 @@ Open your browser to:
 ├── package.json
 └── README.md
 ```
+
+---
+
+## 🤖 AI Agents & Knowledge Base Protocol
+
+All AI coding assistants (Antigravity, Claude Code, Gemini CLI, Cursor, Copilot) are instructed by standard configuration files:
+- **`AGENTS.md`**: Universal root instructions for autonomous agents.
+- **`CLAUDE.md`**: Anthropic Claude Code workspace rules.
+- **`GEMINI.md`**: Google Gemini & Antigravity configuration.
+- **`.cursorrules`**: Cursor IDE behavior and verification rules.
+- **`.github/copilot-instructions.md`**: GitHub Copilot instructions.
+
+### The Mandatory 2-Step Protocol:
+1. **Pre-Change Knowledge Inspection (Step 1)**: Always inspect `knowledge/index.yaml` and read the relevant `ARCH-*`, `DEV-*`, and `PROD-*` standards before planning or editing code.
+2. **Post-Change Knowledge Synchronization (Step 2)**: Update existing knowledge units or create new ones whenever code or architecture changes, keeping `knowledge/index.yaml` in sync.
 
 ---
 
