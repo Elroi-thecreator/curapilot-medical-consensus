@@ -1,0 +1,77 @@
+{
+  "brand": "PharmaSafe Interaction Laboratory",
+  "networks": [
+    {
+      "name": "pharmasafe_node",
+      "front_man": "pharmacology_specialist",
+      "hocon": "./pharmasafe_node.network.json",
+      "description": "Evidence-based pharmacology, drug-drug interaction screening, CYP450 enzyme metabolism pathways, and adverse toxicity alerts.",
+      "tags": [
+        "open-agentic-web",
+        "pharmacology",
+        "drug-safety"
+      ],
+      "sample_queries": [
+        "Evaluate polypharmacy interactions between Metformin, Dichloroacetate, and Valproic Acid.",
+        "Check CYP3A4 and CYP2C19 competitive inhibition for Omeprazole and Clopidogrel.",
+        "What are the toxic metabolic contraindications of glucose-rich IV infusions in pyruvate dehydrogenase deficiency?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [],
+  "peer_policy": {
+    "mode": "open",
+    "deny_origins": [],
+    "note": "Public pharmacological authority node. Open to queries from any conforming agentic web client."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "pharmasafe_node",
+    "front_man": "pharmacology_specialist",
+    "available": false,
+    "reason": "Static bundle; public MCP facade requires server host."
+  },
+  "theme": {
+    "primary": "#7c3aed"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "pharmasafe_node",
+        "front_man": "pharmacology_specialist",
+        "aliases": [
+          "pharmasafe_node",
+          "pharmacology_specialist"
+        ],
+        "url": "pharmasafe_node"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "check_drug_interactions",
+      "get_drug_monograph"
+    ]
+  }
+}

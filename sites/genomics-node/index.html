@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rare Genomics Institute — Open Agentic Knowledge Node</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="runtime/theme.css">
+  <script type="module" src="script.js"></script>
+  <script type="module" src="site.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-group">
+      <div class="logo-badge">RGI</div>
+      <div class="logo-title">Rare Genomics Institute</div>
+    </div>
+    <div class="protocol-tag">Open Agentic Web Node</div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Inborn Errors of Metabolism & Variant Pathogenicity</h1>
+      <p>Decentralized clinical genomics authority. Providing verifiable variant pathogenicity, enzyme deficiencies, and metabolic pathways for the worldwide agentic web.</p>
+    </section>
+
+    <section class="search-card">
+      <h2>Curated Genomic Variant Registry</h2>
+      <div class="search-form">
+        <div class="form-group">
+          <label for="gene-input">HGNC Gene Symbol</label>
+          <input type="text" id="gene-input" placeholder="e.g. PDHA1" value="PDHA1">
+        </div>
+        <div class="form-group">
+          <label for="variant-input">HGVS Variant (Optional)</label>
+          <input type="text" id="variant-input" placeholder="e.g. c.1145C>T" value="c.1145C>T">
+        </div>
+        <button id="variant-search-btn" class="btn-primary">Inspect Record</button>
+      </div>
+
+      <div class="sample-queries">
+        <span>Quick Samples:</span>
+        <button class="sample-btn" onclick="document.querySelector('#gene-input').value='PDHA1'; document.querySelector('#variant-input').value='c.1145C>T'; document.querySelector('#variant-search-btn').click();">PDHA1 c.1145C>T</button>
+        <button class="sample-btn" onclick="document.querySelector('#gene-input').value='DPYD'; document.querySelector('#variant-input').value='*2A'; document.querySelector('#variant-search-btn').click();">DPYD *2A</button>
+        <button class="sample-btn" onclick="document.querySelector('#gene-input').value='CYP2C19'; document.querySelector('#variant-input').value='*2'; document.querySelector('#variant-search-btn').click();">CYP2C19 *2</button>
+      </div>
+
+      <div id="variant-results" class="results-area"></div>
+    </section>
+
+    <!-- Autonomous Agent Assistant Section -->
+    <section class="assistant-container">
+      <div class="assistant-header">
+        <h2>🧬 Senior Genomics Specialist Agent</h2>
+        <div id="assistant-status">Connecting autonomous genomics agent...</div>
+      </div>
+      <!-- Runtime Mount Point -->
+      <div id="agent-app"></div>
+    </section>
+  </main>
+</body>
+</html>

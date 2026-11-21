@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aegis — Zero-Leakage Medical Consensus Room</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="runtime/theme.css">
+  <script type="module" src="script.js"></script>
+  <script type="module" src="site.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="brand-group">
+      <div class="brand-icon">🛡️</div>
+      <div class="brand-text">
+        <h1>AEGIS CONSENSUS</h1>
+        <p>ZERO-LEAKAGE MEDICAL CONSENSUS ROOM</p>
+      </div>
+    </div>
+    <div class="privacy-badge">
+      <span class="privacy-dot"></span>
+      <span>100% In-Browser Privacy • Zero Cloud Uploads</span>
+    </div>
+  </header>
+
+  <!-- Case Toolbar -->
+  <div class="toolbar-bar">
+    <div class="case-select-group">
+      <label for="case-selector">Active Case in Memory:</label>
+      <select id="case-selector">
+        <option value="case-1" selected>CASE #AG-8492 — Refractory Lactic Acidosis & Ataxia (24y F)</option>
+        <option value="case-2">CASE #AG-3104 — Post-PCI Refractory Ischemia on Clopidogrel (58y M)</option>
+      </select>
+    </div>
+    <div class="federation-status">
+      <span class="node-indicator"><span class="node-dot"></span> Hub: 8080</span>
+      <span class="node-indicator"><span class="node-dot"></span> Genomics: 8081</span>
+      <span class="node-indicator"><span class="node-dot"></span> PharmaSafe: 8082</span>
+    </div>
+  </div>
+
+  <!-- Main Application Grid -->
+  <main class="app-container">
+    <!-- Left Column: Sovereign Vault & Outputs -->
+    <div class="vault-panel">
+      <!-- Patient Vault Card -->
+      <section class="vault-card">
+        <div class="card-header">
+          <h2>🔒 Sovereign Patient Vault</h2>
+          <span class="badge-tag">Air-Gapped in Browser RAM</span>
+        </div>
+
+        <div class="patient-banner">
+          <h3 id="active-case-title">Loading case...</h3>
+          <div id="active-case-demographics" class="demographics"></div>
+          <div id="active-case-presentation" class="presentation"></div>
+        </div>
+
+        <!-- Biomarkers -->
+        <div class="sub-panel-title">Diagnostic Laboratory Biomarkers</div>
+        <div id="biomarkers-list" class="biomarkers-grid"></div>
+
+        <!-- Genomics -->
+        <div class="sub-panel-title">Genomic Variant Markers</div>
+        <div id="genomics-list" class="genomics-grid"></div>
+
+        <!-- Medications -->
+        <div class="sub-panel-title">Active Polypharmacy Profile</div>
+        <div id="meds-list" class="meds-grid"></div>
+      </section>
+
+      <!-- Flagged Contraindications Card -->
+      <section class="vault-card">
+        <div class="card-header">
+          <h2>⚠️ Flagged Clinical Contraindications</h2>
+          <span id="alerts-count-badge" class="badge-tag red" style="display: none;">0 Alerts</span>
+        </div>
+        <div id="flagged-alerts-container" class="alerts-container">
+          <div class="empty-state">No contraindications currently flagged. When agents identify risks during deliberation, they will appear here.</div>
+        </div>
+      </section>
+
+      <!-- Consensus Dossier Card -->
+      <section class="vault-card">
+        <div class="card-header">
+          <h2>📋 Sealed Consensus Dossier</h2>
+          <button id="export-dossier-btn" class="btn-secondary">Download Report</button>
+        </div>
+        <div id="dossier-output"></div>
+      </section>
+    </div>
+
+    <!-- Right Column: Consensus Chat Room & Runtime -->
+    <div class="room-panel">
+      <!-- Specialist Deck -->
+      <div class="specialists-deck">
+        <div class="node-card">
+          <div class="node-icon genomics">🧬</div>
+          <div class="node-info">
+            <h4>Rare Genomics Institute</h4>
+            <p>Node: localhost:8081 (Genomics)</p>
+          </div>
+        </div>
+        <div class="node-card">
+          <div class="node-icon pharma">💊</div>
+          <div class="node-info">
+            <h4>PharmaSafe Laboratory</h4>
+            <p>Node: localhost:8082 (Pharmacology)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chief Physician Chat Interface -->
+      <section class="chat-card">
+        <div class="chat-header">
+          <h2>🩺 Chief Physician Consensus Coordinator</h2>
+          <div id="assistant-status">Connecting autonomous consensus coordinator...</div>
+        </div>
+        <!-- In-Browser nsdeploy Runtime Mount -->
+        <div id="agent-app"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

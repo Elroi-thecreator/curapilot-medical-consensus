@@ -1,0 +1,21 @@
+# Knowledge Base Index
+
+knowledge_units_count: 3
+last_updated: "2026-11-21"
+
+domains:
+  product:
+    - id: PROD-001
+      title: "Open Agentic Web Challenge Specification & Submission Protocol"
+      path: "product/PROD-001-challenge-spec-and-rules.md"
+      status: "APPROVED"
+  architecture:
+    - id: ARCH-001
+      title: "Aegis Zero-Leakage Multi-Specialist Consensus Architecture"
+      path: "architecture/ARCH-001-aegis-consensus-architecture.md"
+      status: "APPROVED"
+  development:
+    - id: DEV-001
+      title: "In-Browser Runtime, Site Actions & Otari BYOK Standards"
+      path: "development/DEV-001-runtime-and-site-actions.md"
+      status: "APPROVED"

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PharmaSafe Interaction Laboratory — Open Agentic Knowledge Node</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="runtime/theme.css">
+  <script type="module" src="script.js"></script>
+  <script type="module" src="site.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-group">
+      <div class="logo-badge">PSI</div>
+      <div class="logo-title">PharmaSafe Interaction Laboratory</div>
+    </div>
+    <div class="protocol-tag">Open Agentic Web Node</div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Polypharmacy Screening & CYP450 Interaction Authority</h1>
+      <p>Decentralized pharmacology intelligence. Screening multi-drug interactions, enzyme metabolic pathways, and critical genetic contraindications for the open agentic web.</p>
+    </section>
+
+    <section class="search-card">
+      <h2>Interactive Polypharmacy Screening</h2>
+      <div class="search-form">
+        <div class="form-group">
+          <label for="meds-input">Medications (Comma-Separated)</label>
+          <input type="text" id="meds-input" placeholder="e.g. Metformin, Valproic Acid, Dichloroacetate" value="Metformin, Valproic Acid, Dichloroacetate">
+        </div>
+        <div class="form-group">
+          <label for="context-input">Clinical/Genetic Context (Optional)</label>
+          <input type="text" id="context-input" placeholder="e.g. PDHA1 deficiency" value="PDHA1 deficiency">
+        </div>
+        <button id="drug-check-btn" class="btn-primary">Screen Polypharmacy</button>
+      </div>
+
+      <div class="sample-queries">
+        <span>Quick Samples:</span>
+        <button class="sample-btn" onclick="document.querySelector('#meds-input').value='Metformin, Valproic Acid'; document.querySelector('#context-input').value='PDHA1'; document.querySelector('#drug-check-btn').click();">Metformin + Valproate (PDHA1)</button>
+        <button class="sample-btn" onclick="document.querySelector('#meds-input').value='Clopidogrel, Omeprazole'; document.querySelector('#context-input').value='CYP2C19'; document.querySelector('#drug-check-btn').click();">Clopidogrel + Omeprazole</button>
+      </div>
+
+      <div id="drug-results" class="results-area"></div>
+    </section>
+
+    <!-- Autonomous Agent Assistant Section -->
+    <section class="assistant-container">
+      <div class="assistant-header">
+        <h2>💊 Senior Clinical Pharmacologist Agent</h2>
+        <div id="assistant-status">Connecting autonomous pharmacology agent...</div>
+      </div>
+      <!-- Runtime Mount Point -->
+      <div id="agent-app"></div>
+    </section>
+  </main>
+</body>
+</html>

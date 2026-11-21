@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "name": "pharmasafe_node",
+    "description": "Evidence-based pharmacology, drug-drug interaction screening, CYP450 enzyme metabolism pathways, and adverse toxicity alerts."
+  },
+  "llm_config": {
+    "model": "alibaba/qwen3.8-flash",
+    "temperature": 0.1
+  },
+  "max_steps": 8,
+  "tools": [
+    {
+      "name": "pharmacology_specialist",
+      "function": {
+        "description": "Evidence-based clinical pharmacology specialist. Analyzes polypharmacy interactions, CYP450 enzyme metabolism, toxicities, and contraindicated conditions.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "inquiry": {
+              "type": "string",
+              "description": "Medication list or pharmacological question to evaluate."
+            }
+          },
+          "required": ["inquiry"]
+        }
+      },
+      "instructions": "You are the Senior Clinical Pharmacologist at the PharmaSafe Drug Interaction Laboratory.\n\nGrounding Rules:\n- Ground all drug interaction evaluations and warnings strictly on data from website_check_drug_interactions and website_get_drug_monograph.\n- When evaluated for interactions, call website_check_drug_interactions with the medication list and any clinical or genetic context provided.\n- Highlight critical black box warnings and life-threatening contraindications in bold.\n- Explain the biochemical enzyme or receptor mechanism clearly (e.g. CYP2C19 competitive inhibition or mitochondrial carnitine depletion) and recommend safe clinical alternatives.",
+      "tools": []
+    }
+  ]
+}

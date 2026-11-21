@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <!-- Deep Space / Cyber Obsidian Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712" />
+      <stop offset="45%" stop-color="#081024" />
+      <stop offset="100%" stop-color="#02040a" />
+    </linearGradient>
+
+    <!-- Refraction & Bioluminescence Gradients -->
+    <radialGradient id="prismCoreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45" />
+      <stop offset="50%" stop-color="#06b6d4" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="lifeGlowEmerald" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.35" />
+      <stop offset="70%" stop-color="#10b981" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="intelGlowViolet" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.35" />
+      <stop offset="70%" stop-color="#8b5cf6" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Glassmorphic Crystalline Shading -->
+    <linearGradient id="facetTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.2" />
+    </linearGradient>
+
+    <linearGradient id="facetLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#083344" stop-opacity="0.4" />
+    </linearGradient>
+
+    <linearGradient id="facetRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.4" />
+    </linearGradient>
+
+    <linearGradient id="facetBottom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#064e3b" stop-opacity="0.3" />
+    </linearGradient>
+
+    <filter id="bloom" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="7" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="800" fill="url(#bgGrad)" />
+
+  <!-- Ambient Light Volumes -->
+  <circle cx="600" cy="380" r="360" fill="url(#prismCoreGlow)" />
+  <circle cx="340" cy="320" r="280" fill="url(#lifeGlowEmerald)" />
+  <circle cx="860" cy="440" r="280" fill="url(#intelGlowViolet)" />
+
+  <!-- Delicate Quantum Mesh Grid -->
+  <g opacity="0.05" stroke="#38bdf8" stroke-width="1">
+    <circle cx="600" cy="380" r="500" fill="none" />
+    <circle cx="600" cy="380" r="400" fill="none" />
+    <circle cx="600" cy="380" r="300" fill="none" />
+    <line x1="100" y1="380" x2="1100" y2="380" />
+    <line x1="600" y1="50" x2="600" y2="710" />
+  </g>
+
+  <!-- Abstract Biomimetic Orbital Harmonics (Subtle Fibonacci / Wave Curves) -->
+  <g fill="none" stroke-width="1.5" opacity="0.45">
+    <ellipse cx="600" cy="380" rx="340" ry="170" stroke="#38bdf8" stroke-dasharray="8 12" transform="rotate(-18 600 380)" />
+    <ellipse cx="600" cy="380" rx="340" ry="170" stroke="#a78bfa" stroke-dasharray="6 14" transform="rotate(28 600 380)" />
+    <ellipse cx="600" cy="380" rx="270" ry="270" stroke="#34d399" stroke-dasharray="4 8" opacity="0.3" />
+  </g>
+
+  <!-- Luminous Synaptic Laser Pathways (Data Consensus Beams) -->
+  <g stroke-width="2" opacity="0.65">
+    <!-- Beam 1: Genetics/Vitality Node -->
+    <line x1="600" y1="380" x2="330" y2="250" stroke="#34d399" stroke-dasharray="4 4" filter="url(#softGlow)" />
+    <!-- Beam 2: Bio-Molecular Node -->
+    <line x1="600" y1="380" x2="870" y2="250" stroke="#a78bfa" stroke-dasharray="4 4" filter="url(#softGlow)" />
+    <!-- Beam 3: Clinical Protocol Node -->
+    <line x1="600" y1="380" x2="600" y2="600" stroke="#38bdf8" stroke-dasharray="4 4" filter="url(#softGlow)" />
+    <!-- Inter-Agent Peer Resonance Links -->
+    <path d="M330,250 Q600,150 870,250" fill="none" stroke="#00f2fe" stroke-width="1.5" opacity="0.4" />
+    <path d="M870,250 Q920,460 600,600" fill="none" stroke="#818cf8" stroke-width="1.5" opacity="0.4" />
+    <path d="M600,600 Q280,460 330,250" fill="none" stroke="#10b981" stroke-width="1.5" opacity="0.4" />
+  </g>
+
+  <!-- THE CENTRAL PRISM (Abstract Shield of Truth & Privacy) -->
+  <g transform="translate(600, 380)">
+    <!-- Outer Aura Bloom -->
+    <polygon points="0,-125 105,-35 85,95 0,140 -85,95 -105,-35"
+             fill="none" stroke="#00f2fe" stroke-width="10" opacity="0.2" filter="url(#bloom)" />
+
+    <!-- Crystalline Facets (Faceted Shield Geometry - NO Crosses) -->
+    <!-- Top-Left Facet -->
+    <polygon points="0,-120 -100,-35 0,0" fill="url(#facetTop)" stroke="#7dd3fc" stroke-width="1.5" />
+    <!-- Top-Right Facet -->
+    <polygon points="0,-120 100,-35 0,0" fill="url(#facetRight)" stroke="#c4b5fd" stroke-width="1.5" />
+    <!-- Bottom-Left Facet -->
+    <polygon points="-100,-35 -80,90 0,135 0,0" fill="url(#facetLeft)" stroke="#38bdf8" stroke-width="1.5" />
+    <!-- Bottom-Right Facet -->
+    <polygon points="100,-35 80,90 0,135 0,0" fill="url(#facetBottom)" stroke="#34d399" stroke-width="1.5" />
+
+    <!-- Core Singularity: Inner Vital Seed (Symbolizes Living Patient Data, Untouched & Protected) -->
+    <circle cx="0" cy="0" r="16" fill="#ffffff" filter="url(#bloom)" />
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0.8" />
+    <circle cx="0" cy="0" r="42" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="3 5" opacity="0.7" />
+  </g>
+
+  <!-- Autonomous Specialist Agent 1: Biomimetic Life Sciences (Top-Left) -->
+  <g transform="translate(330, 250)">
+    <!-- Node Halo -->
+    <circle cx="0" cy="0" r="44" fill="#041a1c" stroke="#34d399" stroke-width="2" filter="url(#softGlow)" />
+    <!-- Abstract Bio-Harmonic Loop (Symbolic of Genetic Elegance without being a literal cartoon) -->
+    <path d="M-18,-10 C-10,-24 10,-24 18,-10 C24,0 12,14 0,18 C-12,14 -24,0 -18,-10 Z"
+          fill="none" stroke="#34d399" stroke-width="2.5" />
+    <circle cx="0" cy="0" r="4" fill="#6ee7b7" />
+    <text x="0" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          font-size="13" font-weight="700" fill="#a7f3d0" text-anchor="middle" letter-spacing="1.5">GENOME NODE</text>
+    <text x="0" y="82" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          font-size="11" fill="#6ee7b7" text-anchor="middle" opacity="0.75">Molecular Grounding</text>
+  </g>
+
+  <!-- Autonomous Specialist Agent 2: Pharmacological Intelligence (Top-Right) -->
+  <g transform="translate(870, 250)">
+    <!-- Node Halo -->
+    <circle cx="0" cy="0" r="44" fill="#130d2a" stroke="#a78bfa" stroke-width="2" filter="url(#softGlow)" />
+    <!-- Abstract Crystal Lattice / Molecular Resonance (Symbolic of Bio-Chemistry) -->
+    <polygon points="0,-18 16,-9 16,9 0,18 -16,9 -16,-9"
+             fill="none" stroke="#a78bfa" stroke-width="2.5" />
+    <circle cx="0" cy="0" r="4" fill="#c4b5fd" />
+    <text x="0" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          font-size="13" font-weight="700" fill="#ddd6fe" text-anchor="middle" letter-spacing="1.5">PHARMA NODE</text>
+    <text x="0" y="82" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          font-size="11" fill="#c4b5fd" text-anchor="middle" opacity="0.75">Interaction Synthesis</text>
+  </g>
+
+  <!-- Autonomous Specialist Agent 3: Clinical Evidence & Trials (Bottom) -->
+  <g transform="translate(600, 600)">
+    <!-- Node Halo -->
+    <circle cx="0" cy="0" r="44" fill="#061729" stroke="#38bdf8" stroke-width="2" filter="url(#softGlow)" />
+    <!-- Abstract Concentric Radar / Discovery Rings (Symbolic of Clinical Evidence Search) -->
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#38bdf8" stroke-width="2" />
+    <path d="M0,-18 V-6 M0,6 V18 M-18,0 H-6 M6,0 H18" stroke="#38bdf8" stroke-width="2" />
+    <circle cx="0" cy="0" r="4" fill="#7dd3fc" />
+    <text x="0" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          font-size="13" font-weight="700" fill="#bae6fd" text-anchor="middle" letter-spacing="1.5">EVIDENCE NODE</text>
+    <text x="0" y="82" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          font-size="11" fill="#7dd3fc" text-anchor="middle" opacity="0.75">Protocol Validation</text>
+  </g>
+
+  <!-- Top Category Pill -->
+  <g transform="translate(600, 70)">
+    <rect x="-185" y="-17" width="370" height="34" rx="17" fill="#ffffff" fill-opacity="0.04" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.3" />
+    <circle cx="-155" cy="0" r="4" fill="#00f2fe" filter="url(#softGlow)" />
+    <text x="-140" y="4.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          font-size="12" font-weight="600" fill="#e0f2fe" letter-spacing="2">OPEN AGENTIC WEB CHALLENGE</text>
+  </g>
+
+  <!-- Bottom Elegant Typography -->
+  <g transform="translate(600, 725)">
+    <text x="0" y="-12" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          font-size="40" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="4">
+      AEGIS <tspan fill="#38bdf8">CONSENSUS</tspan>
+    </text>
+    <text x="0" y="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+          font-size="15" font-weight="500" fill="#94a3b8" text-anchor="middle" letter-spacing="2">
+      DECENTRALIZED MULTI-SPECIALIST CLINICAL INTELLIGENCE
+    </text>
+  </g>
+
+  <!-- Badges -->
+  <g transform="translate(80, 745)" opacity="0.8">
+    <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#38bdf8">
+      🛡️ Zero Cloud Uploads • 100% In-Browser Privacy
+    </text>
+  </g>
+  <g transform="translate(940, 745)" opacity="0.8">
+    <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#a78bfa">
+      ⚡ Powered by Mozilla Otari BYOK
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+{
+  "name": "aegis-medical-consensus",
+  "version": "1.0.0",
+  "description": "Aegis: Zero-Leakage Medical Consensus Room — Open Agentic Web Challenge (Cognizant / Mozilla / MIT NANDA)",
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve_all.mjs",
+    "test": "node tests/conformance_test.mjs",
+    "serve:hub": "node scripts/serve_site.mjs sites/aegis-hub --port 8080",
+    "serve:genomics": "node scripts/serve_site.mjs sites/genomics-node --port 8081",
+    "serve:pharma": "node scripts/serve_site.mjs sites/pharmasafe-node --port 8082"
+  },
+  "keywords": [
+    "open-agentic-web",
+    "neuro-san",
+    "mozilla-otari",
+    "healthcare-ai",
+    "multi-agent-systems",
+    "zero-leakage",
+    "byok",
+    "privacy-preserving-ai"
+  ],
+  "author": "Aegis Team",
+  "license": "Apache-2.0"
+}
