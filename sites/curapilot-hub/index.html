@@ -50,7 +50,10 @@
       <section class="vault-card">
         <div class="card-header">
           <h2>🔒 Sovereign Patient Vault</h2>
-          <span class="badge-tag">Air-Gapped in Browser RAM</span>
+          <div class="vault-header-actions">
+            <button id="custom-case-btn" class="btn-vault-action" title="Enter or edit custom patient details">➕ Custom Patient</button>
+            <span class="badge-tag">Air-Gapped in Browser RAM</span>
+          </div>
         </div>
 
         <div class="patient-banner">
@@ -137,5 +140,67 @@
       </section>
     </div>
   </main>
+
+  <!-- Custom Patient Intake Modal (100% In-Browser Memory) -->
+  <dialog id="custom-patient-modal" class="custom-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">🩺</span>
+          <div>
+            <h3>Enter Custom Patient Record</h3>
+            <p>Processed purely in browser volatile memory • Zero cloud transmission</p>
+          </div>
+        </div>
+        <button id="close-modal-btn" class="close-x-btn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="custom-patient-form" class="modal-form">
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="cust-code">Case Code / ID</label>
+            <input type="text" id="cust-code" value="CASE #CP-CUSTOM" required />
+          </div>
+          <div class="form-field">
+            <label for="cust-demographics">Demographics (Age, Sex, Status)</label>
+            <input type="text" id="cust-demographics" value="34y Female • Outpatient Review" required />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="cust-title">Differential Title / Syndrome Summary</label>
+          <input type="text" id="cust-title" value="Episodic Weakness, Muscle Cramps & Post-Meal Confusion" required />
+        </div>
+
+        <div class="form-field">
+          <label for="cust-presentation">Clinical Presentation & Symptoms</label>
+          <textarea id="cust-presentation" rows="2" required>Patient reports intermittent ataxia, rapid-onset exercise fatigue, episodic confusion, and unprovoked muscle tremors.</textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="cust-biomarkers">Laboratory Biomarkers (comma-separated: Name: Value [Status])</label>
+          <input type="text" id="cust-biomarkers" value="Venous Lactate: 4.6 mmol/L [CRITICAL_HIGH], Serum Pyruvate: 0.17 mmol/L [HIGH], Lactate/Pyruvate Ratio: 27.1 [ABNORMAL_HIGH]" />
+          <small class="field-hint">e.g. Venous Lactate: 4.6 mmol/L [CRITICAL_HIGH], Serum Creatinine: 0.9 mg/dL [NORMAL]</small>
+        </div>
+
+        <div class="form-field">
+          <label for="cust-genomics">Genomic Variants (Gene: Variant Mutation)</label>
+          <input type="text" id="cust-genomics" value="PDHA1: c.1145C>T (p.Pro382Leu, Heterozygous)" />
+          <small class="field-hint">e.g. PDHA1: c.1145C>T, DPYD: *2A, CYP2C19: *2</small>
+        </div>
+
+        <div class="form-field">
+          <label for="cust-meds">Active Medications (comma-separated)</label>
+          <input type="text" id="cust-meds" value="Valproic Acid 250mg BID, Metformin 500mg Daily" />
+          <small class="field-hint">e.g. Valproic Acid, Metformin, Clopidogrel, Omeprazole</small>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="cancel-modal-btn" class="btn-demo-subtle">Cancel</button>
+          <button type="submit" class="btn-demo-primary">💾 Save into Sovereign Vault (RAM)</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
 </body>
 </html>

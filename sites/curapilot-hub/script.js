@@ -293,6 +293,111 @@ export class CuraPilotApp {
         CuraPilotApp.downloadDossierText();
       });
     }
+
+    // Custom Patient Modal Handlers
+    const modal = document.querySelector("#custom-patient-modal");
+    const openBtn = document.querySelector("#custom-case-btn");
+    const closeBtn = document.querySelector("#close-modal-btn");
+    const cancelBtn = document.querySelector("#cancel-modal-btn");
+    const form = document.querySelector("#custom-patient-form");
+
+    if (openBtn && modal) {
+      openBtn.addEventListener("click", () => {
+        modal.showModal();
+      });
+    }
+
+    if (closeBtn && modal) {
+      closeBtn.addEventListener("click", () => modal.close());
+    }
+
+    if (cancelBtn && modal) {
+      cancelBtn.addEventListener("click", () => modal.close());
+    }
+
+    if (form && modal) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const codeVal = document.querySelector("#cust-code")?.value.trim() || "CASE #CP-CUSTOM";
+        const demoVal = document.querySelector("#cust-demographics")?.value.trim() || "30y Patient";
+        const titleVal = document.querySelector("#cust-title")?.value.trim() || "Custom Clinical Review";
+        const presVal = document.querySelector("#cust-presentation")?.value.trim() || "Unresolved symptoms entered by user.";
+        const bioVal = document.querySelector("#cust-biomarkers")?.value.trim() || "";
+        const genVal = document.querySelector("#cust-genomics")?.value.trim() || "";
+        const medVal = document.querySelector("#cust-meds")?.value.trim() || "";
+
+        // Parse Biomarkers
+        const biomarkers = bioVal ? bioVal.split(",").map(b => {
+          const parts = b.split(":");
+          const name = parts[0]?.trim() || "Biomarker";
+          const valWithStatus = parts[1]?.trim() || "Normal";
+          const statusMatch = valWithStatus.match(/\[(.*?)\]/);
+          const status = statusMatch ? statusMatch[1] : "NORMAL";
+          const cleanVal = valWithStatus.replace(/\[.*?\]/, "").trim();
+          return { name, value: cleanVal, status, ref: "Standard Reference" };
+        }) : [];
+
+        // Parse Genomics
+        const genomic_variants = genVal ? genVal.split(",").map(g => {
+          const parts = g.split(":");
+          const gene = parts[0]?.trim() || "GENE";
+          const variant = parts[1]?.trim() || "Variant";
+          return { gene, variant, protein: "", zygosity: "Reported", notes: "Custom patient entered variant." };
+        }) : [];
+
+        // Parse Meds
+        const active_medications = medVal ? medVal.split(",").map(m => {
+          return { name: m.trim(), dosage: "Active Dose", indication: "Prescribed Therapy" };
+        }) : [];
+
+        const customCase = {
+          id: "case-custom",
+          code: codeVal,
+          title: titleVal,
+          demographics: { age: 30, sex: "Specified", status: demoVal },
+          clinical_presentation: presVal,
+          biomarkers,
+          genomic_variants,
+          active_medications,
+          demo_script: {
+            prompt: `Chief Physician, please evaluate ${codeVal} in my private vault. Cross-examine active medications against patient findings.`,
+            genomics_response: "Rare Genomics Institute confirmed: Patient variant verified against locus reference database. Clinical annotation review completed.",
+            pharma_response: "PharmaSafe Laboratory Alert: Screened polypharmacy regimen against patient biomarkers. Drug clearances assessed.",
+            dossier: {
+              primary_etiology: "Clinical Differential & Metabolic Profile",
+              diagnostic_confidence: "MODERATE",
+              genomic_findings_summary: `Genomic review conducted for ${genVal || "reported loci"}.`,
+              pharmacological_findings_summary: `Screened active medications: ${medVal || "none reported"}.`,
+              urgent_interventions: [
+                "Review clinical presentation with attending physician",
+                "Monitor laboratory biomarkers at scheduled follow-up",
+                "Confirm medication safety and contraindications"
+              ],
+              physician_discussion_notes: "Custom patient record compiled in browser memory. Discuss findings with attending medical team."
+            }
+          }
+        };
+
+        CuraPilotApp.vault.cases["case-custom"] = customCase;
+
+        // Ensure option exists in selector
+        const selector = document.querySelector("#case-selector");
+        if (selector) {
+          let opt = selector.querySelector("option[value='case-custom']");
+          if (!opt) {
+            opt = document.createElement("option");
+            opt.value = "case-custom";
+            selector.appendChild(opt);
+          }
+          opt.textContent = `${codeVal} — ${titleVal} (Custom In-Memory Record)`;
+          selector.value = "case-custom";
+        }
+
+        CuraPilotApp.vault.setActiveCase("case-custom");
+        modal.close();
+      });
+    }
   }
 
   static appendSimulatedMessage(role, text) {
