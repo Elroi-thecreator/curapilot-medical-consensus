@@ -23,7 +23,25 @@ export class AegisVault {
         active_medications: [
           { name: "Valproic Acid", dosage: "250 mg BID", indication: "Prescribed for episodic migraine / seizure prophylaxis" },
           { name: "Metformin", dosage: "500 mg Daily", indication: "Mild insulin resistance" }
-        ]
+        ],
+        demo_script: {
+          prompt: "Chief Physician, please review Case #AG-8492 in my private vault. Consult the Rare Genomics Institute on PDHA1 c.1145C>T and PharmaSafe on Valproic Acid & Metformin. Synthesize a complete clinical consensus dossier.",
+          genomics_response: "Rare Genomics Institute confirmed: PDHA1 c.1145C>T (p.Pro382Leu) is classified as PATHOGENIC (ClinVar:RCV000782319, OMIM:312170). The mutation disrupts the thiamine pyrophosphate (TPP) cofactor binding domain, suppressing PDH catalytic activity to <15% of normal. This causes cellular lactic flux and brain energy starvation.",
+          pharma_response: "PharmaSafe Laboratory Alert: CRITICAL CONTRAINDICATION DETECTED! Valproic acid depletes mitochondrial carnitine and halts beta-oxidation. In patients with underlying PDHA1 mutations, valproate precipitates fulminant mitochondrial crisis, cerebral edema, and status epilepticus. Furthermore, Metformin inhibits complex I, exacerbating lactic acidosis.",
+          dossier: {
+            primary_etiology: "Pyruvate Dehydrogenase E1-alpha Deficiency (PDHD)",
+            diagnostic_confidence: "HIGH",
+            genomic_findings_summary: "Confirmed pathogenic mutation PDHA1 c.1145C>T causing severe E1-alpha catalytic failure (<15% activity) and impaired pyruvate-to-acetyl-CoA conversion.",
+            pharmacological_findings_summary: "Valproic Acid represents an acute, life-threatening mitochondrial toxin in PDH deficiency. Metformin exacerbates systemic lactic flux.",
+            urgent_interventions: [
+              "Immediately discontinue Valproic Acid; substitute non-mitochondrial Levetiracetam",
+              "Discontinue Metformin to reduce lactic acidosis risk",
+              "Strictly avoid standard IV dextrose/glucose infusions (triggers fatal lactic crises)",
+              "Initiate medical ketogenic diet (4:1 ratio) with high-dose thiamine (100 mg/kg/day)"
+            ],
+            physician_discussion_notes: "Provide attending physician with emergency protocol letter; confirm baseline venous lactate/pyruvate ratio and schedule neurology metabolic consultation."
+          }
+        }
       },
       "case-2": {
         id: "case-2",
@@ -43,13 +61,67 @@ export class AegisVault {
           { name: "Clopidogrel", dosage: "75 mg Daily", indication: "Post-PCI Dual Antiplatelet" },
           { name: "Omeprazole", dosage: "20 mg Daily", indication: "Gastric ulcer prophylaxis" },
           { name: "Atorvastatin", dosage: "40 mg Daily", indication: "Lipid lowering" }
-        ]
+        ],
+        demo_script: {
+          prompt: "Chief Physician, examine Case #AG-3104. Review CYP2C19 variant status and analyze why the patient has clopidogrel hypo-responsiveness on dual antiplatelet therapy.",
+          genomics_response: "Rare Genomics Institute confirmed: CYP2C19 *2 is a loss-of-function allele causing aberrant splicing. The patient is an Intermediate/Poor Metabolizer with impaired hepatic bioactivation of thienopyridine prodrugs.",
+          pharma_response: "PharmaSafe Laboratory Alert: MAJOR PHARMACOKINETIC ANTAGONISM DETECTED! Omeprazole is a competitive CYP2C19 substrate and inhibitor. Co-administration in a CYP2C19 *2 carrier drops active clopidogrel thiol metabolite generation by ~45%, creating high stent thrombosis risk.",
+          dossier: {
+            primary_etiology: "CYP2C19 Poor Metabolizer Phenotype with Clopidogrel Resistance",
+            diagnostic_confidence: "HIGH",
+            genomic_findings_summary: "Confirmed CYP2C19 *2 loss-of-function allele impairing enzymatic prodrug activation.",
+            pharmacological_findings_summary: "Omeprazole competitively blocks residual CYP2C19 activity, neutralizing clopidogrel antiplatelet protection.",
+            urgent_interventions: [
+              "Switch antiplatelet agent from Clopidogrel to Ticagrelor (90mg BID) or Prasugrel (10mg daily)",
+              "Substitute Omeprazole with Pantoprazole (low CYP2C19 affinity) or H2-blocker",
+              "Repeat P2Y12 PRU platelet assay in 14 days"
+            ],
+            physician_discussion_notes: "Alert interventional cardiologist immediately to adjust antiplatelet therapy to prevent in-stent thrombosis."
+          }
+        }
+      },
+      "case-3": {
+        id: "case-3",
+        code: "CASE #AG-5519 (62y Male)",
+        title: "Stage III Colorectal Carcinoma — Pre-Chemotherapy Toxicity Screen",
+        demographics: { age: 62, sex: "Male", status: "Pre-Chemotherapy" },
+        clinical_presentation: "A 62-year-old male scheduled to initiate adjuvant fluoropyrimidine chemotherapy (FOLFOX regimen) undergoes baseline pharmacogenetic safety screening.",
+        biomarkers: [
+          { name: "Absolute Neutrophil Count", value: "3.8 x10^9/L", status: "NORMAL", ref: "2.0 - 7.5 x10^9/L" },
+          { name: "Total Bilirubin", value: "0.7 mg/dL", status: "NORMAL", ref: "0.2 - 1.2 mg/dL" },
+          { name: "Serum Creatinine", value: "1.0 mg/dL", status: "NORMAL", ref: "0.7 - 1.3 mg/dL" }
+        ],
+        genomic_variants: [
+          { gene: "DPYD", variant: "*2A", protein: "c.1905+1G>A", zygosity: "Heterozygous", notes: "CPIC Level 1A splice-donor mutation abolishing DPD activity." }
+        ],
+        active_medications: [
+          { name: "Capecitabine / 5-Fluorouracil", dosage: "Standard Body Surface Area Dose", indication: "Adjuvant Colorectal Protocol (Planned)" },
+          { name: "Ondansetron", dosage: "8 mg Pre-infusion", indication: "Antiemetic" }
+        ],
+        demo_script: {
+          prompt: "Chief Physician, evaluate Case #AG-5519. Check DPYD *2A variant pathogenicity and screen scheduled 5-FU/capecitabine chemotherapy for life-threatening toxicity.",
+          genomics_response: "Rare Genomics Institute confirmed: DPYD *2A (c.1905+1G>A) causes complete exon 14 skipping and produces non-functional dihydropyrimidine dehydrogenase. DPD activity score is critically reduced (0.5-1.0).",
+          pharma_response: "PharmaSafe Laboratory Alert: CRITICAL / LIFE-THREATENING TOXICITY WARNING! DPYD *2A carriers cannot catabolize 5-FU. Standard dosing triggers catastrophic myelosuppression, pancytopenia, mucositis, and fatal neurotoxicity (CPIC Level 1A).",
+          dossier: {
+            primary_etiology: "Dihydropyrimidine Dehydrogenase (DPD) Deficiency",
+            diagnostic_confidence: "HIGH",
+            genomic_findings_summary: "Confirmed DPYD *2A splice mutation eliminating normal clearance of fluoropyrimidine metabolites.",
+            pharmacological_findings_summary: "Full-dose 5-FU or Capecitabine is an absolute contraindication due to lethal drug accumulation.",
+            urgent_interventions: [
+              "Reduce initial 5-FU / Capecitabine dose by at least 50% with therapeutic drug monitoring (TDM)",
+              "Consider non-fluoropyrimidine alternative regimens (e.g. Irinotecan-based protocols)",
+              "Ensure patient carries emergency DPD deficiency card"
+            ],
+            physician_discussion_notes: "Advise medical oncologist to consult CPIC guidelines for DPYD dosing before administering cycle 1."
+          }
+        }
       }
     };
 
     this.activeCaseId = "case-1";
     this.flaggedContraindications = [];
     this.consensusDossier = null;
+    this.simulating = false;
   }
 
   getActiveRecord() {
@@ -106,6 +178,60 @@ export class AegisVault {
       dossier_id: "DOSSIER-" + Math.floor(100000 + Math.random() * 900000)
     };
   }
+
+  runDemoSimulation() {
+    if (this.simulating) return;
+    this.simulating = true;
+    const c = this.cases[this.activeCaseId];
+    const demo = c.demo_script;
+
+    AegisApp.appendSimulatedMessage("user", demo.prompt);
+
+    setTimeout(() => {
+      AegisApp.appendSimulatedMessage("bot", `🩺 **Chief Physician:** Initiating zero-leakage clinical consensus review for ${c.code}. Accessing local private vault... Verified ${c.biomarkers.length} biomarkers, ${c.genomic_variants.length} genomic variants, and ${c.active_medications.length} active medications. Calling external specialist nodes via Open Agentic Web peer links...`);
+    }, 600);
+
+    setTimeout(() => {
+      AegisApp.appendSimulatedMessage("genomics", `🧬 **Rare Genomics Institute (` + window.location.origin + `/genomics):** ${demo.genomics_response}`);
+    }, 1800);
+
+    setTimeout(() => {
+      AegisApp.appendSimulatedMessage("pharma", `💊 **PharmaSafe Interaction Laboratory (` + window.location.origin + `/pharmasafe):** ${demo.pharma_response}`);
+      
+      // Auto-flag contraindication
+      if (c.id === "case-1") {
+        this.addContraindication({
+          severity: "CRITICAL",
+          target: "Valproic Acid",
+          conflict_with: "PDHA1 c.1145C>T deficiency",
+          clinical_rationale: "Valproic acid depletes mitochondrial carnitine and halts pyruvate oxidation, triggering catastrophic lactic crisis in PDH deficiency.",
+          recommended_action: "Immediately discontinue Valproic Acid. Substitute non-mitochondrial Levetiracetam."
+        });
+      } else if (c.id === "case-2") {
+        this.addContraindication({
+          severity: "MAJOR",
+          target: "Omeprazole + Clopidogrel",
+          conflict_with: "CYP2C19 *2 loss of function",
+          clinical_rationale: "Omeprazole competitively inhibits CYP2C19, preventing active metabolite formation for antiplatelet protection.",
+          recommended_action: "Switch to Ticagrelor or Prasugrel; substitute Omeprazole with Pantoprazole."
+        });
+      } else if (c.id === "case-3") {
+        this.addContraindication({
+          severity: "CRITICAL",
+          target: "5-Fluorouracil / Capecitabine",
+          conflict_with: "DPYD *2A deficiency",
+          clinical_rationale: "Complete lack of DPD enzyme clearance leads to toxic fluoropyrimidine accumulation and lethal pancytopenia.",
+          recommended_action: "Reduce dose by >=50% with therapeutic monitoring or switch to non-fluoropyrimidine chemotherapy."
+        });
+      }
+    }, 3200);
+
+    setTimeout(() => {
+      AegisApp.appendSimulatedMessage("bot", `🩺 **Chief Physician:** Cross-examination complete. Critical contradiction identified between patient's genetic defect and medication regimen! Synthesizing and sealing formal Consensus Dossier...`);
+      this.saveConsensusDossier(demo.dossier);
+      this.simulating = false;
+    }, 4500);
+  }
 }
 
 export class AegisApp {
@@ -124,16 +250,60 @@ export class AegisApp {
       });
     }
 
+    const demoSimBtn = document.querySelector("#demo-simulate-btn");
+    if (demoSimBtn) {
+      demoSimBtn.addEventListener("click", () => {
+        AegisApp.vault.runDemoSimulation();
+      });
+    }
+
+    const prefillBtn = document.querySelector("#demo-prefill-btn");
+    if (prefillBtn) {
+      prefillBtn.addEventListener("click", () => {
+        const c = AegisApp.vault.cases[AegisApp.vault.activeCaseId];
+        const input = document.querySelector("#ns-query-input") || document.querySelector("input[type='text'].ns-input");
+        if (input) {
+          input.value = c.demo_script.prompt;
+          input.focus();
+        } else {
+          navigator.clipboard.writeText(c.demo_script.prompt);
+          alert("Copied sample prompt to clipboard! Paste it into the chat input below.");
+        }
+      });
+    }
+
+    const resetBtn = document.querySelector("#demo-reset-btn");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        AegisApp.vault.setActiveCase(AegisApp.vault.activeCaseId);
+        const chatMsgs = document.querySelector("#ns-msgs");
+        if (chatMsgs) {
+          chatMsgs.innerHTML = `<div class="ns-msg bot">I am the Chief Physician Coordinator. I operate entirely within your local browser memory to coordinate zero-leakage clinical second opinions. How can I assist with the active case?</div>`;
+        }
+      });
+    }
+
     const exportBtn = document.querySelector("#export-dossier-btn");
     if (exportBtn) {
       exportBtn.addEventListener("click", () => {
         if (!AegisApp.vault.consensusDossier) {
-          alert("No consensus dossier has been compiled yet. Ask the Chief Physician to synthesize the case first!");
+          alert("No consensus dossier has been compiled yet. Run the consensus deliberation first!");
           return;
         }
         AegisApp.downloadDossierText();
       });
     }
+  }
+
+  static appendSimulatedMessage(role, text) {
+    const chatMsgs = document.querySelector("#ns-msgs");
+    if (!chatMsgs) return;
+
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `ns-msg ${role} sim-msg-${role}`;
+    msgDiv.innerHTML = text.replace(/\n/g, "<br>");
+    chatMsgs.appendChild(msgDiv);
+    chatMsgs.scrollTop = chatMsgs.scrollHeight;
   }
 
   static render() {
@@ -155,7 +325,7 @@ export class AegisApp {
     const bioContainer = document.querySelector("#biomarkers-list");
     if (bioContainer) {
       bioContainer.innerHTML = c.biomarkers.map(b => `
-        <div class="metric-row ${b.status.includes('HIGH') || b.status.includes('ABNORMAL') ? 'metric-alert' : ''}">
+        <div class="metric-row ${b.status.includes('HIGH') || b.status.includes('ABNORMAL') || b.status.includes('CRITICAL') ? 'metric-alert' : ''}">
           <span class="metric-name">${b.name}</span>
           <span class="metric-val"><strong>${b.value}</strong> <small>(${b.ref})</small></span>
         </div>
@@ -228,7 +398,7 @@ export class AegisApp {
       container.innerHTML = `
         <div class="empty-dossier">
           <p>Consensus dossier not yet compiled.</p>
-          <small>Ask the Chief Physician to synthesize the consultation once specialist deliberations complete.</small>
+          <small>Ask the Chief Physician to synthesize the consultation or click "⚡ Run Consensus Demo" above.</small>
         </div>
       `;
       return;

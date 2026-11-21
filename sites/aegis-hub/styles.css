@@ -589,3 +589,118 @@ header {
   color: var(--text-muted);
   margin-top: 0.25rem;
 }
+
+/* Live Demo Recording Toolbar */
+.demo-toolbar {
+  background: linear-gradient(135deg, #f0fdf4, #e0f2fe);
+  border: 1px solid #bae6fd;
+  border-radius: 12px;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.05);
+}
+
+.demo-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.demo-tag {
+  background: #0284c7;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.demo-title-group strong {
+  font-size: 0.85rem;
+  color: #0c4a6e;
+}
+
+.demo-buttons-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-demo-primary {
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  color: white;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
+  transition: all 0.2s ease;
+}
+
+.btn-demo-primary:hover {
+  background: linear-gradient(135deg, #0369a1, #0284c7);
+  transform: translateY(-1px);
+}
+
+.btn-demo-secondary {
+  background: #ffffff;
+  color: #0369a1;
+  border: 1px solid #7dd3fc;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-demo-secondary:hover {
+  background: #f0f9ff;
+}
+
+.btn-demo-subtle {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-demo-subtle:hover {
+  background: #e2e8f0;
+}
+
+/* Simulated Message Bubbles */
+.ns-msg.sim-msg-genomics {
+  background: #f0fdf4 !important;
+  border-left: 4px solid #059669 !important;
+  color: #064e3b !important;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.ns-msg.sim-msg-pharma {
+  background: #f5f3ff !important;
+  border-left: 4px solid #7c3aed !important;
+  color: #4c1d95 !important;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.ns-msg.sim-msg-user {
+  background: #f0f9ff !important;
+  border-left: 4px solid #0284c7 !important;
+  color: #075985 !important;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
