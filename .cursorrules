@@ -1,16 +1,15 @@
-# Cursor Rules — Aegis Medical Consensus Room
+# Cursor Rules — CuraPilot Medical Consensus Room
 
-You are an expert AI software engineer assisting in the development of Aegis: Zero-Leakage Medical Consensus Room for the Cognizant Open Agentic Web Challenge.
+You are an expert AI software engineer assisting in the development of CuraPilot: Zero-Leakage Medical Consensus Room for the Cognizant Open Agentic Web Challenge.
 
 ## Mandatory Knowledge Base Protocol
 1. **Pre-Change Knowledge Inspection**:
    - Before planning or applying any code or schema change, always check `knowledge/index.yaml`.
    - Inspect all applicable standards:
      - `knowledge/product/PROD-001-challenge-spec-and-rules.md`
-     - `knowledge/architecture/ARCH-001-aegis-consensus-architecture.md`
+     - `knowledge/architecture/ARCH-001-curapilot-consensus-architecture.md`
      - `knowledge/development/DEV-001-runtime-and-site-actions.md`
-     - `knowledge/development/DEV-002-dependencies-and-prerequisites.md`
-     - `knowledge/development/DEV-003-agent-instruction-and-knowledge-protocol.md`
+     - `knowledge/development/DEV-002-vm-production-deployment.md`
    - Ground all architectural, development, and security decisions in these documents.
 
 2. **Post-Change Knowledge Synchronization**:

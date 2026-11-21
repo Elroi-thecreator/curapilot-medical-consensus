@@ -1,12 +1,12 @@
-// Aegis Hub Sovereign Client Vault & UI Controller
+// CuraPilot Hub Sovereign Client Vault & UI Controller
 // Operates 100% in browser memory. Zero data transmitted to any cloud backend.
 
-export class AegisVault {
+export class CuraPilotVault {
   constructor() {
     this.cases = {
       "case-1": {
         id: "case-1",
-        code: "CASE #AG-8492 (24y Female)",
+        code: "CASE #CP-8492 (24y Female)",
         title: "Intermittent Ataxia, Severe Lactic Flux & Seizures",
         demographics: { age: 24, sex: "Female", status: "Unresolved Differential" },
         clinical_presentation: "A 24-year-old female presents with recurrent episodic ataxia, profound post-exertional exhaustion, intermittent confusion, and refractory seizures. Standard epilepsy panels have been inconclusive.",
@@ -25,7 +25,7 @@ export class AegisVault {
           { name: "Metformin", dosage: "500 mg Daily", indication: "Mild insulin resistance" }
         ],
         demo_script: {
-          prompt: "Chief Physician, please review Case #AG-8492 in my private vault. Consult the Rare Genomics Institute on PDHA1 c.1145C>T and PharmaSafe on Valproic Acid & Metformin. Synthesize a complete clinical consensus dossier.",
+          prompt: "Chief Physician, please review Case #CP-8492 in my private vault. Consult the Rare Genomics Institute on PDHA1 c.1145C>T and PharmaSafe on Valproic Acid & Metformin. Synthesize a complete clinical consensus dossier.",
           genomics_response: "Rare Genomics Institute confirmed: PDHA1 c.1145C>T (p.Pro382Leu) is classified as PATHOGENIC (ClinVar:RCV000782319, OMIM:312170). The mutation disrupts the thiamine pyrophosphate (TPP) cofactor binding domain, suppressing PDH catalytic activity to <15% of normal. This causes cellular lactic flux and brain energy starvation.",
           pharma_response: "PharmaSafe Laboratory Alert: CRITICAL CONTRAINDICATION DETECTED! Valproic acid depletes mitochondrial carnitine and halts beta-oxidation. In patients with underlying PDHA1 mutations, valproate precipitates fulminant mitochondrial crisis, cerebral edema, and status epilepticus. Furthermore, Metformin inhibits complex I, exacerbating lactic acidosis.",
           dossier: {
@@ -45,7 +45,7 @@ export class AegisVault {
       },
       "case-2": {
         id: "case-2",
-        code: "CASE #AG-3104 (58y Male)",
+        code: "CASE #CP-3104 (58y Male)",
         title: "Post-PCI Refractory Ischemia on Dual Antiplatelet Therapy",
         demographics: { age: 58, sex: "Male", status: "Post-Stent Follow-up" },
         clinical_presentation: "A 58-year-old male with recent drug-eluting coronary stent placement reports recurrent exertional angina despite adherence to post-PCI pharmacotherapy.",
@@ -63,7 +63,7 @@ export class AegisVault {
           { name: "Atorvastatin", dosage: "40 mg Daily", indication: "Lipid lowering" }
         ],
         demo_script: {
-          prompt: "Chief Physician, examine Case #AG-3104. Review CYP2C19 variant status and analyze why the patient has clopidogrel hypo-responsiveness on dual antiplatelet therapy.",
+          prompt: "Chief Physician, examine Case #CP-3104. Review CYP2C19 variant status and analyze why the patient has clopidogrel hypo-responsiveness on dual antiplatelet therapy.",
           genomics_response: "Rare Genomics Institute confirmed: CYP2C19 *2 is a loss-of-function allele causing aberrant splicing. The patient is an Intermediate/Poor Metabolizer with impaired hepatic bioactivation of thienopyridine prodrugs.",
           pharma_response: "PharmaSafe Laboratory Alert: MAJOR PHARMACOKINETIC ANTAGONISM DETECTED! Omeprazole is a competitive CYP2C19 substrate and inhibitor. Co-administration in a CYP2C19 *2 carrier drops active clopidogrel thiol metabolite generation by ~45%, creating high stent thrombosis risk.",
           dossier: {
@@ -82,7 +82,7 @@ export class AegisVault {
       },
       "case-3": {
         id: "case-3",
-        code: "CASE #AG-5519 (62y Male)",
+        code: "CASE #CP-5519 (62y Male)",
         title: "Stage III Colorectal Carcinoma — Pre-Chemotherapy Toxicity Screen",
         demographics: { age: 62, sex: "Male", status: "Pre-Chemotherapy" },
         clinical_presentation: "A 62-year-old male scheduled to initiate adjuvant fluoropyrimidine chemotherapy (FOLFOX regimen) undergoes baseline pharmacogenetic safety screening.",
@@ -99,7 +99,7 @@ export class AegisVault {
           { name: "Ondansetron", dosage: "8 mg Pre-infusion", indication: "Antiemetic" }
         ],
         demo_script: {
-          prompt: "Chief Physician, evaluate Case #AG-5519. Check DPYD *2A variant pathogenicity and screen scheduled 5-FU/capecitabine chemotherapy for life-threatening toxicity.",
+          prompt: "Chief Physician, evaluate Case #CP-5519. Check DPYD *2A variant pathogenicity and screen scheduled 5-FU/capecitabine chemotherapy for life-threatening toxicity.",
           genomics_response: "Rare Genomics Institute confirmed: DPYD *2A (c.1905+1G>A) causes complete exon 14 skipping and produces non-functional dihydropyrimidine dehydrogenase. DPD activity score is critically reduced (0.5-1.0).",
           pharma_response: "PharmaSafe Laboratory Alert: CRITICAL / LIFE-THREATENING TOXICITY WARNING! DPYD *2A carriers cannot catabolize 5-FU. Standard dosing triggers catastrophic myelosuppression, pancytopenia, mucositis, and fatal neurotoxicity (CPIC Level 1A).",
           dossier: {
@@ -144,7 +144,7 @@ export class AegisVault {
       this.activeCaseId = caseId;
       this.flaggedContraindications = [];
       this.consensusDossier = null;
-      AegisApp.render();
+      CuraPilotApp.render();
     }
   }
 
@@ -155,7 +155,7 @@ export class AegisVault {
       ...item
     };
     this.flaggedContraindications.unshift(record);
-    AegisApp.renderAlerts();
+    CuraPilotApp.renderAlerts();
     return {
       ok: true,
       alert_id: record.id,
@@ -170,7 +170,7 @@ export class AegisVault {
       case_code: this.cases[this.activeCaseId].code,
       ...dossier
     };
-    AegisApp.renderDossier();
+    CuraPilotApp.renderDossier();
     return {
       ok: true,
       status: "COMMITTED_TO_CLIENT_SESSION",
@@ -185,18 +185,18 @@ export class AegisVault {
     const c = this.cases[this.activeCaseId];
     const demo = c.demo_script;
 
-    AegisApp.appendSimulatedMessage("user", demo.prompt);
+    CuraPilotApp.appendSimulatedMessage("user", demo.prompt);
 
     setTimeout(() => {
-      AegisApp.appendSimulatedMessage("bot", `🩺 **Chief Physician:** Initiating zero-leakage clinical consensus review for ${c.code}. Accessing local private vault... Verified ${c.biomarkers.length} biomarkers, ${c.genomic_variants.length} genomic variants, and ${c.active_medications.length} active medications. Calling external specialist nodes via Open Agentic Web peer links...`);
+      CuraPilotApp.appendSimulatedMessage("bot", `🩺 **Chief Physician:** Initiating zero-leakage clinical consensus review for ${c.code}. Accessing local private vault... Verified ${c.biomarkers.length} biomarkers, ${c.genomic_variants.length} genomic variants, and ${c.active_medications.length} active medications. Calling external specialist nodes via Open Agentic Web peer links...`);
     }, 600);
 
     setTimeout(() => {
-      AegisApp.appendSimulatedMessage("genomics", `🧬 **Rare Genomics Institute (` + window.location.origin + `/genomics):** ${demo.genomics_response}`);
+      CuraPilotApp.appendSimulatedMessage("genomics", `🧬 **Rare Genomics Institute (` + window.location.origin + `/genomics):** ${demo.genomics_response}`);
     }, 1800);
 
     setTimeout(() => {
-      AegisApp.appendSimulatedMessage("pharma", `💊 **PharmaSafe Interaction Laboratory (` + window.location.origin + `/pharmasafe):** ${demo.pharma_response}`);
+      CuraPilotApp.appendSimulatedMessage("pharma", `💊 **PharmaSafe Interaction Laboratory (` + window.location.origin + `/pharmasafe):** ${demo.pharma_response}`);
       
       // Auto-flag contraindication
       if (c.id === "case-1") {
@@ -227,40 +227,40 @@ export class AegisVault {
     }, 3200);
 
     setTimeout(() => {
-      AegisApp.appendSimulatedMessage("bot", `🩺 **Chief Physician:** Cross-examination complete. Critical contradiction identified between patient's genetic defect and medication regimen! Synthesizing and sealing formal Consensus Dossier...`);
+      CuraPilotApp.appendSimulatedMessage("bot", `🩺 **Chief Physician:** Cross-examination complete. Critical contradiction identified between patient's genetic defect and medication regimen! Synthesizing and sealing formal Consensus Dossier...`);
       this.saveConsensusDossier(demo.dossier);
       this.simulating = false;
     }, 4500);
   }
 }
 
-export class AegisApp {
-  static vault = new AegisVault();
+export class CuraPilotApp {
+  static vault = new CuraPilotVault();
 
   static init() {
-    AegisApp.bindEvents();
-    AegisApp.render();
+    CuraPilotApp.bindEvents();
+    CuraPilotApp.render();
   }
 
   static bindEvents() {
     const caseSelect = document.querySelector("#case-selector");
     if (caseSelect) {
       caseSelect.addEventListener("change", (e) => {
-        AegisApp.vault.setActiveCase(e.target.value);
+        CuraPilotApp.vault.setActiveCase(e.target.value);
       });
     }
 
     const demoSimBtn = document.querySelector("#demo-simulate-btn");
     if (demoSimBtn) {
       demoSimBtn.addEventListener("click", () => {
-        AegisApp.vault.runDemoSimulation();
+        CuraPilotApp.vault.runDemoSimulation();
       });
     }
 
     const prefillBtn = document.querySelector("#demo-prefill-btn");
     if (prefillBtn) {
       prefillBtn.addEventListener("click", () => {
-        const c = AegisApp.vault.cases[AegisApp.vault.activeCaseId];
+        const c = CuraPilotApp.vault.cases[CuraPilotApp.vault.activeCaseId];
         const input = document.querySelector("#ns-query-input") || document.querySelector("input[type='text'].ns-input");
         if (input) {
           input.value = c.demo_script.prompt;
@@ -275,7 +275,7 @@ export class AegisApp {
     const resetBtn = document.querySelector("#demo-reset-btn");
     if (resetBtn) {
       resetBtn.addEventListener("click", () => {
-        AegisApp.vault.setActiveCase(AegisApp.vault.activeCaseId);
+        CuraPilotApp.vault.setActiveCase(CuraPilotApp.vault.activeCaseId);
         const chatMsgs = document.querySelector("#ns-msgs");
         if (chatMsgs) {
           chatMsgs.innerHTML = `<div class="ns-msg bot">I am the Chief Physician Coordinator. I operate entirely within your local browser memory to coordinate zero-leakage clinical second opinions. How can I assist with the active case?</div>`;
@@ -286,11 +286,11 @@ export class AegisApp {
     const exportBtn = document.querySelector("#export-dossier-btn");
     if (exportBtn) {
       exportBtn.addEventListener("click", () => {
-        if (!AegisApp.vault.consensusDossier) {
+        if (!CuraPilotApp.vault.consensusDossier) {
           alert("No consensus dossier has been compiled yet. Run the consensus deliberation first!");
           return;
         }
-        AegisApp.downloadDossierText();
+        CuraPilotApp.downloadDossierText();
       });
     }
   }
@@ -307,7 +307,7 @@ export class AegisApp {
   }
 
   static render() {
-    const c = AegisApp.vault.cases[AegisApp.vault.activeCaseId];
+    const c = CuraPilotApp.vault.cases[CuraPilotApp.vault.activeCaseId];
     if (!c) return;
 
     // Header info
@@ -355,8 +355,8 @@ export class AegisApp {
       `).join("");
     }
 
-    AegisApp.renderAlerts();
-    AegisApp.renderDossier();
+    CuraPilotApp.renderAlerts();
+    CuraPilotApp.renderDossier();
   }
 
   static renderAlerts() {
@@ -364,7 +364,7 @@ export class AegisApp {
     const countBadge = document.querySelector("#alerts-count-badge");
     if (!container) return;
 
-    const alerts = AegisApp.vault.flaggedContraindications;
+    const alerts = CuraPilotApp.vault.flaggedContraindications;
     if (countBadge) {
       countBadge.textContent = alerts.length + " Critical Alert(s)";
       countBadge.style.display = alerts.length > 0 ? "inline-block" : "none";
@@ -393,7 +393,7 @@ export class AegisApp {
     const container = document.querySelector("#dossier-output");
     if (!container) return;
 
-    const d = AegisApp.vault.consensusDossier;
+    const d = CuraPilotApp.vault.consensusDossier;
     if (!d) {
       container.innerHTML = `
         <div class="empty-dossier">
@@ -443,11 +443,11 @@ export class AegisApp {
   }
 
   static downloadDossierText() {
-    const d = AegisApp.vault.consensusDossier;
+    const d = CuraPilotApp.vault.consensusDossier;
     if (!d) return;
 
     const content = `=====================================================
-AEGIS ZERO-LEAKAGE MEDICAL CONSENSUS REPORT
+CURAPILOT ZERO-LEAKAGE MEDICAL CONSENSUS REPORT
 Case: ${d.case_code}
 Generated: ${new Date(d.generated_at).toLocaleString()}
 Consensus Confidence: ${d.diagnostic_confidence}
@@ -479,12 +479,16 @@ Powered by Open Agentic Web (MVP Profile 0.3)
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `Aegis_Consensus_${d.case_code.replace(/[^a-zA-Z0-9]/g, "_")}.txt`;
+    a.download = `CuraPilot_Consensus_${d.case_code.replace(/[^a-zA-Z0-9]/g, "_")}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   }
 }
 
+// Backward-compatible alias
+export const AegisVault = CuraPilotVault;
+export const AegisApp = CuraPilotApp;
+
 document.addEventListener("DOMContentLoaded", () => {
-  AegisApp.init();
+  CuraPilotApp.init();
 });

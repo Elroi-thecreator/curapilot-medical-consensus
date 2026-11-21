@@ -1,6 +1,6 @@
-// Aegis Hub Site Actions
+// CuraPilot Hub Site Actions
 // Exposes local EHR vault state, contraindication alerts, and dossier generation.
-import { AegisApp } from "./script.js";
+import { CuraPilotApp } from "./script.js";
 
 export class SiteActions {
   static registerActions(actions) {
@@ -20,7 +20,7 @@ export class SiteActions {
         additionalProperties: false
       },
       execute: async () => {
-        return AegisApp.vault.getActiveRecord();
+        return CuraPilotApp.vault.getActiveRecord();
       }
     };
   }
@@ -59,7 +59,7 @@ export class SiteActions {
         additionalProperties: false
       },
       execute: async (args) => {
-        return AegisApp.vault.addContraindication(args);
+        return CuraPilotApp.vault.addContraindication(args);
       }
     };
   }
@@ -103,7 +103,7 @@ export class SiteActions {
         additionalProperties: false
       },
       execute: async (args) => {
-        return AegisApp.vault.saveConsensusDossier(args);
+        return CuraPilotApp.vault.saveConsensusDossier(args);
       }
     };
   }

@@ -1,14 +1,15 @@
-# Aegis: Zero-Leakage Medical Consensus Room
+# CuraPilot: Zero-Leakage Medical Consensus Room
 ### The First Decentralized, Multi-Specialist Clinical Consensus Suite for the Open Agentic Web
 
 > **Devpost Challenge:** [Open Agentic Web Challenge](https://cognizant-agenticweb.devpost.com/)  
 > **Hosted by:** Cognizant AI Lab, Mozilla (Otari), MIT Media Lab (Project NANDA), AWS, and UT Austin  
 > **Specification:** [Worldwide Agentic Web MVP Profile 0.3](https://github.com/cognizant-ai-labs/agentic-web/blob/main/docs/worldwide_agentic_web_mvp_spec.md)  
-> **Primary Hub URL:** `http://localhost:8080/`  
+> **Primary Live URL:** [https://pnrs.is-a.dev/curapilot/](https://pnrs.is-a.dev/curapilot/)  
+> **GitHub Repository:** [https://github.com/Elroi-thecreator/curapilot-medical-consensus](https://github.com/Elroi-thecreator/curapilot-medical-consensus)  
 
 ---
 
-![Aegis Medical Consensus Room](assets/thumbnail_light.jpg)
+![CuraPilot Medical Consensus Room](assets/thumbnail_light.jpg)
 
 ---
 
@@ -20,16 +21,16 @@ Commercial cloud AI cannot solve this due to **The Privacy Wall**: Under HIPAA, 
 
 ---
 
-## 🛡️ The Aegis Solution
+## 🛡️ The CuraPilot Solution
 
-**Aegis** inverts the traditional cloud AI model by implementing the **Open Agentic Web** specification:
+**CuraPilot** inverts the traditional cloud AI model by implementing the **Open Agentic Web** specification:
 
 1. **100% In-Browser Execution (Zero-Leakage):** The patient’s confidential health data is stored strictly in client browser memory (RAM). **Zero bytes are transmitted to any backend server.**
 2. **Decentralized Multi-Node Federation:** When a clinical case requires specialized analysis, the local Chief Physician Agent dynamically discovers and federates independent authority specialist nodes across the open web via `links.json` and `agent-manifest.json`:
-   - 🧬 **Rare Genomics Institute (`genomics-node` on port 8081):** Pathogenicity, affected enzyme complexes, and metabolic pathways.
-   - 💊 **PharmaSafe Interaction Laboratory (`pharmasafe-node` on port 8082):** Polypharmacy interactions, CYP450 metabolism conflicts, and contraindications.
+   - 🧬 **Rare Genomics Institute (`genomics-node` on port 8081 / path `/genomics/`):** Pathogenicity, affected enzyme complexes, and metabolic pathways.
+   - 💊 **PharmaSafe Interaction Laboratory (`pharmasafe-node` on port 8082 / path `/pharmasafe/`):** Polypharmacy interactions, CYP450 metabolism conflicts, and contraindications.
 3. **Dialectic Cross-Examination:** Specialist agents debate hypotheses peer-to-peer inside the visitor's browser, cross-referencing genetic defects against active medications to uncover hidden clinical hazards.
-4. **Bring Your Own Key (BYOK) Inference:** All inference is funded by the visitor using **Mozilla Otari** (`alibaba/qwen3.8-flash`) or local models. **The website hosts pay \$0 for inference.**
+4. **Bring Your Own Key (BYOK) Inference:** All inference is funded by the visitor using **Mozilla Otari** (`alibaba/qwen3.8-flash`) or local models. **The website hosts pay $0 for inference.**
 
 ---
 
@@ -41,7 +42,7 @@ flowchart TD
         direction TB
         VAULT["🔒 Private Patient Vault (In RAM / DOM)\n• Lab Biomarkers: Lactate, Pyruvate\n• Genome Variant: PDHA1 c.1145C>T\n• Active Meds: Valproic Acid, Metformin"]
         
-        CP["🩺 Chief Physician Coordinator\n(Front Agent in aegis_coordinator.network.json)"]
+        CP["🩺 Chief Physician Coordinator\n(Front Agent in curapilot_coordinator.network.json)"]
         
         CONSENT["🔒 User Consent Gateway (onConsent)\nInteractive User Approval Before External Fetch"]
         
@@ -61,18 +62,18 @@ flowchart TD
         CP -->|"6. Synthesizes Report"| DOSSIER
     end
 
-    subgraph HostA["Site 1: Aegis Hub (Port 8080)"]
+    subgraph HostA["Site 1: CuraPilot Hub (Port 8080 / /curapilot/)"]
         M1["agent-manifest.json"]
-        N1["aegis_coordinator.network.json"]
+        N1["curapilot_coordinator.network.json"]
         L1["links.json"]
     end
 
-    subgraph HostB["Site 2: Genomics Node (Port 8081)"]
+    subgraph HostB["Site 2: Genomics Node (Port 8081 / /genomics/)"]
         M2["agent-manifest.json (CORS: *)"]
         N2["genomics_node.network.json"]
     end
 
-    subgraph HostC["Site 3: PharmaSafe Node (Port 8082)"]
+    subgraph HostC["Site 3: PharmaSafe Node (Port 8082 / /pharmasafe/)"]
         M3["agent-manifest.json (CORS: *)"]
         N3["pharmasafe_node.network.json"]
     end
@@ -98,14 +99,14 @@ npm test
 ```
 *Validates JSON syntax, Neuro SAN schemas, agent-manifest declarations, peer-linking resolution, and site action executions.*
 
-### 2. Launch the 3-Site Decentralized Cluster
+### 2. Launch the 3-Site Decentralized Cluster Locally
 Start all 3 agentic websites concurrently with CORS enabled:
 ```bash
 npm start
 ```
 
 Open your browser to:
-* **Aegis Hub (Main Application):** [http://localhost:8080/](http://localhost:8080/)
+* **CuraPilot Hub (Main Application):** [http://localhost:8080/](http://localhost:8080/)
 * **Rare Genomics Node (Peer Specialist 1):** [http://localhost:8081/](http://localhost:8081/)
 * **PharmaSafe Lab Node (Peer Specialist 2):** [http://localhost:8082/](http://localhost:8082/)
 
@@ -113,15 +114,15 @@ Open your browser to:
 
 ## 🧪 Clinical Case Walkthrough: "The Hidden Metabolic Trap"
 
-1. **Load Active Case #AG-8492 in the Aegis Hub:**
+1. **Load Active Case #CP-8492 in the CuraPilot Hub:**
    - 24-year-old female presenting with episodic ataxia, confusion, and unprovoked lactic acidosis.
    - Labs: Venous Lactate **4.8 mmol/L** (Critical High), Lactate/Pyruvate ratio **26.7** (Abnormal).
    - Genomic Variant: **PDHA1 c.1145C>T (p.Pro382Leu)**.
    - Current Polypharmacy: **Valproic Acid 250mg BID** (off-label for migraine/seizures) and **Metformin 500mg Daily**.
 2. **Start Consultation in the Consensus Room:**
    - The Chief Physician reads the private record via `website_get_patient_clinical_record`.
-   - The user is prompted with an interactive consent dialog to consult the **Rare Genomics Institute** (`localhost:8081`) and **PharmaSafe Laboratory** (`localhost:8082`).
-   - The user clicks **OK / Approve**.
+   - The user is prompted with an interactive consent dialog to consult the **Rare Genomics Institute** and **PharmaSafe Laboratory**.
+   - The user clicks **OK / Approve** (or clicks `⚡ 1-Click Multi-Agent Consensus`).
 3. **The Multi-Agent Cross-Examination:**
    - **Genomics Specialist:** Confirms `PDHA1 c.1145C>T` causes Pyruvate Dehydrogenase E1-alpha catalytic failure (<15% activity).
    - **Pharmacology Specialist:** Discovers that Valproic Acid depletes mitochondrial carnitine and halts pyruvate oxidation—a **lethal contraindication** in PDH deficiency! Metformin also exacerbates lactic flux.
@@ -150,18 +151,19 @@ Open your browser to:
 │   ├── index.yaml                 # Master index of all registered knowledge units
 │   ├── README.md                  # Knowledge base guide & schema definition
 │   ├── product/PROD-001-...       # Hackathon Spec & Submission Protocol
-│   ├── architecture/ARCH-001-...  # Aegis Consensus Multi-Site Architecture
+│   ├── architecture/ARCH-001-...  # CuraPilot Consensus Multi-Site Architecture
 │   └── development/               # Runtime, Action Tools, Prerequisites & Agent Protocol
 ├── assets/                        # Design Assets & Thumbnails
 │   ├── thumbnail.jpg              # Official 3:2 Devpost thumbnail
 │   ├── thumbnail.svg              # Scalable vector graphic
 │   └── thumbnail_light.jpg        # High-key light scientific thumbnail
 ├── sites/
-│   ├── aegis-hub/                 # Site 1: Patient & Physician Sovereign Hub (Port 8080)
+│   ├── curapilot-hub/             # Site 1: Patient & Physician Sovereign Hub (Port 8080)
 │   ├── genomics-node/             # Site 2: Rare Genomics Institute (Port 8081)
 │   └── pharmasafe-node/           # Site 3: PharmaSafe Interaction Lab (Port 8082)
 ├── scripts/
 │   ├── serve_all.mjs              # Multi-site concurrent local runner
+│   ├── serve_vm.mjs               # Production VM runner (8880, 8881, 8882)
 │   ├── serve_site.mjs             # CORS-enabled HTTP server
 │   └── build_network.mjs          # Network build and validation utility
 ├── tests/
@@ -189,7 +191,7 @@ All AI coding assistants (Antigravity, Claude Code, Gemini CLI, Cursor, Copilot)
 
 ## 🏆 Hackathon Alignment & Judging Criteria
 
-| Criterion | Aegis Implementation |
+| Criterion | CuraPilot Implementation |
 | :--- | :--- |
 | **Technological Implementation (25%)** | 100% compliant with Open Agentic Web MVP Profile 0.3. Clean separation of declarative JSON (`*.network.json`), client-side `nsdeploy` runtime, and schema-validated site actions (`website_*`). |
 | **Design (25%)** | Pristine, high-key clinical studio aesthetic with real-time patient vault, live biomarker monitors, interactive consensus stream, and sealed report generation. |

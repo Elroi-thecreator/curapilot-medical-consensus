@@ -6,23 +6,24 @@ type: "development"
 title: "Production VM Deployment & Reverse Proxy Architecture"
 domain: "development"
 status: "APPROVED"
-version: "1.0.0"
+version: "1.1.0"
 ---
 
 ## Rule
-Aegis is deployed on the production VM without disturbing any pre-existing workloads (such as Holy Bible FastAPI on port 8000 or OpenHands Gateway on port 8080/8443):
+CuraPilot is deployed on the production VM without disturbing any pre-existing workloads (such as Holy Bible FastAPI on port 8000 or OpenHands Gateway on port 8080/8443):
 
 1. **Local Node Background Services**:
-   - Managed via systemd service `aegis-consensus.service`.
+   - Managed via systemd service `curapilot.service`.
    - Runs `node scripts/serve_vm.mjs` under the `ubuntu` system user.
    - Binds the 3 static Open Agentic Web sites to loopback-only ports:
-     - `127.0.0.1:8880`: `sites/aegis-hub` (Hub & Chief Physician)
+     - `127.0.0.1:8880`: `sites/curapilot-hub` (Hub & Chief Physician)
      - `127.0.0.1:8881`: `sites/genomics-node` (Rare Genomics Node)
      - `127.0.0.1:8882`: `sites/pharmasafe-node` (PharmaSafe Node)
 2. **Nginx Reverse Proxy & SSL Integration**:
-   - Uses `/etc/nginx/snippets/aegis.conf` included inside `/etc/nginx/sites-available/default`.
+   - Uses `/etc/nginx/snippets/curapilot.conf` included inside `/etc/nginx/sites-available/default`.
    - Routes incoming HTTPS traffic on `https://pnrs.is-a.dev` under dedicated subpaths:
-     - `/aegis/` -> `http://127.0.0.1:8880/`
+     - `/curapilot/` -> `http://127.0.0.1:8880/` (Primary live URL)
+     - `/aegis/` -> 301 Redirect to `/curapilot/` (Backward compatibility)
      - `/genomics/` -> `http://127.0.0.1:8881/`
      - `/pharmasafe/` -> `http://127.0.0.1:8882/`
    - Enforces `add_header Access-Control-Allow-Origin * always;` for worldwide agentic web compliance.
@@ -43,5 +44,5 @@ Running the agent cluster via a dedicated systemd service proxied through specif
 
 ## Related Items
 - `knowledge/index.yaml`
-- `ARCH-001`: Aegis Zero-Leakage Multi-Specialist Consensus Architecture
+- `ARCH-001`: CuraPilot Zero-Leakage Multi-Specialist Consensus Architecture
 - `DEV-001`: In-Browser Runtime, Site Actions & Otari BYOK Standards

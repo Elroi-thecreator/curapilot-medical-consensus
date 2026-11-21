@@ -1,21 +1,21 @@
-# ARCH-001: Aegis Zero-Leakage Multi-Specialist Consensus Architecture
+# ARCH-001: CuraPilot Zero-Leakage Multi-Specialist Consensus Architecture
 
 ---
 id: "ARCH-001"
 type: "architecture"
-title: "Aegis Zero-Leakage Multi-Specialist Consensus Architecture"
+title: "CuraPilot Zero-Leakage Multi-Specialist Consensus Architecture"
 domain: "architecture"
 status: "APPROVED"
-version: "1.0.0"
+version: "1.1.0"
 ---
 
 ## Rule
-AegisConsensus implements a decentralized multi-agent clinical consultation architecture adhering strictly to the Open Agentic Web MVP Profile 0.3 specification:
+CuraPilot implements a decentralized multi-agent clinical consultation architecture adhering strictly to the Open Agentic Web MVP Profile 0.3 specification:
 
-1. **Top-Level Hub (`aegis-hub`)**:
+1. **Top-Level Hub (`curapilot-hub`)**:
    - Operates as the patient/clinician sovereign entry point.
    - Contains the client-side EHR / genomic / medication intake vault.
-   - Hosts the `aegis_coordinator` (Chief Physician Agent) which coordinates internal evaluation and external peer consensus.
+   - Hosts the `curapilot_coordinator` (Chief Physician Agent) which coordinates internal evaluation and external peer consensus.
    - Resolves peer specialist networks via `links.json` and obtains explicit user approval via interactive consent cards before peer composition.
 2. **Genomics Specialist Node (`genomics-node`)**:
    - Standalone static agentic website publishing `agent-manifest.json` and `genomics_node.network.json`.
@@ -42,9 +42,10 @@ AegisConsensus implements a decentralized multi-agent clinical consultation arch
 - Do NOT allow cross-site agent calls without explicit user consent prompt.
 
 ## Reason
-Centralized cloud healthcare AI violates medical privacy, HIPAA, and data protection laws, while placing massive inference bills on hospital servers. Aegis inverts this paradigm by executing the entire multi-specialist consultation in the visitor's browser for \$0 host cost.
+Centralized cloud healthcare AI violates medical privacy, HIPAA, and data protection laws, while placing massive inference bills on hospital servers. CuraPilot inverts this paradigm by executing the entire multi-specialist consultation in the visitor's browser for $0 host cost.
 
 ## Related Items
 - `knowledge/index.yaml`
 - `PROD-001`: Open Agentic Web Challenge Specification & Submission Protocol
 - `DEV-001`: In-Browser Runtime, Site Actions & Otari BYOK Standards
+- `DEV-002`: Production VM Deployment & Reverse Proxy Architecture

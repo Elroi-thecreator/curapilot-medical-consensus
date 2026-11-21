@@ -1,7 +1,9 @@
-// Automated Specification Conformance & Tool Verification Test
+// Automated Conformance Test Suite for CuraPilot Open Agentic Web Cluster
+// Validates manifests, declarative JSON networks, peer link mappings, and site-action schemas.
+
 import { readFileSync, existsSync } from "node:fs";
-import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { dirname, join } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, "..");
@@ -20,12 +22,12 @@ function assert(condition, message) {
 }
 
 console.log("\n========================================================");
-console.log("🧪 Running Aegis Open Agentic Web Conformance Test Suite");
+console.log("🧪 Running CuraPilot Open Agentic Web Conformance Test Suite");
 console.log("========================================================\n");
 
 // 1. Validate Manifests
 console.log("1. Validating Agent Manifests (agent-manifest.json)...");
-const siteDirs = ["aegis-hub", "genomics-node", "pharmasafe-node"];
+const siteDirs = ["curapilot-hub", "genomics-node", "pharmasafe-node"];
 
 for (const dir of siteDirs) {
   const manifestPath = join(rootDir, "sites", dir, "agent-manifest.json");
@@ -47,7 +49,7 @@ for (const dir of siteDirs) {
 // 2. Validate Network JSON Definitions
 console.log("\n2. Validating Declarative Network JSON Graphs...");
 const networkFiles = [
-  { dir: "aegis-hub", file: "aegis_coordinator.network.json", frontAgent: "chief_physician" },
+  { dir: "curapilot-hub", file: "curapilot_coordinator.network.json", frontAgent: "chief_physician" },
   { dir: "genomics-node", file: "genomics_node.network.json", frontAgent: "genomics_specialist" },
   { dir: "pharmasafe-node", file: "pharmasafe_node.network.json", frontAgent: "pharmacology_specialist" }
 ];
@@ -67,11 +69,11 @@ for (const item of networkFiles) {
 
 // 3. Validate Links Map
 console.log("\n3. Validating Peer Links Mapping (links.json)...");
-const linksPath = join(rootDir, "sites", "aegis-hub", "links.json");
-assert(existsSync(linksPath), "aegis-hub contains links.json");
+const linksPath = join(rootDir, "sites", "curapilot-hub", "links.json");
+assert(existsSync(linksPath), "curapilot-hub contains links.json");
 const links = JSON.parse(readFileSync(linksPath, "utf-8"));
-assert(links.networks && links.networks.aegis_coordinator, "links.json configures aegis_coordinator network");
-assert(links.networks.aegis_coordinator.genomics && links.networks.aegis_coordinator.pharmasafe, "links.json maps both genomics and pharmasafe peers");
+assert(links.networks && links.networks.curapilot_coordinator, "links.json configures curapilot_coordinator network");
+assert(links.networks.curapilot_coordinator.genomics && links.networks.curapilot_coordinator.pharmasafe, "links.json maps both genomics and pharmasafe peers");
 
 // 4. Test Site Actions (Tool Execution & Schemas)
 console.log("\n4. Testing Site Actions & Grounded Knowledge Bases...");
@@ -109,13 +111,13 @@ async function testActions() {
   assert(drugResult.total_alerts >= 2, `PharmaSafe detected ${drugResult.total_alerts} alerts (Expected >= 2 for Valproate+PDHA1 and Metformin)`);
   assert(drugResult.alerts.some(a => a.severity.includes("Critical")), "PharmaSafe flags Critical severity for Valproate in PDHA1 context");
 
-  // Test Aegis Hub Actions
-  const hubActionsUrl = pathToFileURL(join(rootDir, "sites", "aegis-hub", "site-actions.js")).href;
+  // Test CuraPilot Hub Actions
+  const hubActionsUrl = pathToFileURL(join(rootDir, "sites", "curapilot-hub", "site-actions.js")).href;
   const { SiteActions: HubActions } = await import(hubActionsUrl);
 
   const getRecordTool = HubActions.getPatientRecordAction();
   const record = await getRecordTool.execute();
-  assert(record.case_id.includes("AG-8492"), "Aegis Hub retrieves active patient record AG-8492 from vault");
+  assert(record.case_id.includes("CP-8492") || record.case_id.includes("8492"), "CuraPilot Hub retrieves active patient record CP-8492 from vault");
   assert(record.biomarkers.length >= 4, "Active patient record contains rich laboratory biomarkers");
   assert(record.genomic_variants.length >= 1, "Active patient record contains genomic variants");
 
@@ -127,7 +129,7 @@ async function testActions() {
     clinical_rationale: "Impairs pyruvate oxidation and depletes mitochondrial carnitine.",
     recommended_action: "Discontinue immediately and substitute Levetiracetam."
   });
-  assert(flagResult.ok === true, "Aegis Hub flags contraindication successfully");
+  assert(flagResult.ok === true, "CuraPilot Hub flags contraindication successfully");
 
   const dossierTool = HubActions.generateDossierAction();
   const dossierResult = await dossierTool.execute({
@@ -142,7 +144,7 @@ async function testActions() {
     ],
     physician_discussion_notes: "Discuss emergency protocol letter and confirm blood lactate/pyruvate ratio."
   });
-  assert(dossierResult.ok === true && dossierResult.status === "COMMITTED_TO_CLIENT_SESSION", "Aegis Hub generates sealed consensus dossier");
+  assert(dossierResult.ok === true && dossierResult.status === "COMMITTED_TO_CLIENT_SESSION", "CuraPilot Hub generates sealed consensus dossier");
 
   console.log("\n========================================================");
   console.log(`Test Summary: ${passed} passed, ${failed} failed.`);

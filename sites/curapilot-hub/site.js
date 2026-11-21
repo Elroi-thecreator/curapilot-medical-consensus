@@ -1,4 +1,4 @@
-// Aegis Hub Runtime Mount & Consent / Action Review Controller
+// CuraPilot Hub Runtime Mount & Consent / Action Review Controller
 import { ChatFollow } from "./chat-follow.js";
 
 export class AssistantMount {
@@ -39,8 +39,8 @@ export class AssistantMount {
         && (!booted.engine.byokKey || booted.engine.byokKey === "demo");
       if (status) {
         status.textContent = needsKey
-          ? "Aegis Coordinator ready. Enter your Mozilla Otari or AI provider key in the settings panel below."
-          : "Aegis Chief Physician active & connected.";
+          ? "CuraPilot Coordinator ready. Enter your Mozilla Otari or AI provider key in the settings panel below."
+          : "CuraPilot Chief Physician active & connected.";
       }
       if (!needsKey) {
         AssistantMount.greet();
@@ -50,7 +50,7 @@ export class AssistantMount {
       if (status) {
         status.textContent = "Autonomous assistant loaded in fallback mode.";
       }
-      console.warn("Aegis coordinator startup note:", error);
+      console.warn("CuraPilot coordinator startup note:", error);
       return null;
     }
   }

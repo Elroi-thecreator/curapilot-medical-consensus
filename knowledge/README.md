@@ -1,6 +1,6 @@
-# Aegis Knowledge Base
+# CuraPilot Knowledge Base
 
-This directory is the **authoritative Single Source of Truth** for all architectural, development, product, and decision standards for the Aegis project and its implementation of the Open Agentic Web specification.
+This directory is the **authoritative Single Source of Truth** for all architectural, development, product, and decision standards for the CuraPilot project and its implementation of the Open Agentic Web specification.
 
 ---
 

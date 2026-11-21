@@ -11,8 +11,8 @@ domains:
       status: "APPROVED"
   architecture:
     - id: ARCH-001
-      title: "Aegis Zero-Leakage Multi-Specialist Consensus Architecture"
-      path: "architecture/ARCH-001-aegis-consensus-architecture.md"
+      title: "CuraPilot Zero-Leakage Multi-Specialist Consensus Architecture"
+      path: "architecture/ARCH-001-curapilot-consensus-architecture.md"
       status: "APPROVED"
   development:
     - id: DEV-001

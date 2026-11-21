@@ -6,7 +6,7 @@ type: "development"
 title: "In-Browser Runtime, Site Actions & Otari BYOK Standards"
 domain: "development"
 status: "APPROVED"
-version: "1.0.0"
+version: "1.1.0"
 ---
 
 ## Rule
@@ -43,4 +43,5 @@ Adherence to these development standards ensures 100% interoperability with the 
 
 ## Related Items
 - `PROD-001`: Open Agentic Web Challenge Specification & Submission Protocol
-- `ARCH-001`: Aegis Zero-Leakage Multi-Specialist Consensus Architecture
+- `ARCH-001`: CuraPilot Zero-Leakage Multi-Specialist Consensus Architecture
+- `DEV-002`: Production VM Deployment & Reverse Proxy Architecture

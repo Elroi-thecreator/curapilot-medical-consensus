@@ -1,10 +1,10 @@
 {
-  "brand": "Aegis: Zero-Leakage Medical Consensus Room",
+  "brand": "CuraPilot: Zero-Leakage Medical Consensus Room",
   "networks": [
     {
-      "name": "aegis_coordinator",
+      "name": "curapilot_coordinator",
       "front_man": "chief_physician",
-      "hocon": "./aegis_coordinator.network.json",
+      "hocon": "./curapilot_coordinator.network.json",
       "description": "Zero-leakage clinical second opinion coordinator. Federates decentralized medical specialist agents peer-to-peer in your browser without cloud uploads.",
       "tags": [
         "open-agentic-web",
@@ -41,7 +41,7 @@
   },
   "agent_mcp": {
     "protocol": "nsdeploy-agent-mcp/v1",
-    "network": "aegis_coordinator",
+    "network": "curapilot_coordinator",
     "front_man": "chief_physician",
     "available": false,
     "reason": "Static bundle; public MCP facade requires server host."
@@ -53,13 +53,13 @@
     "protocol": "nsdeploy-link/v1",
     "exports": [
       {
-        "network": "aegis_coordinator",
+        "network": "curapilot_coordinator",
         "front_man": "chief_physician",
         "aliases": [
-          "aegis_coordinator",
+          "curapilot_coordinator",
           "chief_physician"
         ],
-        "url": "aegis_coordinator"
+        "url": "curapilot_coordinator"
       }
     ],
     "imports": [

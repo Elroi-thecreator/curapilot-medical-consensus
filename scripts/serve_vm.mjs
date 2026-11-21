@@ -1,4 +1,4 @@
-// Production Multi-Site Server for Aegis on VM (Localhost bindings 8880, 8881, 8882)
+// Production Multi-Site Server for CuraPilot on VM (Localhost bindings 8880, 8881, 8882)
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
@@ -8,7 +8,7 @@ const rootDir = join(__dirname, "..");
 const serveScript = join(__dirname, "serve_site.mjs");
 
 const sites = [
-  { name: "Aegis Hub", dir: join(rootDir, "sites", "aegis-hub"), port: 8880 },
+  { name: "CuraPilot Hub", dir: join(rootDir, "sites", "curapilot-hub"), port: 8880 },
   { name: "Rare Genomics Node", dir: join(rootDir, "sites", "genomics-node"), port: 8881 },
   { name: "PharmaSafe Lab Node", dir: join(rootDir, "sites", "pharmasafe-node"), port: 8882 }
 ];
@@ -16,7 +16,7 @@ const sites = [
 const children = [];
 
 for (const site of sites) {
-  console.log(`[Aegis Service] Starting ${site.name} on 127.0.0.1:${site.port}...`);
+  console.log(`[CuraPilot Service] Starting ${site.name} on 127.0.0.1:${site.port}...`);
   const child = spawn(
     process.execPath,
     [serveScript, site.dir, "--host", "127.0.0.1", "--port", String(site.port)],
@@ -24,14 +24,14 @@ for (const site of sites) {
   );
 
   child.on("exit", (code, signal) => {
-    console.error(`[Aegis Service] ${site.name} exited with code ${code} signal ${signal}`);
+    console.error(`[CuraPilot Service] ${site.name} exited with code ${code} signal ${signal}`);
   });
 
   children.push(child);
 }
 
 function cleanup() {
-  console.log("[Aegis Service] Stopping all sites...");
+  console.log("[CuraPilot Service] Stopping all sites...");
   for (const child of children) {
     child.kill("SIGTERM");
   }

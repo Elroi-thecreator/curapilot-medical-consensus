@@ -1,6 +1,6 @@
 # AI Agent Operating Guidelines & Knowledge Base Protocol
 
-Welcome to the **Aegis: Zero-Leakage Medical Consensus Room** repository.
+Welcome to the **CuraPilot: Zero-Leakage Medical Consensus Room** repository.
 All autonomous AI coding agents (Antigravity, Claude, Cursor, Gemini, Copilot, Codex, etc.) working in this repository must strictly follow this protocol.
 
 ---
@@ -13,10 +13,9 @@ All autonomous AI coding agents (Antigravity, Claude, Cursor, Gemini, Copilot, C
 2. **Open and read `knowledge/index.yaml`** to identify the active architecture (`ARCH-*`), development (`DEV-*`), product (`PROD-*`), and decision (`ADR-*`) standards that apply to your task.
 3. **Inspect the relevant standards**:
    - `knowledge/product/PROD-001-challenge-spec-and-rules.md`: Open Agentic Web specification & hackathon submission protocol.
-   - `knowledge/architecture/ARCH-001-aegis-consensus-architecture.md`: Aegis decentralized multi-specialist clinical consensus architecture & zero-leakage invariant.
+   - `knowledge/architecture/ARCH-001-curapilot-consensus-architecture.md`: CuraPilot decentralized multi-specialist clinical consensus architecture & zero-leakage invariant.
    - `knowledge/development/DEV-001-runtime-and-site-actions.md`: In-browser runtime conventions, site-actions (`website_*`), and Otari BYOK inference standards.
-   - `knowledge/development/DEV-002-dependencies-and-prerequisites.md`: Hackathon dependencies, toolchain requirements, and submission lifecycle.
-   - `knowledge/development/DEV-003-agent-instruction-and-knowledge-protocol.md`: AI agent workspace configuration and knowledge discovery standards.
+   - `knowledge/development/DEV-002-vm-production-deployment.md`: Production VM deployment, systemd, and reverse proxy standards.
 4. **Ground all architectural and implementation decisions in these approved standards.** Never invent conflicting conventions or bypass existing specifications.
 
 ---
@@ -53,13 +52,13 @@ devpost-Cognizant/
 │   ├── architecture/          # System design & privacy invariants (ARCH-*)
 │   └── development/           # Runtime, site-actions, and setup (DEV-*)
 ├── sites/                     # 3 federated static agentic web nodes
-│   ├── aegis-hub/             # Port 8080: Patient intake vault & Chief Physician Coordinator
+│   ├── curapilot-hub/         # Port 8080: Patient intake vault & Chief Physician Coordinator
 │   ├── genomics-node/         # Port 8081: Rare Genomics Specialist Node
 │   └── pharmasafe-node/       # Port 8082: PharmaSafe Drug Interaction Node
 ├── scripts/                   # Server runners and build utilities
 │   ├── serve_all.mjs          # Concurrently boots all 3 nodes (8080, 8081, 8082)
-│   ├── serve_site.mjs         # Static HTTP server with CORS enabled
-│   └── build_network.mjs      # Neuro SAN HOCON/JSON resolution tool
+│   ├── serve_vm.mjs           # Production VM runner (8880, 8881, 8882)
+│   └── serve_site.mjs         # Static HTTP server with CORS enabled
 ├── tests/                     # Automated conformance test suite
 │   └── conformance_test.mjs   # 54-point Open Agentic Web specification validator
 ├── assets/                    # Project thumbnails and diagrams
@@ -77,10 +76,10 @@ devpost-Cognizant/
    - Never implement backend server-side agent execution runtimes or server logging of patient records.
 2. **Bring Your Own Key (BYOK) Inference**:
    - Powered by **Mozilla Otari** (`https://api.otari.ai/api/v1`) using default model `alibaba/qwen3.8-flash`, or OpenRouter/local models.
-   - Website hosts pay **\$0 for inference**.
+   - Website hosts pay **$0 for inference**.
    - API keys are stored solely in client browser `localStorage` by the browser runtime; never hardcode or transmit keys.
 3. **Decentralized Multi-Agent Federation**:
-   - `aegis-hub` resolves peer specialist networks dynamically via `links.json`.
+   - `curapilot-hub` resolves peer specialist networks dynamically via `links.json`.
    - The user must be prompted with an interactive consent card (`onConsent`) prior to fetching and running any third-party agent graph.
    - All declarative agent networks (`*.network.json`) and manifests (`agent-manifest.json`) must be served with CORS headers (`Access-Control-Allow-Origin: *`).
 
@@ -101,7 +100,7 @@ npm start
 
 ### Start Individual Nodes
 ```bash
-npm run serve:hub       # Aegis Hub on http://localhost:8080
+npm run serve:hub       # CuraPilot Hub on http://localhost:8080
 npm run serve:genomics  # Genomics Node on http://localhost:8081
 npm run serve:pharma    # PharmaSafe Node on http://localhost:8082
 ```
