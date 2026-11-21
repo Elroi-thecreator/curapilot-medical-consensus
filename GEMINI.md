@@ -1,4 +1,4 @@
-# Gemini & Antigravity Agent Guidelines — CuraPilot Medical Consensus Room
+# Gemini & Antigravity Agent Guidelines — TripSteward Federated Travel Concierge
 
 ## ⚡ Mandatory Knowledge Base Protocol
 
@@ -7,7 +7,7 @@
 - Identify the relevant standards (`ARCH-*`, `DEV-*`, `PROD-*`, `ADR-*`).
 - Ground all changes strictly in these approved specifications:
   - `knowledge/product/PROD-001-challenge-spec-and-rules.md` (Challenge specs)
-  - `knowledge/architecture/ARCH-001-curapilot-consensus-architecture.md` (Multi-agent architecture & zero-leakage invariant)
+  - `knowledge/architecture/ARCH-002-tripsteward-federated-architecture.md` (TripSteward federated cross-site booking architecture)
   - `knowledge/development/DEV-001-runtime-and-site-actions.md` (In-browser runtime & Otari BYOK)
   - `knowledge/development/DEV-002-vm-production-deployment.md` (Production VM deployment & reverse proxy architecture)
 
@@ -19,26 +19,27 @@
 ---
 
 ## 🧭 Project Architecture & Sites
-This repository implements the **CuraPilot Zero-Leakage Medical Consensus Room** adhering to the **Cognizant Open Agentic Web Challenge (MVP Profile 0.3)**:
-- **`sites/curapilot-hub` (Port 8080 / path `/curapilot/`)**: Patient intake vault, Chief Physician Coordinator agent (`curapilot_coordinator.network.json`), peer link resolution (`links.json`).
-- **`sites/genomics-node` (Port 8081 / path `/genomics/`)**: Rare Genomics Specialist (`genomics_node.network.json`, PDHA1, DPYD variant analysis).
-- **`sites/pharmasafe-node` (Port 8082 / path `/pharmasafe/`)**: PharmaSafe Laboratory (`pharmasafe_node.network.json`, drug interaction & CYP450 contraindication detection).
+This repository implements **TripSteward: Autonomous Federated Travel, Hotel & City Mobility Concierge** adhering to the **Cognizant Open Agentic Web Challenge (MVP Profile 0.3)**:
+- **`sites/tripsteward-hub` (Port 8080 / path `/tripsteward/`)**: Traveler intake vault, HarborView room holds, Chief Travel Concierge agent (`tripsteward_concierge.network.json`), peer link resolution (`links.json`).
+- **`sites/cityglide-node` (Port 8081 / path `/rides/`)**: CityGlide Autonomous Fleet (`cityglide_transfer.network.json`, flight tracking, arrival delay buffer calculation, chauffeur dispatch).
+- **`sites/metropass-node` (Port 8082 / path `/experiences/`)**: MetroPass Experiences (`metropass_experiences.network.json`, sunset cruises, SFMOMA VIP passes, instant QR voucher issuance).
 
 ---
 
-## 🔒 Security & Privacy Invariants
-1. **Zero-Leakage Privacy**: All patient data is strictly processed client-side in browser memory. Zero bytes transmitted to backend servers.
-2. **BYOK Inference**: Mozilla Otari (`alibaba/qwen3.8-flash`) or visitor-provided keys. Website hosts pay $0 for inference.
-3. **User Consent**: Cross-site agent invocations must require interactive user confirmation (`onConsent`).
-4. **CORS & Declarative JSON**: Declarative Neuro SAN networks served statically with CORS enabled (`*`).
+## 🔒 Security & Invariants
+1. **Action-Driven Personal Agents**: Agents directly execute reservations and ticket issuance across independent sites, eliminating 15–30% aggregator markups.
+2. **Zero-Leakage Privacy**: All traveler preferences and booking tokens are processed client-side in browser memory. Zero bytes transmitted to backend servers.
+3. **BYOK Inference**: Mozilla Otari (`alibaba/qwen3.8-flash`) or visitor-provided keys. Website hosts pay $0 for inference.
+4. **User Consent**: Cross-site agent invocations require interactive user confirmation (`onConsent`).
+5. **CORS & Declarative JSON**: Declarative Neuro SAN networks served statically with CORS enabled (`*`).
 
 ---
 
 ## 🛠️ Verification & Run Commands
 ```bash
-npm test            # Run 54-point Open Agentic Web conformance test
-npm start           # Boot all 3 nodes (8080, 8081, 8082) concurrently
-npm run serve:hub   # Boot CuraPilot Hub (8080)
-npm run serve:genomics # Boot Genomics Node (8081)
-npm run serve:pharma   # Boot PharmaSafe Node (8082)
+npm test               # Run 64-point Open Agentic Web conformance test
+npm start              # Boot all 3 nodes (8080, 8081, 8082) concurrently
+npm run serve:hub      # Boot TripSteward Hub (8080)
+npm run serve:rides    # Boot CityGlide Node (8081)
+npm run serve:experiences # Boot MetroPass Node (8082)
 ```

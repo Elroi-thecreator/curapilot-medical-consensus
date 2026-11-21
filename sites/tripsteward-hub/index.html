@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TripSteward — Autonomous Travel & Hospitality Concierge</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="runtime/theme.css">
+  <script type="module" src="script.js"></script>
+  <script type="module" src="site.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="brand-group">
+      <div class="brand-icon">✈️</div>
+      <div class="brand-text">
+        <h1>TRIPSTEWARD</h1>
+        <p>AUTONOMOUS TRAVEL, HOTEL & CITY CONCIERGE</p>
+      </div>
+    </div>
+    <div class="privacy-badge">
+      <span class="privacy-dot"></span>
+      <span>100% In-Browser Execution • 0% Middleman Aggregator Fees</span>
+    </div>
+  </header>
+
+  <!-- Trip Toolbar -->
+  <div class="toolbar-bar">
+    <div class="case-select-group">
+      <label for="trip-selector">Active Journey in Memory:</label>
+      <select id="trip-selector">
+        <option value="trip-1" selected>TRIP #TS-7492 — San Francisco Coastal Getaway & Sunset Sailing (2 Guests)</option>
+        <option value="trip-2">TRIP #TS-3104 — Seattle Waterfront & Pike Place Culinary Tour (1 Guest)</option>
+        <option value="trip-3">TRIP #TS-5519 — Austin Downtown Live Music & Arts Weekend (2 Guests)</option>
+      </select>
+    </div>
+    <div class="federation-status">
+      <span class="node-indicator"><span class="node-dot"></span> Hotel Hub: 8080</span>
+      <span class="node-indicator"><span class="node-dot"></span> CityGlide Ride: 8081</span>
+      <span class="node-indicator"><span class="node-dot"></span> MetroPass Tours: 8082</span>
+    </div>
+  </div>
+
+  <!-- Main Application Grid -->
+  <main class="app-container">
+    <!-- Left Column: Traveler Vault, Bookings & Itinerary -->
+    <div class="vault-panel">
+      <!-- Traveler Profile & Stay Preferences -->
+      <section class="vault-card">
+        <div class="card-header">
+          <h2>🏨 Traveler Stay & Preferences</h2>
+          <div class="vault-header-actions">
+            <button id="custom-trip-btn" class="btn-vault-action" title="Enter your custom travel request">➕ Custom Trip</button>
+            <span class="badge-tag">Sovereign Browser RAM</span>
+          </div>
+        </div>
+
+        <div class="patient-banner">
+          <h3 id="active-trip-title">Loading trip...</h3>
+          <div id="active-trip-traveler" class="demographics"></div>
+          <div id="active-trip-destination" class="presentation"></div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="sub-panel-title">Trip Requirements & Constraints</div>
+        <div id="preferences-list" class="preferences-grid"></div>
+
+        <!-- Room Inventory -->
+        <div class="sub-panel-title">HarborView Boutique Room Inventory</div>
+        <div id="room-inventory-list" class="rooms-grid"></div>
+      </section>
+
+      <!-- Confirmed Direct Bookings -->
+      <section class="vault-card">
+        <div class="card-header">
+          <h2>🌐 Autonomous Web Actions Committed</h2>
+          <span id="bookings-count-badge" class="badge-tag green" style="display: none;">0 Confirmed</span>
+        </div>
+        <div id="confirmed-bookings-container" class="bookings-container">
+          <div class="empty-state">No direct reservations committed yet. When the concierge coordinates hotel rooms, airport pickups, or activity passes, they will appear here.</div>
+        </div>
+      </section>
+
+      <!-- Sealed Master Travel Itinerary Card -->
+      <section class="vault-card">
+        <div class="card-header">
+          <h2>🎟️ Master Digital Travel Pass</h2>
+          <button id="export-itinerary-btn" class="btn-secondary">Download Itinerary</button>
+        </div>
+        <div id="itinerary-output"></div>
+      </section>
+    </div>
+
+    <!-- Right Column: Concierge Chat Room & Runtime -->
+    <div class="room-panel">
+      <!-- Partner Provider Nodes -->
+      <div class="specialists-deck">
+        <div class="node-card">
+          <div class="node-icon transfer">🚗</div>
+          <div class="node-info">
+            <h4>CityGlide Airport Transfer</h4>
+            <p>Node: localhost:8081 (/rides)</p>
+          </div>
+        </div>
+        <div class="node-card">
+          <div class="node-icon exp">⛵</div>
+          <div class="node-info">
+            <h4>MetroPass City Experiences</h4>
+            <p>Node: localhost:8082 (/experiences)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rapid Demo Toolbar -->
+      <div class="demo-toolbar">
+        <div class="demo-title-group">
+          <span class="demo-tag">DEMO CONTROLS</span>
+          <strong>Multi-Site Agent Coordination</strong>
+        </div>
+        <div class="demo-buttons-group">
+          <button id="demo-simulate-btn" class="btn-demo-primary" title="Coordinates hotel, airport ride, and experiences in seconds">⚡ 1-Click Trip Coordination</button>
+          <button id="demo-prefill-btn" class="btn-demo-secondary" title="Fills the concierge prompt">💬 Pre-fill Prompt</button>
+          <button id="demo-reset-btn" class="btn-demo-subtle" title="Reset journey for another demo take">🔄 Reset</button>
+        </div>
+      </div>
+
+      <!-- Autonomous Travel Concierge Chat -->
+      <section class="chat-card">
+        <div class="chat-header">
+          <h2>🛎️ Autonomous Travel Concierge</h2>
+          <div id="assistant-status">Connecting concierge agent...</div>
+        </div>
+        <!-- In-Browser nsdeploy Runtime Mount -->
+        <div id="agent-app"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Custom Trip Intake Modal -->
+  <dialog id="custom-trip-modal" class="custom-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">✈️</span>
+          <div>
+            <h3>Plan Custom Trip with Agents</h3>
+            <p>Agents book across peer sites in your browser • Direct provider rates</p>
+          </div>
+        </div>
+        <button id="close-modal-btn" class="close-x-btn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="custom-trip-form" class="modal-form">
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="cust-code">Trip Code / ID</label>
+            <input type="text" id="cust-code" value="TRIP #TS-CUSTOM" required />
+          </div>
+          <div class="form-field">
+            <label for="cust-traveler">Lead Traveler Name</label>
+            <input type="text" id="cust-traveler" value="Alex Mercer" required />
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="cust-destination">Destination City</label>
+            <input type="text" id="cust-destination" value="San Francisco, CA" required />
+          </div>
+          <div class="form-field">
+            <label for="cust-dates">Travel Dates</label>
+            <input type="text" id="cust-dates" value="Dec 18 – Dec 20 (2 Nights)" required />
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-field">
+            <label for="cust-flight">Flight Arrival Details</label>
+            <input type="text" id="cust-flight" value="Flight UA 512 • SFO Arrival Friday 3:45 PM" required />
+          </div>
+          <div class="form-field">
+            <label for="cust-budget">Target Budget (USD)</label>
+            <input type="number" id="cust-budget" value="650" required />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="cust-notes">Traveler Preferences & Special Requests</label>
+          <textarea id="cust-notes" rows="2" required>Quiet room with waterfront view, flight-tracked airport pickup, and tickets for local architectural bay tour.</textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="cancel-modal-btn" class="btn-demo-subtle">Cancel</button>
+          <button type="submit" class="btn-demo-primary">💾 Save Trip to Private Vault</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+</body>
+</html>

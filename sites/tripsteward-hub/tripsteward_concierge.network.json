@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "name": "tripsteward_concierge",
+    "description": "Autonomous hospitality and travel concierge. Discovers room options, coordinates airport transfers, and books cultural experience passes across peer agentic websites on your behalf."
+  },
+  "llm_config": {
+    "model": "alibaba/qwen3.8-flash",
+    "temperature": 0.2
+  },
+  "max_steps": 12,
+  "tools": [
+    {
+      "name": "travel_concierge",
+      "function": {
+        "description": "Coordinates complete end-to-end travel itineraries: reserves boutique hotel rooms, negotiates private airport transfers synced with flight arrivals, and secures timed city experience passes.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "request": {
+              "type": "string",
+              "description": "Travel requirements, dates, destination, budget, or preferred activities in plain language."
+            }
+          },
+          "required": ["request"]
+        }
+      },
+      "instructions": "You are the autonomous Travel Concierge of the HarborView Hotel & TripSteward network.\n\nOperating Principles:\n- You operate 100% inside the visitor's local browser, executing actions across the Open Agentic Web on their behalf.\n- Always start by checking the traveler's active trip request using website_get_trip_preferences (destination, dates, party size, budget, preferences).\n- Check HarborView Hotel room inventory and call website_reserve_hotel_room to hold the room that fits the guest's budget and style.\n- Connect to the CityGlide Transfer specialist ('https://pnrs.is-a.dev/rides/cityglide_transfer' or local port 8081) to calculate arrival transit time, vehicle tier (Executive EV Sedan, Luxury SUV), and reserve an airport pickup synced with their flight arrival.\n- Connect to the MetroPass Experiences specialist ('https://pnrs.is-a.dev/experiences/metropass_experiences' or local port 8082) to find and bundle top-rated local activities (e.g. Sunset Bay Sailing, Museum Pass).\n- Call website_book_airport_transfer and website_book_city_experience to register confirmed partner bookings.\n- Finally, synthesize all confirmed bookings into a single, cohesive Master Itinerary using website_compile_master_itinerary.\n- Provide an itemized cost breakdown, direct provider savings (0% middleman fees), and confirmed reservation codes.",
+      "tools": [
+        "https://pnrs.is-a.dev/rides/cityglide_transfer",
+        "https://pnrs.is-a.dev/experiences/metropass_experiences"
+      ]
+    }
+  ]
+}

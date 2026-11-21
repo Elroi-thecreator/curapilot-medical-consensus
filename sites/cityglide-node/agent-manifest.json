@@ -1,0 +1,91 @@
+{
+  "brand": "CityGlide Autonomous Fleet & Airport Transfers",
+  "networks": [
+    {
+      "name": "cityglide_transfer",
+      "front_man": "transfer_dispatcher",
+      "hocon": "./cityglide_transfer.network.json",
+      "description": "Autonomous airport ground transfer dispatch, flight buffer scheduling, and chauffeur reservations across the Open Agentic Web.",
+      "tags": [
+        "open-agentic-web",
+        "mobility-ai",
+        "airport-transfers",
+        "dispatch",
+        "byok"
+      ],
+      "sample_queries": [
+        "Quote an airport transfer from SFO to HarborView Hotel for flight UA 482 arriving at 4:30 PM.",
+        "Schedule an Executive EV Sedan with flight tracking for 2 passengers.",
+        "Check fleet dispatch availability at SFO, SEA, and AUS."
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [
+    "https://pnrs.is-a.dev",
+    "http://localhost:8080",
+    "http://localhost:8081",
+    "http://localhost:8082",
+    "http://127.0.0.1:8080",
+    "http://127.0.0.1:8081",
+    "http://127.0.0.1:8082",
+    "http://127.0.0.1:8880",
+    "http://127.0.0.1:8881",
+    "http://127.0.0.1:8882"
+  ],
+  "peer_policy": {
+    "mode": "open",
+    "deny_origins": [],
+    "note": "Public fleet mobility dispatch node. Open to travel concierges and personal booking agents."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "cityglide_transfer",
+    "front_man": "transfer_dispatcher",
+    "available": false,
+    "reason": "Static bundle; public MCP facade requires server host."
+  },
+  "theme": {
+    "primary": "#06b6d4"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "cityglide_transfer",
+        "front_man": "transfer_dispatcher",
+        "aliases": [
+          "cityglide_transfer",
+          "transfer_dispatcher"
+        ],
+        "url": "cityglide_transfer"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "quote_transfer_service",
+      "schedule_airport_transfer",
+      "get_fleet_status"
+    ]
+  }
+}

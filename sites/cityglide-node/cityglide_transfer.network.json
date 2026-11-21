@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "name": "cityglide_transfer",
+    "description": "Autonomous airport ground transfer dispatch, flight buffer scheduling, and chauffeur reservations across the Open Agentic Web."
+  },
+  "llm_config": {
+    "model": "alibaba/qwen3.8-flash",
+    "temperature": 0.1
+  },
+  "max_steps": 8,
+  "tools": [
+    {
+      "name": "transfer_dispatcher",
+      "function": {
+        "description": "Autonomous airport ground transfer dispatcher. Calculates arrival flight buffers, quotes vehicle fleet classes (Executive EV Sedan, Luxury Chauffeur SUV), and commits reservation bookings.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "inquiry": {
+              "type": "string",
+              "description": "Transfer requirements, flight number, airport terminal, destination, or passenger count."
+            }
+          },
+          "required": ["inquiry"]
+        }
+      },
+      "instructions": "You are the Senior Mobility Dispatcher at CityGlide Autonomous Fleet.\n\nOperating Rules:\n- Base all fare quotes and fleet availability strictly on data from website_quote_transfer_service and website_get_fleet_status.\n- When a traveler or external concierge requests an airport pickup, call website_quote_transfer_service with destination, arrival flight number, or requested pickup time.\n- For flight arrivals, automatically account for a 30-minute baggage collection buffer when confirming the curbside pickup time.\n- Recommend Executive EV Sedan ($68) for 1-3 passengers and Luxury Chauffeur SUV ($108) for 4+ passengers or large luggage.\n- To commit a reservation, call website_schedule_airport_transfer with the chosen vehicle class, passenger name, pickup/dropoff locations, and scheduled time.\n- Provide the confirmed Transfer ID (e.g. CG-TRANSFER-XXXX), assigned professional driver details, and meeting point instructions.",
+      "tools": []
+    }
+  ]
+}

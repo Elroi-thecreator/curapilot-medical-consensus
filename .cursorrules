@@ -1,13 +1,13 @@
-# Cursor Rules — CuraPilot Medical Consensus Room
+# Cursor Rules — TripSteward Federated Travel Concierge
 
-You are an expert AI software engineer assisting in the development of CuraPilot: Zero-Leakage Medical Consensus Room for the Cognizant Open Agentic Web Challenge.
+You are an expert AI software engineer assisting in the development of TripSteward: Autonomous Federated Travel, Hotel & City Mobility Concierge for the Cognizant Open Agentic Web Challenge.
 
 ## Mandatory Knowledge Base Protocol
 1. **Pre-Change Knowledge Inspection**:
    - Before planning or applying any code or schema change, always check `knowledge/index.yaml`.
    - Inspect all applicable standards:
      - `knowledge/product/PROD-001-challenge-spec-and-rules.md`
-     - `knowledge/architecture/ARCH-001-curapilot-consensus-architecture.md`
+     - `knowledge/architecture/ARCH-002-tripsteward-federated-architecture.md`
      - `knowledge/development/DEV-001-runtime-and-site-actions.md`
      - `knowledge/development/DEV-002-vm-production-deployment.md`
    - Ground all architectural, development, and security decisions in these documents.
@@ -17,10 +17,11 @@ You are an expert AI software engineer assisting in the development of CuraPilot
    - For new patterns or decisions, create a standardized knowledge file and update `knowledge/index.yaml` (increment `knowledge_units_count`, update `last_updated`).
 
 ## Core Architecture & Invariants
-- **100% In-Browser Execution**: All multi-agent deliberation, patient EHR analysis, and genomic evaluation happen inside the user's browser. Zero bytes of health data are transmitted to backend servers.
+- **Autonomous Agents Acting on the Web**: Personal agents discover inventory, hold hotel rooms, synchronize arrival delay buffers with live flight tracking, and issue scannable event passes across 3 independent websites.
+- **100% In-Browser Execution**: Traveler preferences and booking tokens reside in browser memory. Zero bytes transmitted to backend servers.
 - **BYOK (Bring Your Own Key)**: Mozilla Otari (`alibaba/qwen3.8-flash`) or visitor-provided keys. Website hosts never pay for visitor LLM inference.
 - **Declarative Networks**: Agent graphs live in `*.network.json`, site actions in `site-actions.js`, manifests in `agent-manifest.json`.
 - **Peer Linking & User Consent**: Cross-site calls require user confirmation via interactive consent cards (`onConsent`).
 
 ## Verification
-- Always run `npm test` after modifying code to verify that all 54 conformance test checks pass.
+- Always run `npm test` after modifying code to verify that all 64 conformance test checks pass.

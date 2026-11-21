@@ -1,6 +1,6 @@
 {
   "version": 1,
   "networks": {
-    "genomics_node": {}
+    "metropass_experiences": {}
   }
 }

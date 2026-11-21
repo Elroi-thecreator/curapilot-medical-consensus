@@ -1,25 +1,25 @@
 {
-  "name": "curapilot-medical-consensus",
+  "name": "tripsteward-agentic-travel",
   "version": "1.0.0",
-  "description": "CuraPilot: Zero-Leakage Medical Consensus Room — Open Agentic Web Challenge (Cognizant / Mozilla / MIT NANDA)",
+  "description": "TripSteward: Autonomous Federated Travel, Hotel & City Transfer Concierge — Open Agentic Web Challenge (Cognizant / Mozilla / MIT NANDA)",
   "type": "module",
   "scripts": {
     "start": "node scripts/serve_all.mjs",
     "test": "node tests/conformance_test.mjs",
-    "serve:hub": "node scripts/serve_site.mjs sites/curapilot-hub --port 8080",
-    "serve:genomics": "node scripts/serve_site.mjs sites/genomics-node --port 8081",
-    "serve:pharma": "node scripts/serve_site.mjs sites/pharmasafe-node --port 8082"
+    "serve:hub": "node scripts/serve_site.mjs sites/tripsteward-hub --port 8080",
+    "serve:rides": "node scripts/serve_site.mjs sites/cityglide-node --port 8081",
+    "serve:experiences": "node scripts/serve_site.mjs sites/metropass-node --port 8082"
   },
   "keywords": [
     "open-agentic-web",
     "neuro-san",
     "mozilla-otari",
-    "healthcare-ai",
-    "multi-agent-systems",
-    "zero-leakage",
+    "travel-ai",
+    "autonomous-concierge",
+    "cross-site-actions",
     "byok",
-    "privacy-preserving-ai"
+    "zero-leakage"
   ],
-  "author": "CuraPilot Team",
+  "author": "TripSteward Team",
   "license": "Apache-2.0"
 }

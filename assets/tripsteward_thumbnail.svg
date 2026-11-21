@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <!-- Deep Midnight Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050b14" />
+      <stop offset="50%" stop-color="#0a1526" />
+      <stop offset="100%" stop-color="#030712" />
+    </linearGradient>
+
+    <!-- Node Aura Gradients -->
+    <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="ridesGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="expGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Node Card Fill Gradients -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111c30" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0c1422" stop-opacity="0.85" />
+    </linearGradient>
+
+    <filter id="bloom" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="800" fill="url(#bgGrad)" />
+
+  <!-- Grid Overlay -->
+  <g opacity="0.08" stroke="#38bdf8" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="800" />
+    <line x1="300" y1="0" x2="300" y2="800" />
+    <line x1="500" y1="0" x2="500" y2="800" />
+    <line x1="700" y1="0" x2="700" y2="800" />
+    <line x1="900" y1="0" x2="900" y2="800" />
+    <line x1="1100" y1="0" x2="1100" y2="800" />
+    <line x1="0" y1="150" x2="1200" y2="150" />
+    <line x1="0" y1="350" x2="1200" y2="350" />
+    <line x1="0" y1="550" x2="1200" y2="550" />
+    <line x1="0" y1="750" x2="1200" y2="750" />
+  </g>
+
+  <!-- Aura Backgrounds -->
+  <circle cx="600" cy="420" r="280" fill="url(#hubGlow)" />
+  <circle cx="260" cy="460" r="220" fill="url(#ridesGlow)" />
+  <circle cx="940" cy="460" r="220" fill="url(#expGlow)" />
+
+  <!-- Connecting Data Conduits -->
+  <path d="M 390 460 Q 600 370 470 420" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="6,4" opacity="0.7" />
+  <path d="M 730 420 Q 600 370 810 460" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,4" opacity="0.7" />
+  <line x1="410" y1="460" x2="470" y2="420" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" filter="url(#bloom)" />
+  <line x1="730" y1="420" x2="790" y2="460" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" filter="url(#bloom)" />
+
+  <!-- HEADER / TITLE SECTION -->
+  <g transform="translate(600, 100)" text-anchor="middle">
+    <!-- Hackathon Track Pill -->
+    <rect x="-240" y="-35" width="480" height="34" rx="17" fill="#0284c7" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.2" />
+    <text x="0" y="-13" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" letter-spacing="1.5">OPEN AGENTIC WEB CHALLENGE • MVP PROFILE 0.3</text>
+
+    <!-- Main Title -->
+    <text x="0" y="45" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="52" font-weight="900" letter-spacing="-1">TripSteward</text>
+    <text x="0" y="85" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="500">Autonomous Federated Travel, Hotel &amp; City Mobility Concierge</text>
+    <text x="0" y="112" fill="#34d399" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600">Zero-Middleman Direct Bookings • 100% In-Browser Execution • Powered by Mozilla Otari BYOK</text>
+  </g>
+
+  <!-- NODE 1: CITYGLIDE (LEFT) -->
+  <g transform="translate(130, 320)">
+    <rect width="280" height="290" rx="16" fill="url(#cardGrad)" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.6" filter="url(#bloom)" />
+    <!-- Header -->
+    <rect x="20" y="20" width="40" height="40" rx="10" fill="#06b6d4" fill-opacity="0.15" stroke="#06b6d4" stroke-width="1" />
+    <text x="40" y="46" fill="#38bdf8" font-size="20" text-anchor="middle">🚗</text>
+    <text x="75" y="38" fill="#ffffff" font-family="sans-serif" font-size="16" font-weight="700">CityGlide Node</text>
+    <text x="75" y="55" fill="#94a3b8" font-family="sans-serif" font-size="12">Port 8081 • /rides/</text>
+
+    <line x1="20" y1="75" x2="260" y2="75" stroke="#1e293b" stroke-width="1" />
+
+    <!-- Details -->
+    <text x="20" y="105" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="600">Specialist: Mobility Dispatcher</text>
+    <text x="20" y="128" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Flight Landing Tracking (UA 482)</text>
+    <text x="20" y="150" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Auto +30min Baggage Buffer</text>
+    <text x="20" y="172" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Executive EV Sedan &amp; SUV Fleet</text>
+    <text x="20" y="194" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Direct Rate: $68.00 (0% markup)</text>
+
+    <!-- Site Action Pill -->
+    <rect x="20" y="225" width="240" height="42" rx="8" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-width="1" />
+    <text x="30" y="244" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="700">website_quote_transfer_service</text>
+    <text x="30" y="258" fill="#34d399" font-family="monospace" font-size="10" font-weight="700">website_schedule_airport_transfer</text>
+  </g>
+
+  <!-- NODE 2: TRIPSTEWARD HUB (CENTER) -->
+  <g transform="translate(470, 280)">
+    <rect width="260" height="370" rx="18" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="2.2" filter="url(#bloom)" />
+    <!-- Header -->
+    <rect x="20" y="20" width="46" height="46" rx="12" fill="#0284c7" fill-opacity="0.2" stroke="#38bdf8" stroke-width="1.2" />
+    <text x="43" y="50" fill="#38bdf8" font-size="24" text-anchor="middle">🛎️</text>
+    <text x="80" y="40" fill="#ffffff" font-family="sans-serif" font-size="18" font-weight="800">TripSteward Hub</text>
+    <text x="80" y="58" fill="#38bdf8" font-family="sans-serif" font-size="12">Port 8080 • /tripsteward/</text>
+
+    <line x1="20" y1="80" x2="240" y2="80" stroke="#1e293b" stroke-width="1" />
+
+    <!-- Details -->
+    <text x="20" y="110" fill="#38bdf8" font-family="sans-serif" font-size="14" font-weight="700">Chief Travel Concierge</text>
+    <text x="20" y="134" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Sovereign Browser Trip Vault</text>
+    <text x="20" y="156" fill="#cbd5e1" font-family="sans-serif" font-size="12">• HarborView Direct Room Hold</text>
+    <text x="20" y="178" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Cross-Site Peer Negotiation</text>
+    <text x="20" y="200" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Human-in-the-Loop Consent</text>
+    <text x="20" y="222" fill="#34d399" font-family="sans-serif" font-size="12" font-weight="600">★ Direct Savings: $142.00 USD</text>
+
+    <!-- Itinerary Pass Box -->
+    <rect x="20" y="245" width="220" height="100" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1" />
+    <text x="30" y="268" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="700">Sealed Master Digital Pass</text>
+    <text x="30" y="286" fill="#94a3b8" font-family="sans-serif" font-size="10">Pass: TS-PASS-SF-8892</text>
+    <text x="30" y="304" fill="#38bdf8" font-family="monospace" font-size="9.5">website_reserve_hotel_room</text>
+    <text x="30" y="320" fill="#38bdf8" font-family="monospace" font-size="9.5">website_compile_master_itinerary</text>
+    <text x="30" y="336" fill="#34d399" font-family="sans-serif" font-size="10" font-weight="700">Total: $604.00 (Zero Aggregator Fee)</text>
+  </g>
+
+  <!-- NODE 3: METROPASS (RIGHT) -->
+  <g transform="translate(790, 320)">
+    <rect width="280" height="290" rx="16" fill="url(#cardGrad)" stroke="#f59e0b" stroke-width="1.5" stroke-opacity="0.6" filter="url(#bloom)" />
+    <!-- Header -->
+    <rect x="20" y="20" width="40" height="40" rx="10" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1" />
+    <text x="40" y="46" fill="#fbbf24" font-size="20" text-anchor="middle">🎟️</text>
+    <text x="75" y="38" fill="#ffffff" font-family="sans-serif" font-size="16" font-weight="700">MetroPass Node</text>
+    <text x="75" y="55" fill="#94a3b8" font-family="sans-serif" font-size="12">Port 8082 • /experiences/</text>
+
+    <line x1="20" y1="75" x2="260" y2="75" stroke="#1e293b" stroke-width="1" />
+
+    <!-- Details -->
+    <text x="20" y="105" fill="#fbbf24" font-family="sans-serif" font-size="13" font-weight="600">Specialist: Experience Curator</text>
+    <text x="20" y="128" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Sunset Catamaran Cruises</text>
+    <text x="20" y="150" fill="#cbd5e1" font-family="sans-serif" font-size="12">• SFMOMA VIP Priority Passes</text>
+    <text x="20" y="172" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Instant Scannable QR Vouchers</text>
+    <text x="20" y="194" fill="#cbd5e1" font-family="sans-serif" font-size="12">• Direct Rate: $79.00 / pass</text>
+
+    <!-- Site Action Pill -->
+    <rect x="20" y="225" width="240" height="42" rx="8" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="1" />
+    <text x="30" y="244" fill="#fbbf24" font-family="monospace" font-size="10" font-weight="700">website_search_experiences</text>
+    <text x="30" y="258" fill="#34d399" font-family="monospace" font-size="10" font-weight="700">website_book_experience_pass</text>
+  </g>
+
+  <!-- FOOTER BADGES -->
+  <g transform="translate(600, 730)" text-anchor="middle">
+    <text x="0" y="0" fill="#64748b" font-family="sans-serif" font-size="13">Cognizant Open Agentic Web Hackathon • Built with Neuro SAN &amp; Mozilla Otari • Hosted on Live VM</text>
+    <text x="0" y="24" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="600">Live URL: https://pnrs.is-a.dev/tripsteward/ • GitHub: Elroi-thecreator/curapilot-medical-consensus</text>
+  </g>
+</svg>

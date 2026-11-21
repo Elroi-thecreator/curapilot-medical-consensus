@@ -1,7 +1,7 @@
 import { ChatFollow } from "./chat-follow.js";
 
 export class AssistantMount {
-  static GREETING = "Welcome to the Rare Genomics Institute agent node. I can evaluate gene variants, metabolic disease mutations, and enzyme deficiency mechanisms.";
+  static GREETING = "Welcome to MetroPass Experiences. I can discover top-rated local city activities, sunset cruises, museum VIP passes, and issue digital passes on your behalf.";
 
   static async start() {
     const status = document.querySelector("#assistant-status");
@@ -20,8 +20,8 @@ export class AssistantMount {
         && (!booted.engine.byokKey || booted.engine.byokKey === "demo");
       if (status) {
         status.textContent = needsKey
-          ? "Specialist Agent ready. Add your Mozilla Otari or provider key in AI settings below to query."
-          : "Genomics Specialist active & connected.";
+          ? "Curator ready. Powered by Mozilla Otari BYOK inference."
+          : "MetroPass Experience Curator active & connected.";
       }
       if (!needsKey) {
         AssistantMount.greet();
@@ -29,9 +29,9 @@ export class AssistantMount {
       return booted.engine;
     } catch (error) {
       if (status) {
-        status.textContent = "Autonomous assistant loaded in background mode.";
+        status.textContent = "Autonomous curator loaded in background mode.";
       }
-      console.warn("Genomics assistant startup note:", error);
+      console.warn("MetroPass assistant startup note:", error);
       return null;
     }
   }

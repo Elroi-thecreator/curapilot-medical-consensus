@@ -1,0 +1,101 @@
+{
+  "brand": "HarborView Hotel & TripSteward Concierge",
+  "networks": [
+    {
+      "name": "tripsteward_concierge",
+      "front_man": "travel_concierge",
+      "hocon": "./tripsteward_concierge.network.json",
+      "description": "Autonomous hospitality and travel concierge. Discovers room options, coordinates airport transfers, and books cultural experience passes across peer agentic websites on your behalf.",
+      "tags": [
+        "open-agentic-web",
+        "travel-ai",
+        "autonomous-booking",
+        "concierge",
+        "byok"
+      ],
+      "sample_queries": [
+        "Book a 2-night stay in San Francisco under $200/night with an airport pickup when my flight arrives at 4:30 PM.",
+        "Check room availability at HarborView and find a sunset sailing tour for Saturday evening.",
+        "Coordinate a complete travel itinerary with hotel, chauffeur transfer, and city experience passes."
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [
+    "https://pnrs.is-a.dev",
+    "http://localhost:8081",
+    "http://localhost:8082",
+    "http://127.0.0.1:8081",
+    "http://127.0.0.1:8082",
+    "http://127.0.0.1:8881",
+    "http://127.0.0.1:8882"
+  ],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Federates booking queries with approved ground transport and experience provider nodes after visitor approval."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "tripsteward_concierge",
+    "front_man": "travel_concierge",
+    "available": false,
+    "reason": "Static bundle; public MCP facade requires server host."
+  },
+  "theme": {
+    "primary": "#0284c7"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "tripsteward_concierge",
+        "front_man": "travel_concierge",
+        "aliases": [
+          "tripsteward_concierge",
+          "travel_concierge"
+        ],
+        "url": "tripsteward_concierge"
+      }
+    ],
+    "imports": [
+      {
+        "network": "cityglide_transfer",
+        "front_man": "transfer_dispatcher",
+        "origin": "http://localhost:8081"
+      },
+      {
+        "network": "metropass_experiences",
+        "front_man": "experience_curator",
+        "origin": "http://localhost:8082"
+      }
+    ],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_trip_preferences",
+      "reserve_hotel_room",
+      "compile_master_itinerary",
+      "book_airport_transfer",
+      "book_city_experience"
+    ]
+  }
+}

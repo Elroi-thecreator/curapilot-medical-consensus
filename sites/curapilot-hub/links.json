@@ -1,9 +1,0 @@
-{
-  "version": 1,
-  "networks": {
-    "curapilot_coordinator": {
-      "genomics": "https://pnrs.is-a.dev/genomics/genomics_node",
-      "pharmasafe": "https://pnrs.is-a.dev/pharmasafe/pharmasafe_node"
-    }
-  }
-}

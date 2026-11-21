@@ -1,6 +1,6 @@
 # AI Agent Operating Guidelines & Knowledge Base Protocol
 
-Welcome to the **CuraPilot: Zero-Leakage Medical Consensus Room** repository.
+Welcome to the **TripSteward: Autonomous Federated Travel, Hotel & City Mobility Concierge** repository.
 All autonomous AI coding agents (Antigravity, Claude, Cursor, Gemini, Copilot, Codex, etc.) working in this repository must strictly follow this protocol.
 
 ---
@@ -13,7 +13,8 @@ All autonomous AI coding agents (Antigravity, Claude, Cursor, Gemini, Copilot, C
 2. **Open and read `knowledge/index.yaml`** to identify the active architecture (`ARCH-*`), development (`DEV-*`), product (`PROD-*`), and decision (`ADR-*`) standards that apply to your task.
 3. **Inspect the relevant standards**:
    - `knowledge/product/PROD-001-challenge-spec-and-rules.md`: Open Agentic Web specification & hackathon submission protocol.
-   - `knowledge/architecture/ARCH-001-curapilot-consensus-architecture.md`: CuraPilot decentralized multi-specialist clinical consensus architecture & zero-leakage invariant.
+   - `knowledge/architecture/ARCH-002-tripsteward-federated-architecture.md`: TripSteward autonomous federated travel & cross-site booking architecture.
+   - `knowledge/architecture/ARCH-001-curapilot-consensus-architecture.md`: Founding multi-specialist consensus architecture.
    - `knowledge/development/DEV-001-runtime-and-site-actions.md`: In-browser runtime conventions, site-actions (`website_*`), and Otari BYOK inference standards.
    - `knowledge/development/DEV-002-vm-production-deployment.md`: Production VM deployment, systemd, and reverse proxy standards.
 4. **Ground all architectural and implementation decisions in these approved standards.** Never invent conflicting conventions or bypass existing specifications.
@@ -49,19 +50,19 @@ devpost-Cognizant/
 ├── knowledge/                 # ⭐️ Central knowledge base (Single Source of Truth)
 │   ├── index.yaml             # Master index of all approved knowledge units
 │   ├── product/               # Product standards & specifications (PROD-*)
-│   ├── architecture/          # System design & privacy invariants (ARCH-*)
+│   ├── architecture/          # System design & cross-site invariants (ARCH-*)
 │   └── development/           # Runtime, site-actions, and setup (DEV-*)
 ├── sites/                     # 3 federated static agentic web nodes
-│   ├── curapilot-hub/         # Port 8080: Patient intake vault & Chief Physician Coordinator
-│   ├── genomics-node/         # Port 8081: Rare Genomics Specialist Node
-│   └── pharmasafe-node/       # Port 8082: PharmaSafe Drug Interaction Node
+│   ├── tripsteward-hub/       # Port 8080: HarborView Hotel & Travel Concierge Hub
+│   ├── cityglide-node/        # Port 8081: CityGlide Autonomous Fleet & Transfers Node
+│   └── metropass-node/        # Port 8082: MetroPass Experiences & Ticketing Node
 ├── scripts/                   # Server runners and build utilities
 │   ├── serve_all.mjs          # Concurrently boots all 3 nodes (8080, 8081, 8082)
 │   ├── serve_vm.mjs           # Production VM runner (8880, 8881, 8882)
 │   └── serve_site.mjs         # Static HTTP server with CORS enabled
 ├── tests/                     # Automated conformance test suite
-│   └── conformance_test.mjs   # 54-point Open Agentic Web specification validator
-├── assets/                    # Project thumbnails and diagrams
+│   └── conformance_test.mjs   # 64-point Open Agentic Web specification validator
+├── assets/                    # Project thumbnails, diagrams, and UI screenshots
 ├── package.json               # Project manifest and scripts
 └── README.md                  # Architectural overview & quickstart documentation
 ```
@@ -70,18 +71,20 @@ devpost-Cognizant/
 
 ## 🛡️ Core Architectural Invariants
 
-1. **100% In-Browser Execution (Zero-Leakage Privacy)**:
-   - Confidential Electronic Health Records (EHR) and genomic variants reside **strictly in browser memory (RAM / client DOM)**.
-   - Static hosting web servers receive **0 bytes** of patient health data.
-   - Never implement backend server-side agent execution runtimes or server logging of patient records.
-2. **Bring Your Own Key (BYOK) Inference**:
+1. **How Agents Use the Web to Act on Our Behalf**:
+   - Rather than just chatting, personal agents discover live availability, hold boutique hotel rooms, synchronize arrival delay buffers with live flight tracking, and issue scannable event passes across 3 independent websites.
+   - Eliminates 15–30% intermediary reseller fees ($142+ saved per typical booking).
+2. **100% In-Browser Execution (Zero-Leakage Privacy)**:
+   - Traveler preferences, itinerary details, and booking tokens reside **strictly in browser memory (RAM / client DOM)**.
+   - Static hosting web servers receive **0 bytes** of customer data.
+3. **Bring Your Own Key (BYOK) Inference**:
    - Powered by **Mozilla Otari** (`https://api.otari.ai/api/v1`) using default model `alibaba/qwen3.8-flash`, or OpenRouter/local models.
    - Website hosts pay **$0 for inference**.
    - API keys are stored solely in client browser `localStorage` by the browser runtime; never hardcode or transmit keys.
-3. **Decentralized Multi-Agent Federation**:
-   - `curapilot-hub` resolves peer specialist networks dynamically via `links.json`.
-   - The user must be prompted with an interactive consent card (`onConsent`) prior to fetching and running any third-party agent graph.
-   - All declarative agent networks (`*.network.json`) and manifests (`agent-manifest.json`) must be served with CORS headers (`Access-Control-Allow-Origin: *`).
+4. **Decentralized Multi-Agent Federation**:
+   - `tripsteward-hub` resolves peer specialist networks dynamically via `links.json`.
+   - The user is prompted with an interactive consent card (`onConsent`) prior to fetching and running any third-party agent graph.
+   - All declarative agent networks (`*.network.json`) and manifests (`agent-manifest.json`) are served with CORS headers (`Access-Control-Allow-Origin: *`).
 
 ---
 
@@ -91,7 +94,7 @@ devpost-Cognizant/
 ```bash
 npm test
 ```
-*Validates JSON schemas, Neuro SAN graphs, agent manifests, peer link resolution, and site actions across all 3 nodes.*
+*Validates JSON schemas, Neuro SAN graphs, agent manifests, peer link resolution, and site actions across all 3 nodes (64 checks).*
 
 ### Start Local Federated Network (Boots ports 8080, 8081, 8082)
 ```bash
@@ -100,9 +103,9 @@ npm start
 
 ### Start Individual Nodes
 ```bash
-npm run serve:hub       # CuraPilot Hub on http://localhost:8080
-npm run serve:genomics  # Genomics Node on http://localhost:8081
-npm run serve:pharma    # PharmaSafe Node on http://localhost:8082
+npm run serve:hub          # TripSteward Hub on http://localhost:8080
+npm run serve:rides        # CityGlide Node on http://localhost:8081
+npm run serve:experiences  # MetroPass Node on http://localhost:8082
 ```
 
 ---
@@ -113,4 +116,4 @@ npm run serve:pharma    # PharmaSafe Node on http://localhost:8082
 - **Action Tool Schema Validation**: All tools in `site-actions.js` must specify JSON Schema parameters (`type`, `properties`, `required`).
 - **Confirmation Modals**: Any action tool that modifies state or performs sensitive operations must hook into `onActionConfirm` for user approval.
 - **No Server Dependencies in Frontend**: Never import server-only Node modules (`fs`, `child_process`, etc.) into client-side scripts under `sites/`.
-- **Always Verify**: Run `npm test` and ensure all 54 checks pass without errors.
+- **Always Verify**: Run `npm test` and ensure all 64 checks pass without errors.

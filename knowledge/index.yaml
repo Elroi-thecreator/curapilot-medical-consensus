@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-knowledge_units_count: 4
+knowledge_units_count: 5
 last_updated: "2026-11-21"
 
 domains:
@@ -13,6 +13,10 @@ domains:
     - id: ARCH-001
       title: "CuraPilot Zero-Leakage Multi-Specialist Consensus Architecture"
       path: "architecture/ARCH-001-curapilot-consensus-architecture.md"
+      status: "APPROVED"
+    - id: ARCH-002
+      title: "TripSteward Autonomous Federated Travel & Cross-Site Booking Architecture"
+      path: "architecture/ARCH-002-tripsteward-federated-architecture.md"
       status: "APPROVED"
   development:
     - id: DEV-001

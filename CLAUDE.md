@@ -1,4 +1,4 @@
-# Claude Code Guidelines — CuraPilot Medical Consensus Room
+# Claude Code Guidelines — TripSteward Federated Travel Concierge
 
 ## ⚡ Mandatory Knowledge Base Protocol
 
@@ -17,31 +17,30 @@
 ## 🧭 Knowledge Base Directory Reference
 - `knowledge/index.yaml`: Master registry of all knowledge units.
 - `knowledge/product/PROD-001-challenge-spec-and-rules.md`: Open Agentic Web specification & submission requirements.
-- `knowledge/architecture/ARCH-001-curapilot-consensus-architecture.md`: Decentralized clinical consensus architecture & zero-leakage privacy invariant.
+- `knowledge/architecture/ARCH-002-tripsteward-federated-architecture.md`: Autonomous federated travel & cross-site booking architecture.
 - `knowledge/development/DEV-001-runtime-and-site-actions.md`: In-browser runtime, action tools (`website_*`), and BYOK Otari inference standards.
 - `knowledge/development/DEV-002-vm-production-deployment.md`: Production VM deployment, systemd, and reverse proxy architecture.
 
 ---
 
 ## 🛠️ Build, Test & Development Commands
-- **Run Conformance Tests**: `npm test` (Runs `node tests/conformance_test.mjs`, must pass 54/54 tests)
+- **Run Conformance Tests**: `npm test` (Runs `node tests/conformance_test.mjs`, must pass 64/64 tests)
 - **Start All Federated Sites**: `npm start` (Runs `node scripts/serve_all.mjs`, serving ports 8080, 8081, 8082)
 - **Serve Individual Sites**:
-  - `npm run serve:hub`: Starts CuraPilot Hub on `http://localhost:8080/`
-  - `npm run serve:genomics`: Starts Genomics Node on `http://localhost:8081/`
-  - `npm run serve:pharma`: Starts PharmaSafe Node on `http://localhost:8082/`
+  - `npm run serve:hub`: Starts TripSteward Concierge Hub on `http://localhost:8080/`
+  - `npm run serve:rides`: Starts CityGlide Transfer Node on `http://localhost:8081/`
+  - `npm run serve:experiences`: Starts MetroPass Experiences Node on `http://localhost:8082/`
 
 ---
 
 ## 🛡️ Core Architecture & Boundaries
+- **How Agents Use the Web to Act on Our Behalf**:
+  - Personal agents discover live inventory, hold hotel rooms, coordinate airport chauffeur transfers with flight delay buffers, and issue scannable activity tickets.
+  - Eliminates 15–30% aggregator platform markups ($142+ saved per itinerary).
 - **Open Agentic Web MVP Profile 0.3**:
   - Client-side execution in the browser via `nsdeploy` runtime.
   - BYOK (Bring Your Own Key) inference via Mozilla Otari (`alibaba/qwen3.8-flash`) or local models. Hosts pay $0.
   - Public JSON artifacts: `agent-manifest.json`, `*.network.json`, `links.json`, `bridge/action-bridge.html`.
-- **Zero-Leakage Invariant**:
-  - Raw patient records, EHR notes, and genomic sequences are stored purely in client-side RAM / DOM.
-  - Zero bytes of patient data are sent to host servers.
-  - Never introduce backend server-side agent execution runtimes or cloud databases for patient records.
 - **Peer Linking & Consent**:
   - Interactive consent cards (`onConsent`) must guard third-party agent graph loading.
   - CORS headers (`Access-Control-Allow-Origin: *`) must be enabled on all published JSON files.

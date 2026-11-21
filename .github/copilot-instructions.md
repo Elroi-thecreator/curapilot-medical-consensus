@@ -1,23 +1,16 @@
-# GitHub Copilot Instructions — CuraPilot Medical Consensus Room
+# GitHub Copilot Instructions — TripSteward Federated Travel Concierge
 
-## ⚡ Mandatory Knowledge Base Protocol
-Before planning, suggesting, or making any changes in this repository:
+You are assisting in the development and maintenance of **TripSteward: Autonomous Federated Travel, Hotel & City Mobility Concierge** for the Cognizant Open Agentic Web Challenge.
+
+## Mandatory Knowledge Base Protocol
 1. **Pre-Change Knowledge Inspection**:
-   - Inspect `knowledge/index.yaml` to discover all active architecture (`ARCH-*`), development (`DEV-*`), product (`PROD-*`), and decision (`ADR-*`) standards.
-   - Ground all implementation work in the approved standards:
-     - `knowledge/product/PROD-001-challenge-spec-and-rules.md`
-     - `knowledge/architecture/ARCH-001-curapilot-consensus-architecture.md`
-     - `knowledge/development/DEV-001-runtime-and-site-actions.md`
-     - `knowledge/development/DEV-002-vm-production-deployment.md`
+   - Always inspect `knowledge/index.yaml` before planning or modifying code.
+   - Reference `knowledge/product/PROD-001-challenge-spec-and-rules.md`, `knowledge/architecture/ARCH-002-tripsteward-federated-architecture.md`, `knowledge/development/DEV-001-runtime-and-site-actions.md`, and `knowledge/development/DEV-002-vm-production-deployment.md`.
 2. **Post-Change Knowledge Synchronization**:
-   - Keep `knowledge/` and `knowledge/index.yaml` synchronized with every codebase change.
+   - Update `knowledge/` and `knowledge/index.yaml` after modifications.
 
-## 🛡️ Architecture & Rules
-- **CuraPilot Medical Consensus Room**: Built for the Cognizant Open Agentic Web Challenge (MVP Profile 0.3).
-- **Zero-Leakage Privacy**: Patient EHR and genomic data are processed 100% in-browser in client RAM/DOM. Zero bytes sent to servers.
-- **BYOK Inference**: Mozilla Otari (`alibaba/qwen3.8-flash`) or visitor-provided keys. Website hosts pay $0 for inference.
-- **Federated Nodes**:
-  - `sites/curapilot-hub` (8080 / `/curapilot/`): Chief physician coordinator & intake vault.
-  - `sites/genomics-node` (8081 / `/genomics/`): Genomics specialist.
-  - `sites/pharmasafe-node` (8082 / `/pharmasafe/`): PharmaSafe pharmacology specialist.
-- **Verification**: Run `npm test` after any modifications to verify conformance.
+## Rules & Invariants
+- **Action-Driven Personal Agents**: Agents call real-world machine tools (`website_*`) across sites to execute bookings, eliminate aggregator markups, and synchronize flight buffers.
+- **100% In-Browser Execution**: All traveler records and booking vouchers are processed client-side. Zero bytes to backend servers.
+- **BYOK Inference**: Mozilla Otari (`alibaba/qwen3.8-flash`) or visitor keys. $0 host inference cost.
+- **Verification**: Always run `npm test` and ensure all 64 checks pass.

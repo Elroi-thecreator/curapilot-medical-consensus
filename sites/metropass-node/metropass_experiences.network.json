@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "name": "metropass_experiences",
+    "description": "Autonomous city experience curation, guided adventure bookings, and verified digital admission passes across the Open Agentic Web."
+  },
+  "llm_config": {
+    "model": "alibaba/qwen3.8-flash",
+    "temperature": 0.15
+  },
+  "max_steps": 8,
+  "tools": [
+    {
+      "name": "experience_curator",
+      "function": {
+        "description": "Curates verified local tours, sunset cruises, museum VIP passes, and culinary experiences with direct ticket booking.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "inquiry": {
+              "type": "string",
+              "description": "City name, desired activity type (sailing, culinary, museum, adventure), or date."
+            }
+          },
+          "required": ["inquiry"]
+        }
+      },
+      "instructions": "You are the Senior Experience Curator at MetroPass Experiences.\n\nOperating Rules:\n- Base all activity listings and pass availability strictly on data from website_search_experiences and website_get_available_catalog.\n- When an external concierge or traveler asks for recommendations, search experiences by city and category.\n- Highlight verified perks: instant confirmation, skip-the-line VIP entry, and direct provider pricing (0% reseller surcharge).\n- To commit an activity booking, call website_book_experience_pass with the experience ID, attendee name, date, and ticket count.\n- Provide the confirmed digital voucher Pass Code (e.g. MP-PASS-XXXX), check-in window, and meeting address.",
+      "tools": []
+    }
+  ]
+}

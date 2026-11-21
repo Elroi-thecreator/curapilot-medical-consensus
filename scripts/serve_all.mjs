@@ -1,5 +1,5 @@
 // Multi-Site Local Development Server for Open Agentic Web Challenge
-// Serves curapilot-hub (8080), genomics-node (8081), and pharmasafe-node (8082) concurrently with CORS enabled.
+// Serves tripsteward-hub (8080), cityglide-node (8081), and metropass-node (8082) concurrently with CORS enabled.
 
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -10,13 +10,13 @@ const rootDir = join(__dirname, "..");
 const serveScript = join(__dirname, "serve_site.mjs");
 
 const sites = [
-  { name: "CuraPilot Hub (Main App)", dir: join(rootDir, "sites", "curapilot-hub"), port: 8080 },
-  { name: "Rare Genomics Node", dir: join(rootDir, "sites", "genomics-node"), port: 8081 },
-  { name: "PharmaSafe Lab Node", dir: join(rootDir, "sites", "pharmasafe-node"), port: 8082 }
+  { name: "TripSteward Concierge Hub", dir: join(rootDir, "sites", "tripsteward-hub"), port: 8080 },
+  { name: "CityGlide Transfer Node", dir: join(rootDir, "sites", "cityglide-node"), port: 8081 },
+  { name: "MetroPass Experiences Node", dir: join(rootDir, "sites", "metropass-node"), port: 8082 }
 ];
 
 console.log("=========================================================");
-console.log("🛡️  Starting CuraPilot Multi-Site Open Agentic Web Cluster");
+console.log("✈️  Starting TripSteward Federated Travel Cluster");
 console.log("=========================================================\n");
 
 const processes = [];
@@ -33,9 +33,9 @@ for (const site of sites) {
 }
 
 console.log("\nAll sites running:");
-console.log("👉 CuraPilot Hub:   http://localhost:8080/");
-console.log("👉 Genomics Node:   http://localhost:8081/");
-console.log("👉 PharmaSafe Node: http://localhost:8082/");
+console.log("👉 TripSteward Hub:   http://localhost:8080/");
+console.log("👉 CityGlide Node:    http://localhost:8081/");
+console.log("👉 MetroPass Node:    http://localhost:8082/");
 console.log("\nPress Ctrl+C to terminate all servers.\n");
 
 function cleanup() {

@@ -1,0 +1,91 @@
+{
+  "brand": "MetroPass Experiences & City Curations",
+  "networks": [
+    {
+      "name": "metropass_experiences",
+      "front_man": "experience_curator",
+      "hocon": "./metropass_experiences.network.json",
+      "description": "Autonomous city experience curation, guided adventure bookings, and verified digital admission passes across the Open Agentic Web.",
+      "tags": [
+        "open-agentic-web",
+        "experiences",
+        "tours",
+        "ticketing",
+        "byok"
+      ],
+      "sample_queries": [
+        "Find a sunset catamaran sailing cruise in San Francisco for Saturday evening.",
+        "Book 2 VIP priority admission passes to the SFMOMA Modern Art Museum.",
+        "Check guided culinary food tours and tasting trails."
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [
+    "https://pnrs.is-a.dev",
+    "http://localhost:8080",
+    "http://localhost:8081",
+    "http://localhost:8082",
+    "http://127.0.0.1:8080",
+    "http://127.0.0.1:8081",
+    "http://127.0.0.1:8082",
+    "http://127.0.0.1:8880",
+    "http://127.0.0.1:8881",
+    "http://127.0.0.1:8882"
+  ],
+  "peer_policy": {
+    "mode": "open",
+    "deny_origins": [],
+    "note": "Public ticketing and experience curation node. Open to travel concierges and personal booking agents."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "metropass_experiences",
+    "front_man": "experience_curator",
+    "available": false,
+    "reason": "Static bundle; public MCP facade requires server host."
+  },
+  "theme": {
+    "primary": "#f59e0b"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "metropass_experiences",
+        "front_man": "experience_curator",
+        "aliases": [
+          "metropass_experiences",
+          "experience_curator"
+        ],
+        "url": "metropass_experiences"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "search_experiences",
+      "book_experience_pass",
+      "get_available_catalog"
+    ]
+  }
+}

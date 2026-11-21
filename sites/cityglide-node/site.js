@@ -1,7 +1,7 @@
 import { ChatFollow } from "./chat-follow.js";
 
 export class AssistantMount {
-  static GREETING = "Welcome to the PharmaSafe Interaction Laboratory agent node. I can evaluate polypharmacy interactions, CYP450 metabolism, and metabolic disease contraindications.";
+  static GREETING = "Welcome to CityGlide Autonomous Fleet. I can quote airport ground transfers, sync flight arrival buffers, and dispatch chauffeur vehicles on your behalf.";
 
   static async start() {
     const status = document.querySelector("#assistant-status");
@@ -20,8 +20,8 @@ export class AssistantMount {
         && (!booted.engine.byokKey || booted.engine.byokKey === "demo");
       if (status) {
         status.textContent = needsKey
-          ? "Specialist Agent ready. Add your Mozilla Otari or provider key in AI settings below to query."
-          : "Pharmacology Specialist active & connected.";
+          ? "Dispatcher ready. Powered by Mozilla Otari BYOK inference."
+          : "CityGlide Transfer Dispatcher active & connected.";
       }
       if (!needsKey) {
         AssistantMount.greet();
@@ -29,9 +29,9 @@ export class AssistantMount {
       return booted.engine;
     } catch (error) {
       if (status) {
-        status.textContent = "Autonomous assistant loaded in background mode.";
+        status.textContent = "Autonomous dispatcher loaded in background mode.";
       }
-      console.warn("Pharma assistant startup note:", error);
+      console.warn("CityGlide assistant startup note:", error);
       return null;
     }
   }
