@@ -7,7 +7,7 @@
 > **Primary Live Concierge:** [https://pnrs.is-a.dev/tripsteward/](https://pnrs.is-a.dev/tripsteward/)  
 > **CityGlide Transfers Node:** [https://pnrs.is-a.dev/rides/](https://pnrs.is-a.dev/rides/)  
 > **MetroPass Experiences Node:** [https://pnrs.is-a.dev/experiences/](https://pnrs.is-a.dev/experiences/)  
-> **GitHub Repository:** [https://github.com/Elroi-thecreator/curapilot-medical-consensus](https://github.com/Elroi-thecreator/curapilot-medical-consensus)  
+> **GitHub Repository:** [https://github.com/Elroi-thecreator/tripsteward-agentic-travel](https://github.com/Elroi-thecreator/tripsteward-agentic-travel)  
 
 ---
 
@@ -125,10 +125,10 @@ flowchart TD
 
 ### 2. Clone and Test
 ```bash
-git clone https://github.com/Elroi-thecreator/curapilot-medical-consensus.git
-cd curapilot-medical-consensus
+git clone https://github.com/Elroi-thecreator/tripsteward-agentic-travel.git
+cd tripsteward-agentic-travel
 
-# Run the 64-point Open Agentic Web conformance test suite
+# Run the 69-point Open Agentic Web conformance test suite
 npm test
 ```
 
