@@ -10,6 +10,7 @@ You are an expert AI software engineer assisting in the development of TripStewa
      - `knowledge/architecture/ARCH-002-tripsteward-federated-architecture.md`
      - `knowledge/development/DEV-001-runtime-and-site-actions.md`
      - `knowledge/development/DEV-002-vm-production-deployment.md`
+     - `knowledge/development/DEV-003-agent-authoring-and-onboarding-guide.md`
    - Ground all architectural, development, and security decisions in these documents.
 
 2. **Post-Change Knowledge Synchronization**:
@@ -24,4 +25,4 @@ You are an expert AI software engineer assisting in the development of TripStewa
 - **Peer Linking & User Consent**: Cross-site calls require user confirmation via interactive consent cards (`onConsent`).
 
 ## Verification
-- Always run `npm test` after modifying code to verify that all 64 conformance test checks pass.
+- Always run `npm test` after modifying code to verify that all 69 conformance test checks pass.

@@ -20,11 +20,12 @@
 - `knowledge/architecture/ARCH-002-tripsteward-federated-architecture.md`: Autonomous federated travel & cross-site booking architecture.
 - `knowledge/development/DEV-001-runtime-and-site-actions.md`: In-browser runtime, action tools (`website_*`), and BYOK Otari inference standards.
 - `knowledge/development/DEV-002-vm-production-deployment.md`: Production VM deployment, systemd, and reverse proxy architecture.
+- `knowledge/development/DEV-003-agent-authoring-and-onboarding-guide.md`: Agent authoring, dynamic discovery, and onboarding standards.
 
 ---
 
 ## 🛠️ Build, Test & Development Commands
-- **Run Conformance Tests**: `npm test` (Runs `node tests/conformance_test.mjs`, must pass 64/64 tests)
+- **Run Conformance Tests**: `npm test` (Runs `node tests/conformance_test.mjs`, must pass 69/69 tests)
 - **Start All Federated Sites**: `npm start` (Runs `node scripts/serve_all.mjs`, serving ports 8080, 8081, 8082)
 - **Serve Individual Sites**:
   - `npm run serve:hub`: Starts TripSteward Concierge Hub on `http://localhost:8080/`

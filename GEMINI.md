@@ -10,6 +10,7 @@
   - `knowledge/architecture/ARCH-002-tripsteward-federated-architecture.md` (TripSteward federated cross-site booking architecture)
   - `knowledge/development/DEV-001-runtime-and-site-actions.md` (In-browser runtime & Otari BYOK)
   - `knowledge/development/DEV-002-vm-production-deployment.md` (Production VM deployment & reverse proxy architecture)
+  - `knowledge/development/DEV-003-agent-authoring-and-onboarding-guide.md` (Agent authoring & dynamic onboarding standards)
 
 **MANDATORY STEP 2: Post-Change Knowledge Synchronization**
 - When modifying code or configuration, immediately update the relevant knowledge units in `knowledge/`.
@@ -37,7 +38,7 @@ This repository implements **TripSteward: Autonomous Federated Travel, Hotel & C
 
 ## 🛠️ Verification & Run Commands
 ```bash
-npm test               # Run 64-point Open Agentic Web conformance test
+npm test               # Run 69-point Open Agentic Web conformance test
 npm start              # Boot all 3 nodes (8080, 8081, 8082) concurrently
 npm run serve:hub      # Boot TripSteward Hub (8080)
 npm run serve:rides    # Boot CityGlide Node (8081)

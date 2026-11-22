@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-knowledge_units_count: 5
+knowledge_units_count: 6
 last_updated: "2026-11-22"
 
 domains:
@@ -26,4 +26,8 @@ domains:
     - id: DEV-002
       title: "Production VM Deployment & Reverse Proxy Architecture"
       path: "development/DEV-002-vm-production-deployment.md"
+      status: "APPROVED"
+    - id: DEV-003
+      title: "Agent Authoring, Dynamic Discovery & Onboarding Standards"
+      path: "development/DEV-003-agent-authoring-and-onboarding-guide.md"
       status: "APPROVED"

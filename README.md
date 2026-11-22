@@ -226,5 +226,12 @@ Test Summary: 69 passed, 0 failed.
 
 ---
 
+## 📚 Guides & Documentation
+
+- **[How to Add an Agent (Developer & User Guide)](docs/HOW_TO_ADD_AN_AGENT.md)**: Complete guide covering runtime no-code agent discovery and step-by-step developer authoring for new Agentic Web nodes.
+- **[Central Knowledge Base](knowledge/index.yaml)**: Approved architectural (`ARCH-*`), product (`PROD-*`), and development (`DEV-*`) standards.
+
+---
+
 ## 📜 License
 Apache-2.0 License. Open source for the Open Agentic Web community.
