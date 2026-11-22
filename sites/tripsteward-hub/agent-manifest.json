@@ -95,7 +95,9 @@
       "reserve_hotel_room",
       "compile_master_itinerary",
       "book_airport_transfer",
-      "book_city_experience"
+      "book_city_experience",
+      "discover_agent_nodes",
+      "register_agent_node"
     ]
   }
 }

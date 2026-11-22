@@ -6,16 +6,18 @@ type: "architecture"
 title: "TripSteward Autonomous Federated Travel & Cross-Site Booking Architecture"
 domain: "architecture"
 status: "APPROVED"
-version: "1.0.0"
+version: "1.1.0"
 ---
 
 ## Rule
-TripSteward implements an autonomous, cross-site federated booking and travel concierge architecture adhering to the Open Agentic Web MVP Profile 0.3 specification:
+TripSteward implements an autonomous, cross-site federated booking and travel orchestrator architecture adhering to the Open Agentic Web MVP Profile 0.3 specification:
 
-1. **Top-Level Concierge Hub (`tripsteward-hub`)**:
-   - Operates as the traveler's sovereign intake and trip preference vault.
-   - Hosts the `tripsteward_concierge` (Chief Travel Concierge Agent `travel_concierge`) coordinating boutique hotel holds, flight-synchronized airport chauffeur transfers, and city activity ticketing.
+1. **Top-Level Orchestrator Hub (`tripsteward-hub`)**:
+   - Operates as the traveler's sovereign intake, trip canvas, and dynamic multi-agent orchestrator running 100% in-browser.
+   - Hosts the `tripsteward_concierge` (Chief Travel Orchestrator Agent `travel_concierge`) coordinating boutique hotel holds, flight-synchronized airport chauffeur transfers, and city activity ticketing.
+   - Dynamic On-the-Fly Agent Discovery & Mounting: Exposes `website_discover_agent_nodes` (searchable directory across dining, adventures, baggage logistics, insurance) and `website_register_agent_node` to mount arbitrary third-party Agentic Web nodes on the fly.
    - Resolves peer specialist networks dynamically via `links.json` (`cityglide` and `metropass`) with interactive human consent approval (`onConsent`).
+   - Replaced static preloaded records with a dynamic Journey Canvas where travelers configure custom destinations, dates, flight tracking telemetry, and budget goals.
    - Synthesizes all confirmed bookings into a single, unified Master Digital Travel Pass with itemized provider savings.
 2. **CityGlide Autonomous Fleet Node (`cityglide-node`)**:
    - Standalone static agentic website publishing `agent-manifest.json` and `cityglide_transfer.network.json`.

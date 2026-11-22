@@ -199,6 +199,25 @@ async function testActions() {
   assert(masterRes.ok === true && masterRes.status === "COMMITTED_TO_CLIENT_SESSION", "TripSteward compiles and seals master itinerary");
   assert(masterRes.itinerary_id.startsWith("ITIN-"), "TripSteward generates sealed itinerary ID");
 
+  // Dynamic Agent Discovery & Orchestrator Mounting tests
+  const discoverTool = HubActions.discoverAgentNodesAction();
+  const diningSearch = await discoverTool.execute({ query: "dining" });
+  assert(diningSearch.ok === true && diningSearch.count >= 1, "TripSteward discovers specialist agents by query");
+  assert(diningSearch.results.some(r => r.id === "tablebespoke"), "TripSteward finds TableBespoke Dining node");
+
+  const adventureSearch = await discoverTool.execute({ category: "Adventures" });
+  assert(adventureSearch.ok === true && adventureSearch.results.some(r => r.id === "alpinetrail"), "TripSteward discovers agents by capability category");
+
+  const registerTool = HubActions.registerAgentNodeAction();
+  const registerRes = await registerTool.execute({
+    node_url: "https://example.com/agents/custom-guide",
+    name: "SummitPeak Trail Guides",
+    category: "Mountain Guiding",
+    front_man: "mountain_ranger"
+  });
+  assert(registerRes.ok === true && registerRes.agent.id === "custom-summitpeak-trail-guides", "TripSteward registers dynamic agent node on the fly");
+  assert(registerRes.total_registered_agents >= 3, "TripSteward updates federated swarm count dynamically");
+
   console.log("\n========================================================");
   console.log(`Test Summary: ${passed} passed, ${failed} failed.`);
   console.log("========================================================\n");

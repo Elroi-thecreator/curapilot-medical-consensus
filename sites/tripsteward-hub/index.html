@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voyager — Autonomous Travel, Hotel & City Mobility Concierge</title>
+  <title>Voyager — Federated Open Agentic Web Orchestrator</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="runtime/theme.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,13 +13,13 @@
   <script type="module" src="site.js"></script>
 </head>
 <body>
-  <!-- Modern Consumer App Header (Airbnb / Linear style) -->
+  <!-- Modern Consumer App Header (Airbnb / Linear Style) -->
   <header class="app-header">
     <div class="header-left">
       <div class="brand-logo">
         <span class="logo-spark">✦</span>
         <span class="logo-name">Voyager</span>
-        <span class="logo-sub">Traveler</span>
+        <span class="logo-sub">Orchestrator</span>
       </div>
       <div class="network-badge">
         <span class="pulse-dot"></span>
@@ -27,44 +27,38 @@
       </div>
     </div>
 
-    <!-- Quick Journey Destination Switcher -->
-    <div class="destination-tabs">
-      <button class="dest-tab active" data-trip="trip-1">
-        <span class="tab-emoji">🌉</span>
-        <span class="tab-name">San Francisco</span>
+    <!-- Orchestrator Quick Actions Bar -->
+    <div class="orchestrator-actions-bar">
+      <button id="open-discover-agents-btn" class="nav-pill-btn" title="Search Open Agentic Web Registry for specialist agents">
+        <span class="tab-emoji">🔍</span>
+        <span class="tab-name">Discover Agents</span>
       </button>
-      <button class="dest-tab" data-trip="trip-2">
-        <span class="tab-emoji">🌲</span>
-        <span class="tab-name">Seattle</span>
-      </button>
-      <button class="dest-tab" data-trip="trip-3">
-        <span class="tab-emoji">🎸</span>
-        <span class="tab-name">Austin</span>
-      </button>
-      <button id="custom-trip-btn" class="dest-tab custom-tab" title="Create a custom trip">
+      <button id="open-custom-agent-btn" class="nav-pill-btn" title="Mount external agentic node on the fly by URL">
         <span class="tab-emoji">➕</span>
-        <span class="tab-name">Custom Trip</span>
+        <span class="tab-name">Add Agent URL</span>
+      </button>
+      <button id="edit-journey-btn" class="nav-pill-btn" title="Customize active journey destination & requirements">
+        <span class="tab-emoji">📍</span>
+        <span class="tab-name">Plan Journey</span>
       </button>
     </div>
 
     <!-- Hidden compatibility select for automated test suites -->
     <select id="trip-selector" style="display: none;">
-      <option value="trip-1" selected>San Francisco</option>
-      <option value="trip-2">Seattle</option>
-      <option value="trip-3">Austin</option>
+      <option value="active-journey" selected>Active Journey</option>
     </select>
 
     <div class="header-right">
       <button id="demo-simulate-btn" class="btn-primary-action">
         <span class="btn-icon">⚡</span>
-        <span>Auto-Book Entire Journey</span>
+        <span>Orchestrate Full Journey</span>
       </button>
     </div>
   </header>
 
   <!-- Interactive Search / Journey Capsule Bar (Airbnb Style) -->
   <div class="search-capsule-wrapper">
-    <div class="search-capsule">
+    <div class="search-capsule" id="capsule-clickable" title="Click to customize journey parameters">
       <div class="capsule-segment">
         <span class="segment-label">Destination</span>
         <span id="capsule-dest" class="segment-val">San Francisco, CA</span>
@@ -81,7 +75,7 @@
       </div>
       <div class="capsule-divider"></div>
       <div class="capsule-segment">
-        <span class="segment-label">Travelers & Budget</span>
+        <span class="segment-label">Travelers &amp; Budget</span>
         <span id="capsule-travelers" class="segment-val">2 Guests • &lt;$250/nt</span>
       </div>
       <button id="demo-prefill-btn" class="capsule-cta" title="Copy agent prompt to clipboard">
@@ -91,13 +85,32 @@
     </div>
   </div>
 
+  <!-- Connected Agent Swarm Bar (Dynamic On-the-Fly Agent Roster) -->
+  <div class="swarm-bar-wrapper">
+    <div class="swarm-bar">
+      <div class="swarm-bar-header">
+        <div class="swarm-title">
+          <span class="swarm-icon">🌐</span>
+          <strong>Federated Agent Swarm</strong>
+          <span id="swarm-count-pill" class="swarm-count-pill">2 External Nodes Connected</span>
+        </div>
+        <div class="swarm-actions">
+          <button id="quick-add-agent-btn" class="btn-swarm-add"><span>+ Connect Specialist Agent</span></button>
+        </div>
+      </div>
+      <div id="active-agents-list" class="swarm-chips-row">
+        <!-- Rendered dynamically by TripStewardApp -->
+      </div>
+    </div>
+  </div>
+
   <!-- Main Consumer Experience Container -->
   <main class="consumer-viewport">
     <!-- Left Column (62%): Interactive Direct Provider Booking Cards -->
     <section class="itinerary-feed">
       <div class="feed-header">
         <div class="feed-title-group">
-          <h1 id="active-trip-title">Boutique Coastal Getaway & Sunset Sailing</h1>
+          <h1 id="active-trip-title">Boutique Coastal Getaway &amp; Sunset Sailing</h1>
           <p id="active-trip-destination" class="feed-sub">Destination: San Francisco, CA • Dates: Nov 27 – Nov 29 • Flight: UA 482</p>
         </div>
         <div id="bookings-count-badge" class="badge-saved">3 Direct Providers Linked</div>
@@ -264,7 +277,10 @@
         </div>
       </article>
 
-      <!-- Confirmed Bookings Container (Hidden by default, holds action receipts) -->
+      <!-- Dynamic Extra Provider Cards (Appears when external nodes like TableBespoke / TravelShield are added on the fly) -->
+      <div id="dynamic-provider-cards-container"></div>
+
+      <!-- Hidden compatibility elements for test runner assertions -->
       <div id="confirmed-bookings-container" style="display: none;"></div>
       <div id="preferences-list" style="display: none;"></div>
       <div id="active-trip-traveler" style="display: none;"></div>
@@ -300,6 +316,7 @@
             <span class="receipt-name">⛵ MetroPass Sunset Sail (2x Passes)</span>
             <span class="receipt-price" id="receipt-exp">$100.00</span>
           </div>
+          <div id="receipt-extra-items"></div>
           <div class="receipt-divider"></div>
           <div class="receipt-row total-row">
             <span class="total-label">Direct Provider Total</span>
@@ -331,7 +348,7 @@
           <div class="chat-agent-info">
             <span class="agent-avatar">🛎️</span>
             <div>
-              <div class="agent-name">Travel Concierge</div>
+              <div class="agent-name">Travel Orchestrator</div>
               <div class="agent-status-line">100% In-Browser • Mozilla Otari BYOK</div>
             </div>
           </div>
@@ -343,7 +360,7 @@
 
         <!-- Quick Prompt Chips -->
         <div class="chat-chips-row">
-          <button class="prompt-chip" onclick="TripStewardApp.vault.runDemoSimulation()">✦ Auto-Book All 3 Sites</button>
+          <button class="prompt-chip" onclick="TripStewardApp.vault.runDemoSimulation()">✦ Orchestrate All Connected Agents</button>
           <button class="prompt-chip" onclick="TripStewardApp.quickHoldHotel()">🏨 Hold Bay-View Room</button>
           <button class="prompt-chip" onclick="TripStewardApp.quickBookTransfer()">🚗 Schedule SFO Pickup</button>
           <button class="prompt-chip" onclick="TripStewardApp.quickBookExperience()">⛵ Book Sunset Sail</button>
@@ -352,51 +369,107 @@
     </aside>
   </main>
 
-  <!-- Custom Trip Modal -->
-  <dialog id="custom-trip-modal" class="custom-modal">
+  <!-- MODAL 1: Discover Specialist Agents Registry -->
+  <dialog id="discover-agents-modal" class="custom-modal wide-modal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>Create Custom Trip Inquiry</h3>
-        <button id="close-modal-btn" class="close-btn">&times;</button>
+        <div>
+          <h3>🔍 Open Agentic Web Discovery Directory</h3>
+          <p class="modal-sub">Search decentralized agent nodes and mount them to your orchestrator on the fly.</p>
+        </div>
+        <button id="close-discover-modal-btn" class="close-btn">&times;</button>
       </div>
-      <form id="custom-trip-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Trip Reference Code</label>
-            <input type="text" id="cust-code" value="TRIP #TS-9901" required>
-          </div>
-          <div class="form-group">
-            <label>Lead Traveler Name</label>
-            <input type="text" id="cust-traveler" value="Jordan Hayes" required>
-          </div>
+      <div class="modal-search-row">
+        <input type="text" id="agent-search-input" placeholder="Search capabilities (e.g. dining, ski, luggage, insurance, guide)...">
+        <select id="agent-category-filter" class="select-field">
+          <option value="all">All Domains</option>
+          <option value="Dining">Dining &amp; Culinary</option>
+          <option value="Adventures">Adventures &amp; Expeditions</option>
+          <option value="Logistics">Baggage &amp; Logistics</option>
+          <option value="Insurance">Travel Insurance</option>
+        </select>
+      </div>
+      <div id="discover-agents-results" class="discover-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL 2: Add Custom Agentic Node by URL -->
+  <dialog id="custom-agent-modal" class="custom-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>➕ Mount Custom Agentic Node URL</h3>
+          <p class="modal-sub">Link any conforming Agentic Web node (MVP Profile 0.3) into the active orchestrator.</p>
+        </div>
+        <button id="close-custom-agent-modal-btn" class="close-btn">&times;</button>
+      </div>
+      <form id="custom-agent-form">
+        <div class="form-group">
+          <label>Agentic Web Network / Manifest URL</label>
+          <input type="url" id="node-custom-url" placeholder="https://example.com/agent-manifest.json or /network" required>
         </div>
         <div class="form-row">
           <div class="form-group">
+            <label>Brand / Node Name</label>
+            <input type="text" id="node-custom-name" placeholder="e.g. AlpineSki Guides Node" required>
+          </div>
+          <div class="form-group">
+            <label>Front-Man Agent Name</label>
+            <input type="text" id="node-custom-front" placeholder="e.g. ski_curator" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Domain Capability</label>
+          <input type="text" id="node-custom-cat" placeholder="e.g. Winter Sports / Ski Passes" required>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="cancel-custom-agent-btn" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Mount Node to Orchestrator</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- MODAL 3: Plan / Edit Journey Parameters -->
+  <dialog id="edit-journey-modal" class="custom-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3>📍 Plan Journey Requirements</h3>
+          <p class="modal-sub">Define traveler preferences to ground your orchestrator's agent search.</p>
+        </div>
+        <button id="close-journey-modal-btn" class="close-btn">&times;</button>
+      </div>
+      <form id="edit-journey-form">
+        <div class="form-row">
+          <div class="form-group">
             <label>Destination City</label>
-            <input type="text" id="cust-destination" value="San Francisco, CA" required>
+            <input type="text" id="edit-dest" value="San Francisco, CA" required>
           </div>
           <div class="form-group">
             <label>Travel Dates</label>
-            <input type="text" id="cust-dates" value="Dec 18 – Dec 20, 2026 (2 Nights)" required>
+            <input type="text" id="edit-dates" value="Nov 27 – Nov 29, 2026 (2 Nights)" required>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label>Flight Details (Landing Telemetry)</label>
-            <input type="text" id="cust-flight" value="Flight SFO-204 • Friday 3:15 PM" required>
+            <input type="text" id="edit-flight" value="United Airlines UA 482 • SFO Arrival: Friday 4:30 PM" required>
           </div>
           <div class="form-group">
             <label>Target Budget (USD)</label>
-            <input type="number" id="cust-budget" value="650" required>
+            <input type="number" id="edit-budget" value="600" required>
           </div>
         </div>
         <div class="form-group">
-          <label>Special Requests</label>
-          <input type="text" id="cust-notes" value="Quiet room with waterfront view, airport EV pickup, outdoor excursion.">
+          <label>Traveler Goals &amp; Specific Requests</label>
+          <input type="text" id="edit-notes" value="Boutique waterfront hotel, flight-buffered EV airport pickup, scenic sunset catamaran sail.">
         </div>
         <div class="modal-actions">
-          <button type="button" id="cancel-modal-btn" class="btn-secondary">Cancel</button>
-          <button type="submit" class="btn-primary">Create Trip &amp; Mount to Agent</button>
+          <button type="button" id="cancel-journey-btn" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Update Journey Canvas</button>
         </div>
       </form>
     </div>

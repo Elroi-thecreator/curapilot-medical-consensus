@@ -31,11 +31,12 @@ Meanwhile, traditional online travel agencies (OTAs like Expedia, Booking, Viato
 
 ## ✈️ The TripSteward Solution
 
-TripSteward federates three independent agentic web properties into a decentralized, zero-middleman booking collective:
+TripSteward operates as an in-browser **Federated Travel Orchestrator** that federates independent agentic web properties into a decentralized, zero-middleman booking collective with on-the-fly dynamic agent discovery:
 
-1. **HarborView Hotel & TripSteward Concierge Hub (`tripsteward-hub` • Port 8080 • `/tripsteward/`):**
-   - Stores the traveler's active profile, dates, and budget strictly in sovereign client browser memory.
-   - Hosts the **Chief Travel Concierge Agent** (`travel_concierge`), which inspects hotel inventory, reserves boutique rooms (`website_reserve_hotel_room`), and dynamically negotiates with peer specialist nodes.
+1. **HarborView Hotel & TripSteward Orchestrator Hub (`tripsteward-hub` • Port 8080 • `/tripsteward/`):**
+   - Stores traveler preferences, telemetry, and budget strictly in sovereign client browser memory—with zero hardcoded static trips.
+   - Hosts the **Chief Travel Orchestrator Agent** (`travel_concierge`), which inspects hotel inventory, holds boutique rooms (`website_reserve_hotel_room`), and dynamically negotiates with peer specialist nodes.
+   - **Dynamic On-the-Fly Agent Discovery & Swarm Expansion**: Discovers new specialist nodes across dining, adventures, baggage couriers, and insurance via `website_discover_agent_nodes`, or mounts any external conforming agent node URL on the fly via `website_register_agent_node`.
 2. **CityGlide Autonomous Fleet & Transfers Node (`cityglide-node` • Port 8081 • `/rides/`):**
    - Independent ground transport authority.
    - Evaluates incoming flight numbers (e.g. `UA 482`), automatically computes a **30-minute baggage collection buffer**, and dispatches executive EV chauffeurs (`website_schedule_airport_transfer`) at direct provider rates ($68 vs $95 on aggregators).
@@ -43,7 +44,7 @@ TripSteward federates three independent agentic web properties into a decentrali
    - Independent cultural activity authority.
    - Discovers verified local activities (`website_search_experiences`), reserves VIP admission, and issues scannable mobile QR passes (`website_book_experience_pass`) with 0% reseller fees.
 4. **Master Digital Travel Pass Synthesis:**
-   - Compiles all 3 confirmed reservations into a single, cohesive master pass (`website_compile_master_itinerary`) with verified itemized savings (**$142.00 saved** on direct provider rates).
+   - Compiles all confirmed provider reservations into a single, cohesive master pass (`website_compile_master_itinerary`) with verified itemized savings (**$142.00 saved** on direct provider rates).
 5. **100% In-Browser Execution & BYOK Inference:**
    - Powered by **Mozilla Otari** (`alibaba/qwen3.8-flash`) or visitor-supplied keys.
    - **Website hosts pay $0 for inference**, and customer travel plans never touch any backend server.
@@ -142,12 +143,13 @@ This boots all three independent agentic web nodes concurrently:
 
 ---
 
-## 🧪 Automated Conformance Test Suite (64 Checks)
+## 🧪 Automated Conformance Test Suite (69 Checks)
 
 The automated validator at `tests/conformance_test.mjs` verifies the complete Open Agentic Web specification:
 - **Agent Manifests (`agent-manifest.json`)**: Validates `networks`, `front_man`, `llm_router.base_url`, `agentTools`, and `bridge/action-bridge.html` across all 3 nodes.
 - **Declarative JSON Graphs (`*.network.json`)**: Validates grounded instructions, parameter schemas, and tool arrays.
 - **Peer Link Resolution (`links.json`)**: Verifies dynamic link resolution from `tripsteward-hub` to `cityglide` and `metropass`.
+- **Dynamic Agent Discovery & Swarm Registration**: Verifies on-the-fly agent catalog discovery (`website_discover_agent_nodes`) and dynamic URL mounting (`website_register_agent_node`).
 - **Site Actions Execution**:
   - `quote_transfer_service`: Flight landing delay calculation (+30 mins) and multi-tier vehicle quoting.
   - `schedule_airport_transfer`: Direct chauffeur dispatch with driver assignment and transfer ID generation.
@@ -199,9 +201,14 @@ $ npm test
   ✅ PASS: TripSteward registers experience voucher reference ID
   ✅ PASS: TripSteward compiles and seals master itinerary
   ✅ PASS: TripSteward generates sealed itinerary ID
+  ✅ PASS: TripSteward discovers specialist agents by query
+  ✅ PASS: TripSteward finds TableBespoke Dining node
+  ✅ PASS: TripSteward discovers agents by capability category
+  ✅ PASS: TripSteward registers dynamic agent node on the fly
+  ✅ PASS: TripSteward updates federated swarm count dynamically
 
 ========================================================
-Test Summary: 64 passed, 0 failed.
+Test Summary: 69 passed, 0 failed.
 ========================================================
 ```
 

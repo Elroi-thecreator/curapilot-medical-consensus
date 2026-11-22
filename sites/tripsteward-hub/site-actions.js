@@ -1,5 +1,6 @@
 // HarborView Hotel & TripSteward Site Actions
-// Exposes travel preferences, room booking, partner coordination, and master itinerary synthesis.
+// Exposes travel preferences, room booking, partner coordination, master itinerary synthesis,
+// and dynamic Open Agentic Web node discovery & registration.
 import { TripStewardApp } from "./script.js";
 
 export class SiteActions {
@@ -9,6 +10,8 @@ export class SiteActions {
     actions.register(SiteActions.bookAirportTransferAction());
     actions.register(SiteActions.bookCityExperienceAction());
     actions.register(SiteActions.compileMasterItineraryAction());
+    actions.register(SiteActions.discoverAgentNodesAction());
+    actions.register(SiteActions.registerAgentNodeAction());
   }
 
   static getTripPreferencesAction() {
@@ -186,6 +189,65 @@ export class SiteActions {
       },
       execute: async (args) => {
         return TripStewardApp.vault.compileMasterItinerary(args);
+      }
+    };
+  }
+
+  static discoverAgentNodesAction() {
+    return {
+      name: "discover_agent_nodes",
+      description: "Search the decentralized Open Agentic Web registry for available specialist nodes (mobility, dining, ski/adventures, baggage courier, travel insurance) matching traveler goals.",
+      effect: "read",
+      inputSchema: {
+        type: "object",
+        properties: {
+          query: {
+            type: "string",
+            description: "Keyword or capability to search (e.g. 'dining', 'ski', 'luggage', 'insurance', 'mobility')."
+          },
+          category: {
+            type: "string",
+            description: "Category filter (e.g. 'Dining', 'Adventures', 'Logistics', 'Insurance', 'Mobility')."
+          }
+        },
+        additionalProperties: false
+      },
+      execute: async (args) => {
+        return TripStewardApp.vault.searchAgents(args);
+      }
+    };
+  }
+
+  static registerAgentNodeAction() {
+    return {
+      name: "register_agent_node",
+      description: "Dynamically mount and link an external agentic web node into the active orchestrator graph on the fly.",
+      effect: "irreversible",
+      inputSchema: {
+        type: "object",
+        properties: {
+          node_url: {
+            type: "string",
+            description: "Endpoint URL of the conforming agent network (e.g. 'https://pnrs.is-a.dev/dining/tablebespoke_concierge')."
+          },
+          name: {
+            type: "string",
+            description: "Display brand name of the agent node."
+          },
+          front_man: {
+            type: "string",
+            description: "Front-man agent identifier declared in the node manifest."
+          },
+          category: {
+            type: "string",
+            description: "Domain capability of the agent."
+          }
+        },
+        required: ["node_url"],
+        additionalProperties: false
+      },
+      execute: async (args) => {
+        return TripStewardApp.vault.addAgentOnTheFly(args);
       }
     };
   }
