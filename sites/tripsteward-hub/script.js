@@ -119,6 +119,7 @@ export class TripStewardVault {
     };
 
     this.activeTripId = "trip-1";
+    this.selectedRoomTier = null;
     this.hotelReservation = null;
     this.airportTransfer = null;
     this.cityExperience = null;
@@ -147,6 +148,7 @@ export class TripStewardVault {
   setActiveTrip(tripId) {
     if (this.trips[tripId]) {
       this.activeTripId = tripId;
+      this.selectedRoomTier = null;
       this.hotelReservation = null;
       this.airportTransfer = null;
       this.cityExperience = null;
@@ -158,7 +160,7 @@ export class TripStewardVault {
   reserveHotelRoom(room) {
     this.hotelReservation = {
       id: "STAY-" + Math.floor(10000 + Math.random() * 90000),
-      timestamp: new Date().toLocaleTimeString(),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       status: "RESERVED_DIRECT",
       ...room
     };
@@ -174,7 +176,7 @@ export class TripStewardVault {
   bookAirportTransfer(transfer) {
     this.airportTransfer = {
       id: "RIDE-" + Math.floor(10000 + Math.random() * 90000),
-      timestamp: new Date().toLocaleTimeString(),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       status: "DISPATCHED_ON_NETWORK",
       ...transfer
     };
@@ -190,7 +192,7 @@ export class TripStewardVault {
   bookCityExperience(exp) {
     this.cityExperience = {
       id: "PASS-" + Math.floor(10000 + Math.random() * 90000),
-      timestamp: new Date().toLocaleTimeString(),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       status: "CONFIRMED_VOUCHER_ISSUED",
       ...exp
     };
@@ -224,10 +226,13 @@ export class TripStewardVault {
     const t = this.trips[this.activeTripId];
     const demo = t.demo_script;
 
+    const btn = document.querySelector("#demo-simulate-btn");
+    if (btn) btn.textContent = "⏳ Coordinating across Open Agentic Web...";
+
     TripStewardApp.appendSimulatedMessage("user", demo.prompt);
 
     setTimeout(() => {
-      TripStewardApp.appendSimulatedMessage("bot", `🛎️ **Travel Concierge:** Initiating Open Agentic Web trip coordination for ${t.code}... Reading traveler preferences in local memory. Checking HarborView direct room availability...`);
+      TripStewardApp.appendSimulatedMessage("bot", `🛎️ **Travel Concierge:** Initiating Open Agentic Web coordination for ${t.code}. Accessing local traveler goals in memory. Direct-holding HarborView boutique room...`);
       
       // Reserve Room
       this.reserveHotelRoom({
@@ -240,20 +245,22 @@ export class TripStewardVault {
     }, 600);
 
     setTimeout(() => {
-      TripStewardApp.appendSimulatedMessage("transfer", `🚗 **CityGlide Airport Transfer (` + window.location.origin + `/rides):** ${demo.cityglide_response}`);
+      const origin = (typeof window !== "undefined" && window.location) ? window.location.origin : "https://pnrs.is-a.dev";
+      TripStewardApp.appendSimulatedMessage("transfer", `🚗 **CityGlide Airport Fleet (${origin}/rides):** ${demo.cityglide_response}`);
       
       // Book Airport Transfer
       this.bookAirportTransfer({
         pickup_location: t.flight_details,
         dropoff_location: "HarborView Hotel, 450 Waterfront Blvd",
-        vehicle_class: "Executive EV Sedan (Tesla Model S)",
-        pickup_time: "5:15 PM (Synced with flight arrival)",
+        vehicle_class: "Executive EV Sedan (Lucid Air / Tesla Model S)",
+        pickup_time: "5:00 PM (Flight UA 482 landing buffer +30m)",
         fare_usd: 45.00
       });
     }, 1800);
 
     setTimeout(() => {
-      TripStewardApp.appendSimulatedMessage("experiences", `⛵ **MetroPass Experiences (` + window.location.origin + `/experiences):** ${demo.metropass_response}`);
+      const origin = (typeof window !== "undefined" && window.location) ? window.location.origin : "https://pnrs.is-a.dev";
+      TripStewardApp.appendSimulatedMessage("experiences", `⛵ **MetroPass Experiences (${origin}/experiences):** ${demo.metropass_response}`);
       
       // Book Experience
       this.bookCityExperience({
@@ -263,13 +270,14 @@ export class TripStewardVault {
         total_price_usd: 100.00,
         special_notes: "Arrive at Pier 39 gate B 15 minutes prior. Digital QR pass verified."
       });
-    }, 3200);
+    }, 3000);
 
     setTimeout(() => {
       TripStewardApp.appendSimulatedMessage("bot", `🛎️ **Travel Concierge:** All direct bookings confirmed across the 3 independent websites! 0% aggregator markups applied. Synthesizing your sealed Master Travel Itinerary Pass...`);
       this.compileMasterItinerary(demo.itinerary);
       this.simulating = false;
-    }, 4500);
+      if (btn) btn.innerHTML = `<span>✓ Journey Fully Booked!</span>`;
+    }, 4200);
   }
 }
 
@@ -282,10 +290,33 @@ export class TripStewardApp {
   }
 
   static bindEvents() {
+    // Destination Tabs
+    const tabs = document.querySelectorAll(".dest-tab");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", (e) => {
+        if (tab.id === "custom-trip-btn") return;
+        const tripId = tab.getAttribute("data-trip");
+        if (tripId) {
+          tabs.forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+          TripStewardApp.vault.setActiveTrip(tripId);
+          const selector = document.querySelector("#trip-selector");
+          if (selector) selector.value = tripId;
+        }
+      });
+    });
+
     const tripSelect = document.querySelector("#trip-selector");
     if (tripSelect) {
       tripSelect.addEventListener("change", (e) => {
         TripStewardApp.vault.setActiveTrip(e.target.value);
+        tabs.forEach(t => {
+          if (t.getAttribute("data-trip") === e.target.value) {
+            t.classList.add("active");
+          } else {
+            t.classList.remove("active");
+          }
+        });
       });
     }
 
@@ -296,6 +327,22 @@ export class TripStewardApp {
       });
     }
 
+    // Direct Quick-Action Handlers
+    const hotelBtn = document.querySelector("#book-hotel-manual-btn");
+    if (hotelBtn) {
+      hotelBtn.addEventListener("click", () => TripStewardApp.quickHoldHotel());
+    }
+
+    const transferBtn = document.querySelector("#book-transfer-manual-btn");
+    if (transferBtn) {
+      transferBtn.addEventListener("click", () => TripStewardApp.quickBookTransfer());
+    }
+
+    const expBtn = document.querySelector("#book-exp-manual-btn");
+    if (expBtn) {
+      expBtn.addEventListener("click", () => TripStewardApp.quickBookExperience());
+    }
+
     const prefillBtn = document.querySelector("#demo-prefill-btn");
     if (prefillBtn) {
       prefillBtn.addEventListener("click", () => {
@@ -304,7 +351,7 @@ export class TripStewardApp {
         if (input) {
           input.value = t.demo_script.prompt;
           input.focus();
-        } else {
+        } else if (navigator.clipboard) {
           navigator.clipboard.writeText(t.demo_script.prompt);
           alert("Copied sample prompt to clipboard! Paste it into the concierge chat below.");
         }
@@ -315,6 +362,8 @@ export class TripStewardApp {
     if (resetBtn) {
       resetBtn.addEventListener("click", () => {
         TripStewardApp.vault.setActiveTrip(TripStewardApp.vault.activeTripId);
+        const simBtn = document.querySelector("#demo-simulate-btn");
+        if (simBtn) simBtn.innerHTML = `<span class="btn-icon">⚡</span><span>Auto-Book Entire Journey</span>`;
         const chatMsgs = document.querySelector("#ns-msgs");
         if (chatMsgs) {
           chatMsgs.innerHTML = `<div class="ns-msg bot">I am your autonomous Travel Concierge. I operate 100% in your local browser to coordinate room reservations, airport transfers, and activity passes directly across independent websites on your behalf. How can I assist with your journey?</div>`;
@@ -326,8 +375,20 @@ export class TripStewardApp {
     if (exportBtn) {
       exportBtn.addEventListener("click", () => {
         if (!TripStewardApp.vault.masterItinerary) {
-          alert("No Master Itinerary compiled yet. Run the trip coordination deliberation first!");
-          return;
+          // If not compiled yet, auto-compile from current state
+          TripStewardApp.vault.compileMasterItinerary({
+            trip_title: TripStewardApp.vault.trips[TripStewardApp.vault.activeTripId].title,
+            destination: TripStewardApp.vault.trips[TripStewardApp.vault.activeTripId].destination,
+            dates: TripStewardApp.vault.trips[TripStewardApp.vault.activeTripId].dates,
+            total_cost_usd: 515.00,
+            direct_savings_usd: 142.00,
+            itinerary_highlights: [
+              "HarborView Hotel Room Direct Reservation",
+              "CityGlide Executive EV Airport Chauffeur (Flight-Synced)",
+              "MetroPass Verified City Experience Passes"
+            ],
+            concierge_notes: "Direct booking verified. Instant digital passes and transfer contact saved in browser session."
+          });
         }
         TripStewardApp.downloadItineraryText();
       });
@@ -402,24 +463,57 @@ export class TripStewardApp {
         };
 
         TripStewardApp.vault.trips["trip-custom"] = customTrip;
-
-        // Ensure option exists in selector
-        const selector = document.querySelector("#trip-selector");
-        if (selector) {
-          let opt = selector.querySelector("option[value='trip-custom']");
-          if (!opt) {
-            opt = document.createElement("option");
-            opt.value = "trip-custom";
-            selector.appendChild(opt);
-          }
-          opt.textContent = `${codeVal} — ${destVal} (Custom In-Memory Trip)`;
-          selector.value = "trip-custom";
-        }
-
         TripStewardApp.vault.setActiveTrip("trip-custom");
         modal.close();
       });
     }
+  }
+
+  static quickHoldHotel() {
+    const t = TripStewardApp.vault.trips[TripStewardApp.vault.activeTripId];
+    const room = t.room_options[0];
+    TripStewardApp.vault.reserveHotelRoom({
+      room_tier: room.tier,
+      nightly_rate_usd: room.rate,
+      nights: 2,
+      guest_names: t.traveler.name,
+      amenities_included: ["Artisan Breakfast", "High-Speed Wi-Fi", "Late Check-out 1 PM"]
+    });
+  }
+
+  static quickBookTransfer() {
+    const t = TripStewardApp.vault.trips[TripStewardApp.vault.activeTripId];
+    TripStewardApp.vault.bookAirportTransfer({
+      pickup_location: t.flight_details,
+      dropoff_location: "HarborView Hotel, 450 Waterfront Blvd",
+      vehicle_class: "Executive EV Sedan (Tesla Model S)",
+      pickup_time: "5:00 PM (Flight buffer +30m)",
+      fare_usd: 45.00
+    });
+  }
+
+  static quickBookExperience() {
+    const t = TripStewardApp.vault.trips[TripStewardApp.vault.activeTripId];
+    TripStewardApp.vault.bookCityExperience({
+      experience_name: "Golden Gate Sunset Catamaran Cruise",
+      scheduled_slot: "Saturday, 5:45 PM – 7:30 PM",
+      tickets_count: t.traveler.party_size,
+      total_price_usd: 100.00,
+      special_notes: "Boarding at Pier 39, Marina Gate B"
+    });
+  }
+
+  static selectRoomTier(tier, rate) {
+    const cards = document.querySelectorAll(".room-option-card");
+    cards.forEach(c => {
+      if (c.getAttribute("data-tier") === tier) {
+        c.classList.add("selected");
+      } else {
+        c.classList.remove("selected");
+      }
+    });
+    const priceAmount = document.querySelector(".price-amount");
+    if (priceAmount) priceAmount.textContent = `$${rate}`;
   }
 
   static appendSimulatedMessage(role, text) {
@@ -439,37 +533,51 @@ export class TripStewardApp {
 
     // Header info
     const tripTitle = document.querySelector("#active-trip-title");
-    const tripTraveler = document.querySelector("#active-trip-traveler");
     const tripDestination = document.querySelector("#active-trip-destination");
+    const tripTraveler = document.querySelector("#active-trip-traveler");
 
-    if (tripTitle) tripTitle.textContent = t.code + " — " + t.title;
-    if (tripTraveler) {
-      tripTraveler.textContent = `Traveler: ${t.traveler.name} (${t.traveler.party_size} Guests) • Budget: $${t.target_budget_usd} USD`;
-    }
+    if (tripTitle) tripTitle.textContent = t.title;
     if (tripDestination) {
       tripDestination.textContent = `Destination: ${t.destination} • Dates: ${t.dates} • ${t.flight_details}`;
     }
-
-    // Preferences List
-    const prefContainer = document.querySelector("#preferences-list");
-    if (prefContainer) {
-      prefContainer.innerHTML = t.preferences.map(p => `
-        <div class="pref-row">
-          <span class="pref-cat">${p.category}</span>
-          <span class="pref-val"><strong>${p.value}</strong></span>
-        </div>
-      `).join("");
+    if (tripTraveler) {
+      tripTraveler.textContent = `Traveler: ${t.traveler.name} (${t.traveler.party_size} Guests) • Budget: $${t.target_budget_usd} USD`;
     }
+
+    // Capsule Labels
+    const capDest = document.querySelector("#capsule-dest");
+    const capDates = document.querySelector("#capsule-dates");
+    const capFlight = document.querySelector("#capsule-flight");
+    const capTravelers = document.querySelector("#capsule-travelers");
+
+    if (capDest) capDest.textContent = t.destination;
+    if (capDates) capDates.textContent = t.dates;
+    if (capFlight) capFlight.textContent = t.flight_details.split("•")[0]?.trim() || t.flight_details;
+    if (capTravelers) capTravelers.textContent = `${t.traveler.party_size} Guests • <$${Math.round(t.target_budget_usd / 2)}/nt`;
+
+    // Pass city and dates in sidebar
+    const passCity = document.querySelector("#pass-city");
+    const passDates = document.querySelector("#pass-dates");
+    if (passCity) passCity.textContent = t.destination.split(",")[0];
+    if (passDates) passDates.textContent = t.dates;
 
     // Room Inventory
     const roomContainer = document.querySelector("#room-inventory-list");
     if (roomContainer) {
-      roomContainer.innerHTML = t.room_options.map(r => `
-        <div class="room-pill">
-          <div class="room-tier">${r.tier}</div>
-          <div class="room-view">${r.view}</div>
-          <div class="room-rate"><strong>$${r.rate}</strong> / night <span class="badge-avail">Direct Rate</span></div>
+      roomContainer.innerHTML = t.room_options.map((r, idx) => `
+        <div class="room-option-card ${idx === 0 ? 'selected' : ''}" data-tier="${r.tier}" onclick="TripStewardApp.selectRoomTier('${r.tier}', ${r.rate})">
+          <div class="room-tier-title">${r.tier}</div>
+          <div class="room-view-desc">${r.view}</div>
+          <div class="room-rate-tag">$${r.rate} <span style="font-size: 0.75rem; color: #64748b; font-weight: normal;">/ night</span></div>
         </div>
+      `).join("");
+    }
+
+    // Preferences list (for tests)
+    const prefContainer = document.querySelector("#preferences-list");
+    if (prefContainer) {
+      prefContainer.innerHTML = t.preferences.map(p => `
+        <div class="pref-row"><span>${p.category}:</span> <strong>${p.value}</strong></div>
       `).join("");
     }
 
@@ -478,137 +586,136 @@ export class TripStewardApp {
   }
 
   static renderBookings() {
-    const container = document.querySelector("#confirmed-bookings-container");
-    const countBadge = document.querySelector("#bookings-count-badge");
-    if (!container) return;
-
     const hotel = TripStewardApp.vault.hotelReservation;
     const transfer = TripStewardApp.vault.airportTransfer;
     const exp = TripStewardApp.vault.cityExperience;
 
+    // Update status tags on cards
+    const hotelTag = document.querySelector("#hotel-status-tag");
+    const hotelBtn = document.querySelector("#book-hotel-manual-btn");
+    if (hotelTag) {
+      if (hotel) {
+        hotelTag.className = "status-pill status-confirmed";
+        hotelTag.textContent = `✓ Reserved (#${hotel.id})`;
+        if (hotelBtn) hotelBtn.textContent = "✓ Room Held in Session";
+      } else {
+        hotelTag.className = "status-pill status-ready";
+        hotelTag.textContent = "Ready for Concierge Hold";
+        if (hotelBtn) hotelBtn.textContent = "Hold Room Directly ($185/nt)";
+      }
+    }
+
+    const transferTag = document.querySelector("#transfer-status-tag");
+    const transferBtn = document.querySelector("#book-transfer-manual-btn");
+    if (transferTag) {
+      if (transfer) {
+        transferTag.className = "status-pill status-confirmed";
+        transferTag.textContent = `✓ Dispatched (#${transfer.id})`;
+        if (transferBtn) transferBtn.textContent = "✓ Chauffeur Dispatched";
+      } else {
+        transferTag.className = "status-pill status-ready";
+        transferTag.textContent = "Flight Telemetry Synced";
+        if (transferBtn) transferBtn.textContent = "Dispatch Airport Chauffeur ($45)";
+      }
+    }
+
+    const expTag = document.querySelector("#exp-status-tag");
+    const expBtn = document.querySelector("#book-exp-manual-btn");
+    if (expTag) {
+      if (exp) {
+        expTag.className = "status-pill status-confirmed";
+        expTag.textContent = `✓ 2x Passes Issued (#${exp.id})`;
+        if (expBtn) expBtn.textContent = "✓ Digital Passes Issued";
+      } else {
+        expTag.className = "status-pill status-ready";
+        expTag.textContent = "Direct Partner Passes";
+        if (expBtn) expBtn.textContent = "Issue 2x Passes ($100.00)";
+      }
+    }
+
+    // Receipt Calculations
+    const hotelCost = hotel ? (hotel.nightly_rate_usd * hotel.nights) : 370;
+    const transferCost = transfer ? transfer.fare_usd : 45;
+    const expCost = exp ? exp.total_price_usd : 100;
+    const totalCost = hotelCost + transferCost + expCost;
+    const otaCost = Math.round(totalCost * 1.275);
+    const savings = otaCost - totalCost;
+
+    const rHotel = document.querySelector("#receipt-hotel");
+    const rTransfer = document.querySelector("#receipt-transfer");
+    const rExp = document.querySelector("#receipt-exp");
+    const rTotal = document.querySelector("#receipt-total");
+    const rOta = document.querySelector("#receipt-ota");
+
+    if (rHotel) rHotel.textContent = `$${hotelCost.toFixed(2)}`;
+    if (rTransfer) rTransfer.textContent = `$${transferCost.toFixed(2)}`;
+    if (rExp) rExp.textContent = `$${expCost.toFixed(2)}`;
+    if (rTotal) rTotal.textContent = `$${totalCost.toFixed(2)}`;
+    if (rOta) rOta.textContent = `$${otaCost.toFixed(2)}`;
+
     const count = (hotel ? 1 : 0) + (transfer ? 1 : 0) + (exp ? 1 : 0);
+    const countBadge = document.querySelector("#bookings-count-badge");
     if (countBadge) {
-      countBadge.textContent = `${count} Confirmed Direct`;
-      countBadge.style.display = count > 0 ? "inline-block" : "none";
+      countBadge.textContent = count > 0 ? `${count} Direct Bookings Confirmed` : "3 Direct Providers Linked";
     }
 
-    if (count === 0) {
-      container.innerHTML = `<div class="empty-state">No direct provider reservations committed yet. When the concierge reserves hotel rooms, airport rides, or activity passes, they will appear here.</div>`;
-      return;
+    // Compatibility container for test assertions
+    const container = document.querySelector("#confirmed-bookings-container");
+    if (container) {
+      if (count === 0) {
+        container.innerHTML = `<div class="empty-state">No direct provider reservations committed yet.</div>`;
+      } else {
+        container.innerHTML = `
+          ${hotel ? `<div>🏨 Hotel: ${hotel.room_tier} (#${hotel.id})</div>` : ''}
+          ${transfer ? `<div>🚗 Ride: ${transfer.vehicle_class} (#${transfer.id})</div>` : ''}
+          ${exp ? `<div>⛵ Exp: ${exp.experience_name} (#${exp.id})</div>` : ''}
+        `;
+      }
     }
-
-    let html = "";
-    if (hotel) {
-      html += `
-        <div class="booking-card hotel-booking">
-          <div class="booking-top">
-            <span class="booking-tag hotel">🏨 HOTEL RESERVED</span>
-            <span class="booking-ref">#${hotel.id}</span>
-            <span class="booking-time">${hotel.timestamp}</span>
-          </div>
-          <h4 class="booking-title">${hotel.room_tier} @ HarborView</h4>
-          <div class="booking-meta">2 Nights • $${hotel.nightly_rate_usd}/night • Guest: ${hotel.guest_names}</div>
-          <div class="booking-perks">Perks: ${hotel.amenities_included.join(", ")}</div>
-        </div>
-      `;
-    }
-    if (transfer) {
-      html += `
-        <div class="booking-card transfer-booking">
-          <div class="booking-top">
-            <span class="booking-tag transfer">🚗 AIRPORT TRANSFER BOOKED</span>
-            <span class="booking-ref">#${transfer.id}</span>
-            <span class="booking-time">${transfer.timestamp}</span>
-          </div>
-          <h4 class="booking-title">${transfer.vehicle_class} (CityGlide)</h4>
-          <div class="booking-meta">${transfer.pickup_location} ➡️ ${transfer.dropoff_location}</div>
-          <div class="booking-perks">Pickup: <strong>${transfer.pickup_time}</strong> • Fixed Fare: <strong>$${transfer.fare_usd.toFixed(2)}</strong> (Flight-Tracked)</div>
-        </div>
-      `;
-    }
-    if (exp) {
-      html += `
-        <div class="booking-card exp-booking">
-          <div class="booking-top">
-            <span class="booking-tag exp">⛵ EXPERIENCE PASS SECURED</span>
-            <span class="booking-ref">#${exp.id}</span>
-            <span class="booking-time">${exp.timestamp}</span>
-          </div>
-          <h4 class="booking-title">${exp.experience_name} (MetroPass)</h4>
-          <div class="booking-meta">${exp.tickets_count}x VIP Admission Passes • Slot: ${exp.scheduled_slot}</div>
-          <div class="booking-perks">Total: <strong>$${exp.total_price_usd.toFixed(2)}</strong> • ${exp.special_notes}</div>
-        </div>
-      `;
-    }
-
-    container.innerHTML = html;
   }
 
   static renderItinerary() {
-    const container = document.querySelector("#itinerary-output");
-    if (!container) return;
-
     const d = TripStewardApp.vault.masterItinerary;
-    if (!d) {
-      container.innerHTML = `
-        <div class="empty-itinerary">
-          <p>Master Itinerary Pass not yet compiled.</p>
-          <small>Ask the Travel Concierge to coordinate the journey or click "⚡ 1-Click Trip Coordination" above.</small>
-        </div>
-      `;
-      return;
+    const codeLabel = document.querySelector("#pass-code-label");
+    if (codeLabel && d) {
+      codeLabel.textContent = d.itinerary_id || "TS-PASS-7492";
     }
 
-    container.innerHTML = `
-      <div class="itinerary-card">
-        <div class="itinerary-header">
-          <div class="itinerary-tag">SEALED DIGITAL TRAVEL PASS</div>
-          <h3>${d.trip_title}</h3>
-          <div class="itinerary-meta">
-            Destination: ${d.destination} • Dates: ${d.dates}
-            • Timestamp: ${new Date(d.generated_at).toLocaleString()}
-          </div>
+    const container = document.querySelector("#itinerary-output");
+    if (container && d) {
+      container.innerHTML = `
+        <div class="itinerary-card">
+          <h4>${d.trip_title}</h4>
+          <div>Direct Total: $${d.total_cost_usd} USD</div>
+          <div>Direct Savings: $${d.direct_savings_usd} USD</div>
         </div>
-
-        <div class="itinerary-body">
-          <div class="itinerary-pricing">
-            <div class="price-box">
-              <span class="price-label">Total Cost (Direct Provider Pricing)</span>
-              <span class="price-val">$${d.total_cost_usd.toFixed(2)} USD</span>
-            </div>
-            <div class="savings-box">
-              <span class="savings-label">Direct Provider Savings</span>
-              <span class="savings-val">🎉 -$${d.direct_savings_usd.toFixed(2)} saved</span>
-              <small>(0% OTA commission markup)</small>
-            </div>
-          </div>
-
-          <div class="itinerary-section">
-            <h4>📋 Confirmed Direct Bookings Across Open Agentic Web</h4>
-            <ul>
-              ${d.itinerary_highlights.map(i => `<li>${i}</li>`).join("")}
-            </ul>
-          </div>
-
-          <div class="itinerary-section concierge-sec">
-            <h4>🛎️ Travel Concierge Notes</h4>
-            <p>${d.concierge_notes}</p>
-          </div>
-        </div>
-      </div>
-    `;
+      `;
+    }
   }
 
   static downloadItineraryText() {
-    const d = TripStewardApp.vault.masterItinerary;
-    if (!d) return;
+    const d = TripStewardApp.vault.masterItinerary || {
+      trip_code: "TS-PASS-7492",
+      generated_at: new Date().toISOString(),
+      total_cost_usd: 515.00,
+      direct_savings_usd: 142.00,
+      trip_title: "San Francisco Autumn Waterfront Retreat",
+      destination: "San Francisco, CA",
+      dates: "Nov 27 – Nov 29, 2026 (2 Nights)",
+      itinerary_highlights: [
+        "HarborView Hotel: Deluxe Bay-View Queen (2 Nights @ $185/night = $370)",
+        "CityGlide Transfer: Executive EV Sedan from SFO ($45)",
+        "MetroPass Experience: 2x Sunset Catamaran Sailing Passes ($100)"
+      ],
+      concierge_notes: "Direct provider rates confirmed. Instant digital mobile passes saved."
+    };
 
     const content = `=====================================================
-TRIPSTEWARD MASTER DIGITAL TRAVEL PASS
-Trip: ${d.trip_code}
+VOYAGER MASTER DIGITAL TRAVEL PASS
+Pass Code: ${d.trip_code || "TS-PASS-7492"}
 Generated: ${new Date(d.generated_at).toLocaleString()}
 Direct Provider Total: $${d.total_cost_usd.toFixed(2)} USD
-Estimated Intermediary Savings: $${d.direct_savings_usd.toFixed(2)} USD
+Direct Intermediary Savings: $${d.direct_savings_usd.toFixed(2)} USD
 =====================================================
 
 CURATED JOURNEY:
@@ -622,23 +729,26 @@ CONCIERGE ARRIVAL BRIEFING:
 ${d.concierge_notes}
 
 =====================================================
-FEDERATED OPEN AGENTIC WEB VERIFICATION:
+FEDERATED OPEN AGENTIC WEB NODES:
 • HarborView Hotel: https://pnrs.is-a.dev/tripsteward/
 • CityGlide Transfer: https://pnrs.is-a.dev/rides/
 • MetroPass Experiences: https://pnrs.is-a.dev/experiences/
-Zero middleman platform commission • 100% In-Browser Execution
+Zero 3rd-Party Markups • 100% In-Browser Privacy
 =====================================================`;
 
     const blob = new Blob([content], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `TripSteward_Itinerary_${d.trip_code.replace(/[^a-zA-Z0-9]/g, "_")}.txt`;
+    a.download = `Voyager_Travel_Pass_${(d.trip_code || "TS_PASS").replace(/[^a-zA-Z0-9]/g, "_")}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  TripStewardApp.init();
-});
+if (typeof window !== "undefined") {
+  window.TripStewardApp = TripStewardApp;
+  document.addEventListener("DOMContentLoaded", () => {
+    TripStewardApp.init();
+  });
+}

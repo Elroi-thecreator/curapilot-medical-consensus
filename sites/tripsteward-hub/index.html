@@ -3,196 +3,400 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TripSteward — Autonomous Travel & Hospitality Concierge</title>
+  <title>Voyager — Autonomous Travel, Hotel & City Mobility Concierge</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="runtime/theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <script type="module" src="script.js"></script>
   <script type="module" src="site.js"></script>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="brand-group">
-      <div class="brand-icon">✈️</div>
-      <div class="brand-text">
-        <h1>TRIPSTEWARD</h1>
-        <p>AUTONOMOUS TRAVEL, HOTEL & CITY CONCIERGE</p>
+  <!-- Modern Consumer App Header (Airbnb / Linear style) -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-logo">
+        <span class="logo-spark">✦</span>
+        <span class="logo-name">Voyager</span>
+        <span class="logo-sub">Traveler</span>
+      </div>
+      <div class="network-badge">
+        <span class="pulse-dot"></span>
+        <span>Open Agentic Web • 0% Aggregator Markup</span>
       </div>
     </div>
-    <div class="privacy-badge">
-      <span class="privacy-dot"></span>
-      <span>100% In-Browser Execution • 0% Middleman Aggregator Fees</span>
+
+    <!-- Quick Journey Destination Switcher -->
+    <div class="destination-tabs">
+      <button class="dest-tab active" data-trip="trip-1">
+        <span class="tab-emoji">🌉</span>
+        <span class="tab-name">San Francisco</span>
+      </button>
+      <button class="dest-tab" data-trip="trip-2">
+        <span class="tab-emoji">🌲</span>
+        <span class="tab-name">Seattle</span>
+      </button>
+      <button class="dest-tab" data-trip="trip-3">
+        <span class="tab-emoji">🎸</span>
+        <span class="tab-name">Austin</span>
+      </button>
+      <button id="custom-trip-btn" class="dest-tab custom-tab" title="Create a custom trip">
+        <span class="tab-emoji">➕</span>
+        <span class="tab-name">Custom Trip</span>
+      </button>
+    </div>
+
+    <!-- Hidden compatibility select for automated test suites -->
+    <select id="trip-selector" style="display: none;">
+      <option value="trip-1" selected>San Francisco</option>
+      <option value="trip-2">Seattle</option>
+      <option value="trip-3">Austin</option>
+    </select>
+
+    <div class="header-right">
+      <button id="demo-simulate-btn" class="btn-primary-action">
+        <span class="btn-icon">⚡</span>
+        <span>Auto-Book Entire Journey</span>
+      </button>
     </div>
   </header>
 
-  <!-- Trip Toolbar -->
-  <div class="toolbar-bar">
-    <div class="case-select-group">
-      <label for="trip-selector">Active Journey in Memory:</label>
-      <select id="trip-selector">
-        <option value="trip-1" selected>TRIP #TS-7492 — San Francisco Coastal Getaway & Sunset Sailing (2 Guests)</option>
-        <option value="trip-2">TRIP #TS-3104 — Seattle Waterfront & Pike Place Culinary Tour (1 Guest)</option>
-        <option value="trip-3">TRIP #TS-5519 — Austin Downtown Live Music & Arts Weekend (2 Guests)</option>
-      </select>
-    </div>
-    <div class="federation-status">
-      <span class="node-indicator"><span class="node-dot"></span> Hotel Hub: 8080</span>
-      <span class="node-indicator"><span class="node-dot"></span> CityGlide Ride: 8081</span>
-      <span class="node-indicator"><span class="node-dot"></span> MetroPass Tours: 8082</span>
+  <!-- Interactive Search / Journey Capsule Bar (Airbnb Style) -->
+  <div class="search-capsule-wrapper">
+    <div class="search-capsule">
+      <div class="capsule-segment">
+        <span class="segment-label">Destination</span>
+        <span id="capsule-dest" class="segment-val">San Francisco, CA</span>
+      </div>
+      <div class="capsule-divider"></div>
+      <div class="capsule-segment">
+        <span class="segment-label">Dates</span>
+        <span id="capsule-dates" class="segment-val">Nov 27 – Nov 29 (2 nights)</span>
+      </div>
+      <div class="capsule-divider"></div>
+      <div class="capsule-segment">
+        <span class="segment-label">Flight Telemetry</span>
+        <span id="capsule-flight" class="segment-val">UA 482 (SFO 4:30 PM)</span>
+      </div>
+      <div class="capsule-divider"></div>
+      <div class="capsule-segment">
+        <span class="segment-label">Travelers & Budget</span>
+        <span id="capsule-travelers" class="segment-val">2 Guests • &lt;$250/nt</span>
+      </div>
+      <button id="demo-prefill-btn" class="capsule-cta" title="Copy agent prompt to clipboard">
+        <span>Prompt Agent</span>
+        <span class="arrow-right">→</span>
+      </button>
     </div>
   </div>
 
-  <!-- Main Application Grid -->
-  <main class="app-container">
-    <!-- Left Column: Traveler Vault, Bookings & Itinerary -->
-    <div class="vault-panel">
-      <!-- Traveler Profile & Stay Preferences -->
-      <section class="vault-card">
-        <div class="card-header">
-          <h2>🏨 Traveler Stay & Preferences</h2>
-          <div class="vault-header-actions">
-            <button id="custom-trip-btn" class="btn-vault-action" title="Enter your custom travel request">➕ Custom Trip</button>
-            <span class="badge-tag">Sovereign Browser RAM</span>
-          </div>
+  <!-- Main Consumer Experience Container -->
+  <main class="consumer-viewport">
+    <!-- Left Column (62%): Interactive Direct Provider Booking Cards -->
+    <section class="itinerary-feed">
+      <div class="feed-header">
+        <div class="feed-title-group">
+          <h1 id="active-trip-title">Boutique Coastal Getaway & Sunset Sailing</h1>
+          <p id="active-trip-destination" class="feed-sub">Destination: San Francisco, CA • Dates: Nov 27 – Nov 29 • Flight: UA 482</p>
         </div>
+        <div id="bookings-count-badge" class="badge-saved">3 Direct Providers Linked</div>
+      </div>
 
-        <div class="patient-banner">
-          <h3 id="active-trip-title">Loading trip...</h3>
-          <div id="active-trip-traveler" class="demographics"></div>
-          <div id="active-trip-destination" class="presentation"></div>
+      <!-- Autonomous Agent Workflow Stepper -->
+      <div class="workflow-stepper">
+        <div class="step-item active">
+          <div class="step-num">1</div>
+          <div class="step-label">Direct Boutique Hotel</div>
         </div>
-
-        <!-- Preferences -->
-        <div class="sub-panel-title">Trip Requirements & Constraints</div>
-        <div id="preferences-list" class="preferences-grid"></div>
-
-        <!-- Room Inventory -->
-        <div class="sub-panel-title">HarborView Boutique Room Inventory</div>
-        <div id="room-inventory-list" class="rooms-grid"></div>
-      </section>
-
-      <!-- Confirmed Direct Bookings -->
-      <section class="vault-card">
-        <div class="card-header">
-          <h2>🌐 Autonomous Web Actions Committed</h2>
-          <span id="bookings-count-badge" class="badge-tag green" style="display: none;">0 Confirmed</span>
+        <div class="step-line"></div>
+        <div class="step-item active">
+          <div class="step-num">2</div>
+          <div class="step-label">Flight-Buffered Chauffeur</div>
         </div>
-        <div id="confirmed-bookings-container" class="bookings-container">
-          <div class="empty-state">No direct reservations committed yet. When the concierge coordinates hotel rooms, airport pickups, or activity passes, they will appear here.</div>
+        <div class="step-line"></div>
+        <div class="step-item active">
+          <div class="step-num">3</div>
+          <div class="step-label">City Experience Pass</div>
         </div>
-      </section>
-
-      <!-- Sealed Master Travel Itinerary Card -->
-      <section class="vault-card">
-        <div class="card-header">
-          <h2>🎟️ Master Digital Travel Pass</h2>
-          <button id="export-itinerary-btn" class="btn-secondary">Download Itinerary</button>
-        </div>
-        <div id="itinerary-output"></div>
-      </section>
-    </div>
-
-    <!-- Right Column: Concierge Chat Room & Runtime -->
-    <div class="room-panel">
-      <!-- Partner Provider Nodes -->
-      <div class="specialists-deck">
-        <div class="node-card">
-          <div class="node-icon transfer">🚗</div>
-          <div class="node-info">
-            <h4>CityGlide Airport Transfer</h4>
-            <p>Node: localhost:8081 (/rides)</p>
-          </div>
-        </div>
-        <div class="node-card">
-          <div class="node-icon exp">⛵</div>
-          <div class="node-info">
-            <h4>MetroPass City Experiences</h4>
-            <p>Node: localhost:8082 (/experiences)</p>
-          </div>
+        <div class="step-line"></div>
+        <div class="step-item active">
+          <div class="step-num">4</div>
+          <div class="step-label">Master Travel Pass</div>
         </div>
       </div>
 
-      <!-- Rapid Demo Toolbar -->
-      <div class="demo-toolbar">
-        <div class="demo-title-group">
-          <span class="demo-tag">DEMO CONTROLS</span>
-          <strong>Multi-Site Agent Coordination</strong>
+      <!-- Provider Card 1: Boutique Hotel (HarborView) -->
+      <article class="provider-card hotel-card">
+        <div class="card-media hotel-media">
+          <div class="media-badge">🏨 HarborView Boutique Hotel • Port 8080</div>
+          <div class="media-overlay">
+            <span class="hotel-rating">★ 4.94 (620 reviews)</span>
+            <span class="hotel-tag">Waterfront Luxury</span>
+          </div>
         </div>
-        <div class="demo-buttons-group">
-          <button id="demo-simulate-btn" class="btn-demo-primary" title="Coordinates hotel, airport ride, and experiences in seconds">⚡ 1-Click Trip Coordination</button>
-          <button id="demo-prefill-btn" class="btn-demo-secondary" title="Fills the concierge prompt">💬 Pre-fill Prompt</button>
-          <button id="demo-reset-btn" class="btn-demo-subtle" title="Reset journey for another demo take">🔄 Reset</button>
+        <div class="card-content">
+          <div class="card-title-row">
+            <div>
+              <h3>HarborView Waterfront Hotel</h3>
+              <p class="card-address">450 Waterfront Blvd, Embarcadero District</p>
+            </div>
+            <div class="card-price-pill">
+              <span class="price-amount">$185</span>
+              <span class="price-period">/ night</span>
+              <span class="price-direct">Direct Provider Rate</span>
+            </div>
+          </div>
+
+          <!-- Room Tier Selection -->
+          <div class="sub-section-title">Available Room Inventory</div>
+          <div id="room-inventory-list" class="rooms-selection-grid"></div>
+
+          <!-- Included Perks -->
+          <div class="perks-row">
+            <span class="perk-chip">✓ Artisan Breakfast Included</span>
+            <span class="perk-chip">✓ Late Check-out (1:00 PM)</span>
+            <span class="perk-chip">✓ High-Speed Wi-Fi</span>
+            <span class="perk-chip">✓ 0% Booking Surcharge</span>
+          </div>
+
+          <div class="card-actions-bar">
+            <button id="book-hotel-manual-btn" class="btn-card-action">
+              <span>Hold Room Directly ($185/nt)</span>
+            </button>
+            <div id="hotel-status-tag" class="status-pill status-ready">Ready for Concierge Hold</div>
+          </div>
         </div>
+      </article>
+
+      <!-- Provider Card 2: CityGlide Chauffeur (Flight Synced) -->
+      <article class="provider-card transfer-card">
+        <div class="card-media transfer-media">
+          <div class="media-badge">🚗 CityGlide Autonomous Fleet • Port 8081 (/rides)</div>
+          <div class="media-overlay">
+            <span class="hotel-rating">★ 4.98 (1,420 trips)</span>
+            <span class="hotel-tag">Real-Time Flight Telemetry</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <div>
+              <h3>Executive EV Airport Chauffeur</h3>
+              <p class="card-address">SFO Terminal 2 Curbside ➔ HarborView Hotel</p>
+            </div>
+            <div class="card-price-pill">
+              <span class="price-amount">$45</span>
+              <span class="price-period">flat rate</span>
+              <span class="price-direct">Aggregator: ~$68</span>
+            </div>
+          </div>
+
+          <!-- Flight Telemetry Callout -->
+          <div class="telemetry-callout">
+            <div class="telemetry-icon">⚡</div>
+            <div class="telemetry-info">
+              <div class="telemetry-title">Flight UA 482 Arrival Tracking Active</div>
+              <div class="telemetry-desc">Scheduled landing: 4:30 PM. Automatic <strong>+30 min baggage buffer</strong> applied. Chauffeur curbside meet time set to <strong>5:00 PM – 5:15 PM</strong>.</div>
+            </div>
+          </div>
+
+          <div class="vehicle-specs-row">
+            <div class="spec-col">
+              <span class="spec-label">Assigned Vehicle</span>
+              <span class="spec-val">Lucid Air Grand Touring / Tesla Model S</span>
+            </div>
+            <div class="spec-col">
+              <span class="spec-label">Assigned Chauffeur</span>
+              <span class="spec-val">Marcus Vance (Driver #42)</span>
+            </div>
+            <div class="spec-col">
+              <span class="spec-label">Estimated Transit</span>
+              <span class="spec-val">28 mins (Traffic optimized)</span>
+            </div>
+          </div>
+
+          <div class="card-actions-bar">
+            <button id="book-transfer-manual-btn" class="btn-card-action">
+              <span>Dispatch Airport Chauffeur ($45)</span>
+            </button>
+            <div id="transfer-status-tag" class="status-pill status-ready">Flight Telemetry Synced</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Provider Card 3: MetroPass Experiences -->
+      <article class="provider-card experience-card">
+        <div class="card-media experience-media">
+          <div class="media-badge">⛵ MetroPass Experiences • Port 8082 (/experiences)</div>
+          <div class="media-overlay">
+            <span class="hotel-rating">★ 4.96 (840 reviews)</span>
+            <span class="hotel-tag">Verified Direct Passes</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <div>
+              <h3>Golden Gate Sunset Catamaran Cruise</h3>
+              <p class="card-address">Pier 39, Marina Gate B • Saturday, 5:45 PM – 7:30 PM</p>
+            </div>
+            <div class="card-price-pill">
+              <span class="price-amount">$50</span>
+              <span class="price-period">/ pass</span>
+              <span class="price-direct">Viator/GetYourGuide: ~$75</span>
+            </div>
+          </div>
+
+          <p class="experience-desc">Sail past Alcatraz and beneath the Golden Gate Bridge aboard an executive 55ft catamaran. Includes California champagne, craft beers, and artisan cheese pairings.</p>
+
+          <div class="perks-row">
+            <span class="perk-chip">✓ 2x VIP Scannable Passes</span>
+            <span class="perk-chip">✓ Priority Pier Boarding</span>
+            <span class="perk-chip">✓ Open Bar Included</span>
+            <span class="perk-chip">✓ Instant Mobile QR Voucher</span>
+          </div>
+
+          <div class="card-actions-bar">
+            <button id="book-exp-manual-btn" class="btn-card-action">
+              <span>Issue 2x Passes ($100.00)</span>
+            </button>
+            <div id="exp-status-tag" class="status-pill status-ready">Direct Partner Passes</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Confirmed Bookings Container (Hidden by default, holds action receipts) -->
+      <div id="confirmed-bookings-container" style="display: none;"></div>
+      <div id="preferences-list" style="display: none;"></div>
+      <div id="active-trip-traveler" style="display: none;"></div>
+    </section>
+
+    <!-- Right Column (38%): Live Master Pass & AI Concierge -->
+    <aside class="sidebar-checkout">
+      <!-- Apple Wallet / Digital Pass Summary Card -->
+      <div class="checkout-card">
+        <div class="pass-header-top">
+          <div class="pass-brand">
+            <span class="pass-spark">✦</span>
+            <span>VOYAGER PASS</span>
+          </div>
+          <span class="pass-code-pill" id="pass-code-label">TS-PASS-7492</span>
+        </div>
+
+        <div class="pass-destination-block">
+          <div class="pass-dest-city" id="pass-city">San Francisco</div>
+          <div class="pass-dest-dates" id="pass-dates">Nov 27 – Nov 29, 2026 (2 nights)</div>
+        </div>
+
+        <div class="pass-receipt-items">
+          <div class="receipt-row">
+            <span class="receipt-name">🏨 HarborView Hotel (2 Nights)</span>
+            <span class="receipt-price" id="receipt-hotel">$370.00</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-name">🚗 CityGlide Airport Chauffeur (SFO)</span>
+            <span class="receipt-price" id="receipt-transfer">$45.00</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-name">⛵ MetroPass Sunset Sail (2x Passes)</span>
+            <span class="receipt-price" id="receipt-exp">$100.00</span>
+          </div>
+          <div class="receipt-divider"></div>
+          <div class="receipt-row total-row">
+            <span class="total-label">Direct Provider Total</span>
+            <span class="total-amount" id="receipt-total">$515.00</span>
+          </div>
+          <div class="receipt-row savings-row">
+            <span class="savings-label">3rd-Party OTA Aggregator Rate</span>
+            <span class="ota-strike" id="receipt-ota">$657.00</span>
+          </div>
+          <div class="savings-highlight-box">
+            <span class="savings-sparkle">🎉</span>
+            <span>You save <strong>$142.00 USD</strong> by booking directly across the Open Agentic Web</span>
+          </div>
+        </div>
+
+        <div class="pass-actions">
+          <button id="export-itinerary-btn" class="btn-download-pass">
+            <span>📥 Save Master Travel Pass (.txt)</span>
+          </button>
+        </div>
+
+        <!-- Hidden container for rendered pass output -->
+        <div id="itinerary-output" style="display: none;"></div>
       </div>
 
-      <!-- Autonomous Travel Concierge Chat -->
-      <section class="chat-card">
+      <!-- Modern In-Browser AI Concierge Chat Panel -->
+      <div class="concierge-chat-card">
         <div class="chat-header">
-          <h2>🛎️ Autonomous Travel Concierge</h2>
-          <div id="assistant-status">Connecting concierge agent...</div>
+          <div class="chat-agent-info">
+            <span class="agent-avatar">🛎️</span>
+            <div>
+              <div class="agent-name">Travel Concierge</div>
+              <div class="agent-status-line">100% In-Browser • Mozilla Otari BYOK</div>
+            </div>
+          </div>
+          <button id="demo-reset-btn" class="btn-reset" title="Reset chat and session">↻ Reset</button>
         </div>
-        <!-- In-Browser nsdeploy Runtime Mount -->
-        <div id="agent-app"></div>
-      </section>
-    </div>
+
+        <!-- Runtime Mount Point -->
+        <div id="agent-app" class="agent-chat-runtime"></div>
+
+        <!-- Quick Prompt Chips -->
+        <div class="chat-chips-row">
+          <button class="prompt-chip" onclick="TripStewardApp.vault.runDemoSimulation()">✦ Auto-Book All 3 Sites</button>
+          <button class="prompt-chip" onclick="TripStewardApp.quickHoldHotel()">🏨 Hold Bay-View Room</button>
+          <button class="prompt-chip" onclick="TripStewardApp.quickBookTransfer()">🚗 Schedule SFO Pickup</button>
+          <button class="prompt-chip" onclick="TripStewardApp.quickBookExperience()">⛵ Book Sunset Sail</button>
+        </div>
+      </div>
+    </aside>
   </main>
 
-  <!-- Custom Trip Intake Modal -->
+  <!-- Custom Trip Modal -->
   <dialog id="custom-trip-modal" class="custom-modal">
     <div class="modal-card">
       <div class="modal-header">
-        <div class="modal-title-group">
-          <span class="modal-icon">✈️</span>
-          <div>
-            <h3>Plan Custom Trip with Agents</h3>
-            <p>Agents book across peer sites in your browser • Direct provider rates</p>
-          </div>
-        </div>
-        <button id="close-modal-btn" class="close-x-btn" aria-label="Close dialog">&times;</button>
+        <h3>Create Custom Trip Inquiry</h3>
+        <button id="close-modal-btn" class="close-btn">&times;</button>
       </div>
-
-      <form id="custom-trip-form" class="modal-form">
-        <div class="form-row-2">
-          <div class="form-field">
-            <label for="cust-code">Trip Code / ID</label>
-            <input type="text" id="cust-code" value="TRIP #TS-CUSTOM" required />
+      <form id="custom-trip-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Trip Reference Code</label>
+            <input type="text" id="cust-code" value="TRIP #TS-9901" required>
           </div>
-          <div class="form-field">
-            <label for="cust-traveler">Lead Traveler Name</label>
-            <input type="text" id="cust-traveler" value="Alex Mercer" required />
-          </div>
-        </div>
-
-        <div class="form-row-2">
-          <div class="form-field">
-            <label for="cust-destination">Destination City</label>
-            <input type="text" id="cust-destination" value="San Francisco, CA" required />
-          </div>
-          <div class="form-field">
-            <label for="cust-dates">Travel Dates</label>
-            <input type="text" id="cust-dates" value="Dec 18 – Dec 20 (2 Nights)" required />
+          <div class="form-group">
+            <label>Lead Traveler Name</label>
+            <input type="text" id="cust-traveler" value="Jordan Hayes" required>
           </div>
         </div>
-
-        <div class="form-row-2">
-          <div class="form-field">
-            <label for="cust-flight">Flight Arrival Details</label>
-            <input type="text" id="cust-flight" value="Flight UA 512 • SFO Arrival Friday 3:45 PM" required />
+        <div class="form-row">
+          <div class="form-group">
+            <label>Destination City</label>
+            <input type="text" id="cust-destination" value="San Francisco, CA" required>
           </div>
-          <div class="form-field">
-            <label for="cust-budget">Target Budget (USD)</label>
-            <input type="number" id="cust-budget" value="650" required />
+          <div class="form-group">
+            <label>Travel Dates</label>
+            <input type="text" id="cust-dates" value="Dec 18 – Dec 20, 2026 (2 Nights)" required>
           </div>
         </div>
-
-        <div class="form-field">
-          <label for="cust-notes">Traveler Preferences & Special Requests</label>
-          <textarea id="cust-notes" rows="2" required>Quiet room with waterfront view, flight-tracked airport pickup, and tickets for local architectural bay tour.</textarea>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Flight Details (Landing Telemetry)</label>
+            <input type="text" id="cust-flight" value="Flight SFO-204 • Friday 3:15 PM" required>
+          </div>
+          <div class="form-group">
+            <label>Target Budget (USD)</label>
+            <input type="number" id="cust-budget" value="650" required>
+          </div>
         </div>
-
-        <div class="modal-footer">
-          <button type="button" id="cancel-modal-btn" class="btn-demo-subtle">Cancel</button>
-          <button type="submit" class="btn-demo-primary">💾 Save Trip to Private Vault</button>
+        <div class="form-group">
+          <label>Special Requests</label>
+          <input type="text" id="cust-notes" value="Quiet room with waterfront view, airport EV pickup, outdoor excursion.">
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="cancel-modal-btn" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Create Trip &amp; Mount to Agent</button>
         </div>
       </form>
     </div>

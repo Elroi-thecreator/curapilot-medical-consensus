@@ -3,131 +3,167 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CityGlide Autonomous Fleet & Airport Transfers — Open Agentic Node</title>
+  <title>CityGlide — Autonomous Luxury Fleet & Airport Chauffeur</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="runtime/theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <script type="module" src="script.js"></script>
   <script type="module" src="site.js"></script>
 </head>
 <body>
-  <header>
-    <div class="logo-group">
-      <div class="logo-badge">⚡ CG</div>
-      <div class="logo-title">CityGlide Autonomous Fleet</div>
+  <!-- Consumer Luxury Mobility Header -->
+  <header class="luxury-header">
+    <div class="brand-group">
+      <div class="brand-spark">⚡</div>
+      <div class="brand-title">CityGlide</div>
+      <span class="brand-edition">Chauffeur</span>
     </div>
-    <div class="header-tags">
-      <span class="protocol-tag">Open Agentic Web Node</span>
-      <span class="hub-tag">SFO Priority Hub</span>
+    <div class="header-badges">
+      <span class="telemetry-badge">● Flight Radar Active</span>
+      <span class="network-badge">Open Agentic Node (/rides)</span>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-badge">Direct Peer Ground Mobility • $0 Middleman Fee</div>
-      <h1>Airport Chauffeur Dispatch & Flight Telemetry</h1>
-      <p>Decentralized ground transfer authority. Personal agents and travel concierges directly quote, synchronize flight delay buffers, and dispatch luxury EV chauffeurs via machine-readable site tools.</p>
+  <main class="luxury-container">
+    <!-- Hero Section -->
+    <section class="luxury-hero">
+      <div class="hero-tag">Zero Aggregator Commission • Flight Telemetry Guaranteed</div>
+      <h1>Airport Chauffeur Dispatch Synced to Your Flight</h1>
+      <p>Personal concierge agents connect directly to our autonomous EV fleet via open site actions—eliminating 30% rideshare surge fees and automating tarmac &amp; baggage delay buffers.</p>
     </section>
 
-    <!-- Live Fleet Telemetry Grid -->
-    <section class="section-block">
-      <div class="section-header">
-        <h2>⚡ Live Autonomous Fleet Standby</h2>
-        <span class="status-indicator"><span class="dot pulse"></span> 4 Vehicles Ready for Instant Dispatch</span>
+    <!-- Flight Buffer Intelligence Card -->
+    <div class="buffer-banner">
+      <div class="buffer-icon">✈️</div>
+      <div class="buffer-text">
+        <h4>Automatic +30 Min Baggage &amp; Tarmac Delay Buffer</h4>
+        <p>Enter your arrival flight number. Our system tracks live radar telemetry and sets your curbside pickup exactly 30 minutes after wheels touch down—zero waiting, zero missed connection fees.</p>
       </div>
-      <div class="fleet-grid">
-        <div class="fleet-card">
-          <div class="fleet-header">
-            <span class="badge badge-cyan">Executive EV Sedan</span>
-            <span class="battery-pill">🔋 94%</span>
+    </div>
+
+    <!-- Live Vehicle Fleet Selection (Uber Black / Rivian Style) -->
+    <section class="section-card">
+      <div class="section-title-bar">
+        <h2>Executive Autonomous Fleet on Standby</h2>
+        <span class="fleet-active-count">● 4 Vehicles Ready at SFO Curbside</span>
+      </div>
+
+      <div class="fleet-cards-grid">
+        <!-- Vehicle 1: Lucid Air -->
+        <div class="vehicle-card featured">
+          <div class="vehicle-media lucid-bg">
+            <span class="badge-tier">Executive EV Sedan</span>
+            <span class="battery-tag">🔋 94% Charge</span>
           </div>
-          <h3>Lucid Air Grand Touring</h3>
-          <p class="driver-info">Driver: <strong>Marcus Vance</strong> (★ 4.98 • 1,420 trips)</p>
-          <div class="fleet-specs">
-            <span>SFO Curbside Express</span>
-            <span class="rate-tag">$68 Flat Direct Rate</span>
+          <div class="vehicle-details">
+            <h3>Lucid Air Grand Touring</h3>
+            <p class="driver-lead">Chauffeur: <strong>Marcus Vance</strong> (★ 4.98 • 1,420 trips)</p>
+            <div class="vehicle-specs">
+              <span>Up to 3 Guests • 2 Large Bags</span>
+              <span>In-Car Wi-Fi &amp; Fiji Water</span>
+            </div>
+            <div class="vehicle-price-row">
+              <div>
+                <span class="price-val">$45.00</span>
+                <span class="price-note">Direct Flat Rate</span>
+              </div>
+              <button class="btn-book-vehicle" onclick="CityGlideApp.bookManual('Executive EV Sedan (Lucid Air)', 45)">Book This Class</button>
+            </div>
           </div>
         </div>
 
-        <div class="fleet-card">
-          <div class="fleet-header">
-            <span class="badge badge-cyan">Executive EV Sedan</span>
-            <span class="battery-pill">🔋 88%</span>
+        <!-- Vehicle 2: Tesla Model S -->
+        <div class="vehicle-card">
+          <div class="vehicle-media tesla-bg">
+            <span class="badge-tier">Executive EV Sedan</span>
+            <span class="battery-tag">🔋 88% Charge</span>
           </div>
-          <h3>Tesla Model S Plaid</h3>
-          <p class="driver-info">Driver: <strong>Elena Rostova</strong> (★ 4.99 • 2,180 trips)</p>
-          <div class="fleet-specs">
-            <span>SFO International Arrivals</span>
-            <span class="rate-tag">$68 Flat Direct Rate</span>
-          </div>
-        </div>
-
-        <div class="fleet-card">
-          <div class="fleet-header">
-            <span class="badge badge-emerald">Luxury Chauffeur SUV</span>
-            <span class="battery-pill">🔋 91%</span>
-          </div>
-          <h3>Rivian R1S Chauffeur Edition</h3>
-          <p class="driver-info">Driver: <strong>Derrick Hayes</strong> (★ 4.96 • 980 trips)</p>
-          <div class="fleet-specs">
-            <span>SFO Terminal 2 Curbside</span>
-            <span class="rate-tag">$108 Flat Direct Rate</span>
+          <div class="vehicle-details">
+            <h3>Tesla Model S Plaid</h3>
+            <p class="driver-lead">Chauffeur: <strong>Elena Rostova</strong> (★ 4.99 • 2,180 trips)</p>
+            <div class="vehicle-specs">
+              <span>Up to 3 Guests • 2 Large Bags</span>
+              <span>Quiet Cabin Glass Canopy</span>
+            </div>
+            <div class="vehicle-price-row">
+              <div>
+                <span class="price-val">$45.00</span>
+                <span class="price-note">Direct Flat Rate</span>
+              </div>
+              <button class="btn-book-vehicle" onclick="CityGlideApp.bookManual('Executive EV Sedan (Tesla Model S)', 45)">Book This Class</button>
+            </div>
           </div>
         </div>
 
-        <div class="fleet-card">
-          <div class="fleet-header">
-            <span class="badge badge-emerald">Luxury Chauffeur SUV</span>
-            <span class="battery-pill">🔋 85%</span>
+        <!-- Vehicle 3: Rivian R1S -->
+        <div class="vehicle-card">
+          <div class="vehicle-media rivian-bg">
+            <span class="badge-tier">Luxury Chauffeur SUV</span>
+            <span class="battery-tag">🔋 91% Charge</span>
           </div>
-          <h3>Cadillac Escalade IQ</h3>
-          <p class="driver-info">Driver: <strong>Aria Thorne</strong> (★ 4.97 • 1,140 trips)</p>
-          <div class="fleet-specs">
-            <span>SEA-Tac Priority Lane</span>
-            <span class="rate-tag">$108 Flat Direct Rate</span>
+          <div class="vehicle-details">
+            <h3>Rivian R1S Chauffeur Edition</h3>
+            <p class="driver-lead">Chauffeur: <strong>Derrick Hayes</strong> (★ 4.96 • 980 trips)</p>
+            <div class="vehicle-specs">
+              <span>Up to 6 Guests • 5 Large Bags</span>
+              <span>VIP Curbside Porter Service</span>
+            </div>
+            <div class="vehicle-price-row">
+              <div>
+                <span class="price-val">$68.00</span>
+                <span class="price-note">Direct Flat Rate</span>
+              </div>
+              <button class="btn-book-vehicle" onclick="CityGlideApp.bookManual('Luxury Chauffeur SUV (Rivian R1S)', 68)">Book This Class</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Live Quote & Route Calculator -->
-    <section class="section-block quote-calculator-section">
-      <h2>Instant Airport Transfer Calculator</h2>
-      <div class="calc-form">
-        <div class="form-group">
-          <label>Destination Hotel / Address</label>
+    <!-- Interactive Fare & Flight Buffer Calculator -->
+    <section class="section-card">
+      <h2>Instant Airport Transfer Route Calculator</h2>
+      <div class="calc-grid">
+        <div class="input-field">
+          <label>Destination Address / Hotel</label>
           <input type="text" id="quote-dest" value="HarborView Hotel, 450 Waterfront Blvd">
         </div>
-        <div class="form-group">
-          <label>Flight Number (Auto-Telemetry)</label>
+        <div class="input-field">
+          <label>Arrival Flight Number</label>
           <input type="text" id="quote-flight" value="UA 482 (SFO Arrival 4:30 PM)">
         </div>
-        <div class="form-group">
-          <label>Requested Pickup Time</label>
+        <div class="input-field">
+          <label>Scheduled Wheels-Down Time</label>
           <input type="text" id="quote-time" value="4:30 PM">
         </div>
-        <button id="calc-quote-btn" class="btn-primary">Calculate Route & Buffer</button>
+        <button id="calc-quote-btn" class="btn-calc">Calculate Route &amp; Buffer</button>
       </div>
 
-      <div id="quote-result" class="quote-result-area"></div>
+      <div id="quote-result" class="quote-result-box"></div>
     </section>
 
-    <!-- Live Confirmed Dispatches -->
-    <section class="section-block">
-      <div class="section-header">
-        <h2>📋 Live Confirmed Dispatch Manifest</h2>
-        <span class="sub-text">Updates in real time as external travel concierges execute bookings</span>
+    <!-- Confirmed Chauffeur Dispatches Feed -->
+    <section class="section-card">
+      <div class="section-title-bar">
+        <h2>Live Confirmed Dispatch Manifest</h2>
+        <span class="sub-lead">Real-time bookings executed by autonomous concierges</span>
       </div>
-      <div id="dispatch-list" class="dispatch-grid"></div>
+      <div id="dispatch-list" class="dispatch-feed-grid"></div>
     </section>
 
-    <!-- Autonomous Dispatcher Assistant Runtime -->
-    <section class="assistant-container">
-      <div class="assistant-header">
-        <div class="assistant-title-group">
-          <h2>🤖 CityGlide Autonomous Transfer Dispatcher</h2>
-          <div class="assistant-subtitle">Callable by external personal agents via <code>website_quote_transfer_service</code> & <code>website_schedule_airport_transfer</code></div>
+    <!-- Autonomous Mobility Dispatcher Runtime -->
+    <section class="assistant-card">
+      <div class="assistant-head">
+        <div class="assistant-lead">
+          <span class="assistant-icon">🤖</span>
+          <div>
+            <h3>CityGlide Mobility Dispatcher Agent</h3>
+            <p>Callable via <code>website_quote_transfer_service</code> and <code>website_schedule_airport_transfer</code></p>
+          </div>
         </div>
-        <div id="assistant-status">Initializing mobility dispatcher...</div>
+        <div id="assistant-status">Mobility Dispatcher Ready</div>
       </div>
       <!-- Runtime Mount Point -->
       <div id="agent-app"></div>

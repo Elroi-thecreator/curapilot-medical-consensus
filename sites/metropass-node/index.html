@@ -3,79 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MetroPass Experiences & City Curations — Open Agentic Node</title>
+  <title>MetroPass — Verified City Experiences & Digital Admission Passes</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="runtime/theme.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <script type="module" src="script.js"></script>
   <script type="module" src="site.js"></script>
 </head>
 <body>
-  <header>
-    <div class="logo-group">
-      <div class="logo-badge">🎟️ MP</div>
-      <div class="logo-title">MetroPass Experiences</div>
+  <!-- Modern Consumer Header (Airbnb Experiences Style) -->
+  <header class="marketplace-header">
+    <div class="brand-group">
+      <span class="brand-spark">🎟️</span>
+      <span class="brand-name">MetroPass</span>
+      <span class="brand-tag">Experiences</span>
     </div>
-    <div class="header-tags">
-      <span class="protocol-tag">Open Agentic Web Node</span>
-      <span class="hub-tag">Verified Direct Ticketing</span>
+    <div class="header-badges">
+      <span class="verified-tag">✓ Direct Provider Rates</span>
+      <span class="network-tag">Open Agentic Node (/experiences)</span>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-badge">Direct Provider Rates • 0% Reseller Markup</div>
-      <h1>Curated City Adventures & Digital Pass Issuance</h1>
-      <p>Decentralized cultural and activity authority. Autonomous concierge agents discover verified local experiences, reserve VIP admission, and issue instant scannable mobile passes on the traveler's behalf.</p>
+  <main class="marketplace-container">
+    <!-- Hero Section -->
+    <section class="marketplace-hero">
+      <div class="hero-badge">0% Reseller Markup • Instant Mobile QR Vouchers</div>
+      <h1>Curated City Adventures &amp; Direct VIP Passes</h1>
+      <p>Personal travel agents connect directly to local tour operators, museum curators, and catamaran captains—saving 25% on middleman ticketing fees with instant scannable passes.</p>
     </section>
 
-    <!-- Search & Filters -->
-    <section class="section-block search-filter-section">
-      <div class="filter-row">
-        <div class="form-group">
+    <!-- Category Filter Bar (Airbnb Style) -->
+    <section class="filter-capsule-card">
+      <div class="filter-fields">
+        <div class="filter-col">
           <label>City Location</label>
-          <input type="text" id="search-city" placeholder="e.g. San Francisco" value="San Francisco">
+          <input type="text" id="search-city" value="San Francisco" placeholder="e.g. San Francisco, Seattle">
         </div>
-        <div class="form-group">
-          <label>Activity Category</label>
-          <select id="search-cat" class="form-select">
-            <option value="all">All Experiences</option>
-            <option value="sailing">Sunset & Sailing Cruises</option>
-            <option value="museum">Museum VIP Passes</option>
-            <option value="culinary">Culinary & Wine Tours</option>
+        <div class="filter-col">
+          <label>Category Filter</label>
+          <select id="search-cat" class="select-field">
+            <option value="all">All Curated Experiences</option>
+            <option value="sailing">Sunset &amp; Bay Cruises</option>
+            <option value="museum">Museum VIP Priority Passes</option>
+            <option value="culinary">Food &amp; Wine Walking Trails</option>
             <option value="adventure">Outdoor Adventures</option>
           </select>
         </div>
-        <button id="search-exp-btn" class="btn-primary">Filter Catalog</button>
+        <button id="search-exp-btn" class="btn-filter">Search Verified Activities</button>
       </div>
       <div id="search-results"></div>
     </section>
 
-    <!-- Verified Experience Catalog -->
-    <section class="section-block">
-      <div class="section-header">
-        <h2>🌟 Verified Direct City Experiences</h2>
-        <span class="sub-text">Directly bookable via machine-readable site action <code>website_book_experience_pass</code></span>
+    <!-- Verified Experiences Marketplace Grid -->
+    <section class="catalog-section">
+      <div class="section-header-row">
+        <h2>Verified Direct Experiences</h2>
+        <span class="sub-lead">Callable by external personal agents via <code>website_book_experience_pass</code></span>
       </div>
-      <div id="catalog-grid" class="catalog-grid"></div>
+      <div id="catalog-grid" class="experiences-grid"></div>
     </section>
 
-    <!-- Live Confirmed Passes Vault -->
-    <section class="section-block">
-      <div class="section-header">
-        <h2>📱 Confirmed Digital Passes Manifest</h2>
-        <span class="sub-text">Updates live when external personal agents issue passes for guests</span>
+    <!-- Confirmed Digital Passes Manifest (Apple Wallet Style) -->
+    <section class="catalog-section">
+      <div class="section-header-row">
+        <h2>Live Issued Digital Passes</h2>
+        <span class="sub-lead">Passes generated live by external travel concierges</span>
       </div>
       <div id="passes-list" class="passes-grid"></div>
     </section>
 
     <!-- Autonomous Curator Assistant Section -->
-    <section class="assistant-container">
-      <div class="assistant-header">
-        <div class="assistant-title-group">
-          <h2>🎭 MetroPass Autonomous Experience Curator</h2>
-          <div class="assistant-subtitle">Callable by personal agents via <code>website_search_experiences</code> & <code>website_book_experience_pass</code></div>
+    <section class="curator-card">
+      <div class="curator-head">
+        <div class="curator-info">
+          <span class="curator-avatar">🎭</span>
+          <div>
+            <h3>MetroPass Experience Curator Agent</h3>
+            <p>Callable via <code>website_search_experiences</code> and <code>website_book_experience_pass</code></p>
+          </div>
         </div>
-        <div id="assistant-status">Initializing experience curator...</div>
+        <div id="assistant-status">Experience Curator Ready</div>
       </div>
       <!-- Runtime Mount Point -->
       <div id="agent-app"></div>
