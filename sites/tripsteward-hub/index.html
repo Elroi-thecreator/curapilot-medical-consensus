@@ -27,22 +27,6 @@
       </div>
     </div>
 
-    <!-- Orchestrator Quick Actions Bar -->
-    <div class="orchestrator-actions-bar">
-      <button id="open-discover-agents-btn" class="nav-pill-btn" title="Search Open Agentic Web Registry for specialist agents">
-        <span class="tab-emoji">🔍</span>
-        <span class="tab-name">Discover Agents</span>
-      </button>
-      <button id="open-custom-agent-btn" class="nav-pill-btn" title="Mount external agentic node on the fly by URL">
-        <span class="tab-emoji">➕</span>
-        <span class="tab-name">Add Agent URL</span>
-      </button>
-      <button id="edit-journey-btn" class="nav-pill-btn" title="Customize active journey destination & requirements">
-        <span class="tab-emoji">📍</span>
-        <span class="tab-name">Plan Journey</span>
-      </button>
-    </div>
-
     <!-- Hidden compatibility select for automated test suites -->
     <select id="trip-selector" style="display: none;">
       <option value="active-journey" selected>Active Journey</option>
@@ -58,7 +42,7 @@
 
   <!-- Interactive Search / Journey Capsule Bar (Airbnb Style) -->
   <div class="search-capsule-wrapper">
-    <div class="search-capsule" id="capsule-clickable" title="Click to customize journey parameters">
+    <div class="search-capsule" id="capsule-clickable" title="Click anywhere to customize journey parameters">
       <div class="capsule-segment">
         <span class="segment-label">Destination</span>
         <span id="capsule-dest" class="segment-val">San Francisco, CA</span>
@@ -95,7 +79,12 @@
           <span id="swarm-count-pill" class="swarm-count-pill">2 External Nodes Connected</span>
         </div>
         <div class="swarm-actions">
-          <button id="quick-add-agent-btn" class="btn-swarm-add"><span>+ Connect Specialist Agent</span></button>
+          <button id="open-discover-agents-btn" class="btn-swarm-discover" title="Search Open Agentic Web directory for specialist agents">
+            <span>🔍 Discover Agents</span>
+          </button>
+          <button id="open-custom-agent-btn" class="btn-swarm-add" title="Mount external agentic node on the fly by URL">
+            <span>➕ Add Agent URL</span>
+          </button>
         </div>
       </div>
       <div id="active-agents-list" class="swarm-chips-row">
